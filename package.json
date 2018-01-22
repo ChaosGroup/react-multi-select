@@ -1,0 +1,15 @@
+{
+  "name": "react-multi-select",
+  "version": "1.0.0",
+  "description": "Multi selection component",
+  "main": "index.js",
+  "repository": "git@git.chaosgroup.com:neui/react-multi-select.git",
+  "author": "Konstantin Simeonov <konstantin.simeonov@chaosgroup.com>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@types/react": "^16.0.34",
+    "prop-types": "^15.6.0",
+    "react": "^16.2.0"
+  }
+}

@@ -1,0 +1,13 @@
+.multiselect {
+	&__entry {
+		width: 99.5%;
+		
+		&.selected {
+			background: lighten($palette2, 5%);
+		}
+
+		&:focus {
+			outline: $palette3 dotted thin;
+		}
+	}
+}
