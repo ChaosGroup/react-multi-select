@@ -12,17 +12,17 @@ export interface TSelectableProps<DT> {
 	children: JSX.Element;
 }
 
-const FOCUS_REF_PROP = { ref: focusable => focusable && focusable.focus() };
+const FOCUS_REF_PROP = { ref: (focusable: HTMLLIElement) => focusable && focusable.focus() };
 const EMPTY = {};
 
-export default class Selectable<DT> extends React.PureComponent<TSelectableProps<DT>, void> {
+export default class Selectable<DT> extends React.PureComponent<TSelectableProps<DT>, Readonly<{}>> {
 	get _className() {
 		const { selected } = this.props;
 
 		return `multiselect__entry${selected ? '--selected' : ''}`;
 	}
 
-	get _refProps() {
+	get _refProps(): { ref?: (r: HTMLLIElement) => any } {
 		return this.props.focused ? FOCUS_REF_PROP : EMPTY;
 	}
 

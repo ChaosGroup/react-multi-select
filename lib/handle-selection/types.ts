@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import Selectable, { TSelectableProps } from '../Selectable';
 
 export type SelectionType = 'mouse' | 'keyboard';
@@ -41,7 +41,7 @@ export interface TSelectionContext<DT> {
 	 * All selectable items for the current selection modification.
 	 * Provides access to their data key via children[i].props.data .
 	 */
-	children: React.ReactElement<TSelectableProps>[];
+	children: React.ReactElement<TSelectableProps<DT>>[];
 
 	selectionType: SelectionType;
 

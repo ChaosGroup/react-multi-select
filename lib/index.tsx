@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 const ensureRange = (min: number, value: number, max: number) => Math.max(min, Math.min(value, max));
 
 import handleSelection from './handle-selection';
@@ -10,8 +10,6 @@ import {
 	TSelectionInfo,
 	TSelectionEvent
 } from './handle-selection/types';
-
-import './styles.scss';
 
 interface TMultiSelectState {
 	lastAction: SelectionAction;

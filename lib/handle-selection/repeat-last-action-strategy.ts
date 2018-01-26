@@ -24,8 +24,8 @@ export const getNewSelection = <DT>(selectionContext: TSelectionContext<DT>): Se
 	const actionEndIndex = ensureRange(minIndex, Math.max(currentActionIndex, lastActionIndex), maxIndex);
 
 	const action = lastAction === 'delete' ?
-		data => newSelected.delete(data) :
-		data => newSelected.add(data);
+		(data: DT) => newSelected.delete(data) :
+		(data: DT) => newSelected.add(data);
 
 	children
 		.slice(actionStartIndex, actionEndIndex + 1)

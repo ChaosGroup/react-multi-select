@@ -4,7 +4,7 @@ import {
 	TSelectionResult
 } from './types';
 
-import repeatLastActionFromTo from './repeat-last-action-strategy';
+import * as repeatLastActionFromTo from './repeat-last-action-strategy';
 import * as selectNewEntry from './select-new-entry-strategy';
 import * as toggleItemSelection from './toggle-item-selection-strategy';
 import * as selectAll from './select-all-strategy';

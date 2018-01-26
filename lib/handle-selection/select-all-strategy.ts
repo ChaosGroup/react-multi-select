@@ -6,7 +6,7 @@ export const getNewSelection = <DT>(selectionContext: TSelectionContext<DT>): Se
 	return new Set([...selection, ...childrenDataKeys]);
 };
 
-export const getStateUpdates = <DT>(): TStateUpdate => {
+export const getStateUpdates = <DT>(electionContext: TSelectionContext<DT>): TStateUpdate => {
 	return null;
 };
 
