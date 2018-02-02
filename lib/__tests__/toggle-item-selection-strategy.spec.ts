@@ -1,5 +1,5 @@
 import test from 'ava';
-import { testIsMatching, minSelectionContext, toMockSelectables, selectionCtx } from '../helpers';
+import { testIsMatching, minSelectionContext, toMockSelectables, selectionCtx } from './helpers/index';
 import * as toggleSelectedItem from '../handle-selection/toggle-item-selection-strategy';
 
 {

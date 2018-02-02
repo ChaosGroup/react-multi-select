@@ -1,6 +1,6 @@
 import test from 'ava';
 import { SelectionAction, TSelectionContext } from '../handle-selection/types';
-import { testIsMatching, minSelectionContext, toMockSelectables, selectionCtx } from '../helpers';
+import { testIsMatching, minSelectionContext, toMockSelectables, selectionCtx } from './helpers/index';
 import * as repeatLastSelectionAction from '../handle-selection/repeat-last-action-strategy';
 
 {

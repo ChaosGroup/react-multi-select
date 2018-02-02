@@ -1,7 +1,7 @@
+import test from 'ava';
 import * as React from 'react';
 import { spy } from 'sinon';
 import * as enzyme from 'enzyme';
-import test from 'ava';
 import * as Adapter from 'enzyme-adapter-react-16';
 
 import Selectable, { TSelectableProps } from '../Selectable';

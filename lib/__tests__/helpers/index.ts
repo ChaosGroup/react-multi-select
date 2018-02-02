@@ -1,7 +1,7 @@
 import test from 'ava';
 import * as React from 'react';
-import { TSelectableProps } from '../Selectable';
-import { SelectionAction, SelectionType, TSelectionStrategy, TSelectionContext } from '../handle-selection/types';
+import { TSelectableProps } from '../../Selectable';
+import { SelectionAction, SelectionType, TSelectionStrategy, TSelectionContext } from '../../handle-selection/types';
 
 const pickSelectors = (selectionContext: { [id: string]: any }) => JSON.stringify(
 	[

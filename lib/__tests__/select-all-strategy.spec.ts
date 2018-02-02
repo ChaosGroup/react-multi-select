@@ -1,5 +1,5 @@
 import test from 'ava';
-import { testIsMatching, minSelectionContext, toMockSelectables, selectionCtx } from '../helpers';
+import { testIsMatching, minSelectionContext, toMockSelectables, selectionCtx } from './helpers/index';
 import * as selectAll from '../handle-selection/select-all-strategy';
 
 {

@@ -1,7 +1,7 @@
 import * as React from 'react';
 const ensureRange = (min: number, value: number, max: number) => Math.max(min, Math.min(value, max));
 
-import handleSelection from './handle-selection';
+import handleSelection from './handle-selection/index';
 import Selectable, { TSelectableProps } from './Selectable';
 
 import {
@@ -11,7 +11,7 @@ import {
 	TSelectionEvent
 } from './handle-selection/types';
 
-interface TMultiSelectState {
+export interface TMultiSelectState {
 	lastAction: SelectionAction;
 	lastActionIndex: number;
 	focusedIndex?: number;

@@ -1,5 +1,5 @@
 import test from 'ava';
-import { testIsMatching, minSelectionContext, selectionCtx } from '../helpers';
+import { testIsMatching, minSelectionContext, selectionCtx } from './helpers/index';
 import * as selectNewEntry from '../handle-selection/select-new-entry-strategy';
 
 {

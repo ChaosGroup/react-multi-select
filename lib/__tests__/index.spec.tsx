@@ -1,4 +1,4 @@
-import MultiSelect from '../';
+import MultiSelect from '../index';
 import test from 'ava';
 
 test('renders without crashing with valid minimal props', assert => {});
