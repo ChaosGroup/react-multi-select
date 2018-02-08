@@ -8,8 +8,10 @@
         "declaration": true,
         "declarationDir": "./dist",
 		"alwaysStrict": true,
-		"target": "es2015",
-		"module": "commonjs"
+		"target": "es6",
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"isolatedModules": false
     },
     "include": [
         "./lib/**/*"

@@ -2,7 +2,7 @@ import * as React from 'react';
 const ensureRange = (min: number, value: number, max: number) => Math.max(min, Math.min(value, max));
 
 import handleSelection from './handle-selection/index';
-import Selectable, { TSelectableProps } from './Selectable';
+import { TSelectableProps } from './Selectable';
 
 import {
 	TSelectionContext,
@@ -124,3 +124,5 @@ export default class MultiSelect<DT> extends React.PureComponent<TMultiSelectPro
 		);
 	}
 }
+
+export { default as Selectable } from './Selectable';
