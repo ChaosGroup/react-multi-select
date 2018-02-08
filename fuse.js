@@ -7,7 +7,7 @@ const fuse = FuseBox.init({
 	cache: false,
 	sourceMaps: { inline: false, vendor: false },
 	natives: false,
-	package: 'rct-mlt-slct',
+	package: 'react-multi-select',
 	plugins: [
 		QuantumPlugin({
 			containedAPI: true,
@@ -20,6 +20,6 @@ const fuse = FuseBox.init({
 
 fuse
 	.bundle('index')
-	.instructions('> [**/!(*.spec*).{tsx,ts}]');
+	.instructions('> *.tsx');
 
 fuse.run();
