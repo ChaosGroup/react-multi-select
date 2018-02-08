@@ -13,6 +13,7 @@ const fuse = FuseBox.init({
 			containedAPI: true,
 			ensureES5: true,
 			uglify: true,
+			treeshake: true,
 			bakeApiIntoBundle: 'index'
 		})
 	]
@@ -20,6 +21,6 @@ const fuse = FuseBox.init({
 
 fuse
 	.bundle('index')
-	.instructions('> *.tsx');
+	.instructions('+ [*.tsx]');
 
 fuse.run();

@@ -1,12 +1,13 @@
 {
   "name": "react-multi-select",
-  "version": "1.0.0",
+  "version": "0.1.1",
   "description": "Multi selection component",
-  "main": "index.js",
+  "ts-main": "./lib/index.tsx",
+  "main": "dist/index.js",
   "repository": "git@git.chaosgroup.com:neui/react-multi-select.git",
   "author": "Konstantin Simeonov <konstantin.simeonov@chaosgroup.com>",
+  "registry": "https://npm.chaosgroup.com",
   "license": "MIT",
-  "private": true,
   "scripts": {
     "build": "node fuse.js",
     "test": "tsc --p ./tsconfig.test.json && ava",
