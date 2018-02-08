@@ -22,6 +22,7 @@ const getMinProps = (): TSelectableProps<string> => ({
 
 test('Selectable#render renders without crashing with valid minimal props', assert => {
 	shallow(<Selectable {...getMinProps() } />);
+	assert.pass();
 });
 
 test('Selectable#render renders renders children inside wrapper', assert => {

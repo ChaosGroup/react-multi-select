@@ -31,7 +31,7 @@ export const testIsMatching = <DT>(strategy: TSelectionStrategy, shouldMatch: It
 	}
 }
 
-export const minSelectionContext = {
+export const minSelectionContext = Object.freeze({
 	selection: new Set([1, 5, 10, 42]),
 	data: 8,
 	lastAction: ('add' as SelectionAction),
@@ -42,7 +42,7 @@ export const minSelectionContext = {
 	shiftKey: false,
 	altKey: false,
 	selectionType: ('mouse' as SelectionType)
-};
+});
 
 export const selectionCtx = <DT>(overrides: object): TSelectionContext<DT> => {
 	return ({ ...minSelectionContext, ...overrides } as TSelectionContext<DT>);

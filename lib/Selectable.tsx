@@ -6,10 +6,10 @@ export interface TSelectableProps<DT> {
 	selected: boolean | undefined;
 	focused: boolean | undefined;
 	data: DT;
-	onSelect: (event: TSelectionEvent<HTMLLIElement>, selectionInfo: TSelectionInfo) => any;
-	onBlur: (childIndex: number) => any;
-	index: number;
-	children: JSX.Element;
+	onSelect?: ((event: TSelectionEvent<HTMLLIElement>, selectionInfo: TSelectionInfo) => any);
+	onBlur?: ((childIndex: number) => any);
+	index?: number;
+	children: React.ReactNode;
 }
 
 const FOCUS_REF_PROP = { ref: (focusable: HTMLLIElement) => focusable && focusable.focus() };

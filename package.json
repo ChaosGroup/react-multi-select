@@ -9,8 +9,8 @@
   "private": true,
   "scripts": {
     "build": "node fuse.js",
-	"test": "tsc --p ./tsconfig.test.json && ava",
-	"clean": "rm -rf ./dump ./dist"
+    "test": "tsc --p ./tsconfig.test.json && ava",
+    "clean": "rm -rf ./dump ./dist"
   },
   "devDependencies": {
     "@types/enzyme": "^3.1.8",
@@ -23,6 +23,7 @@
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "fuse-box": "^3.0.2",
+    "jsdom": "^11.6.2",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
