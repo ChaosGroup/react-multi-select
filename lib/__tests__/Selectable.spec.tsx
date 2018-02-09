@@ -35,7 +35,7 @@ test(`Selectable#_classname returns "multiselect__entry selected" when props.sel
 	const minProps: TSelectableProps<string> = { ...getMinProps(), selected: true };
 	const instance = shallow(<Selectable {...minProps} />).instance() as Selectable<string>;
 
-	assert.is(instance._className, 'multiselect__entry--selected');
+	assert.is(instance._className, 'multiselect__entry selected');
 });
 
 test(`Selectable#_classname returns "multiselect__entry" when props.selected`, assert => {

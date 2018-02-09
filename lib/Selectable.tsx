@@ -19,7 +19,7 @@ export default class Selectable<DT> extends React.PureComponent<TSelectableProps
 	get _className() {
 		const { selected } = this.props;
 
-		return `multiselect__entry${selected ? '--selected' : ''}`;
+		return `multiselect__entry${selected ? ' selected' : ''}`;
 	}
 
 	get _refProps(): { ref?: (r: HTMLLIElement) => any } {
