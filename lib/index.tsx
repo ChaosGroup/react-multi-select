@@ -1,5 +1,5 @@
 import * as React from 'react';
-const ensureRange = (min: number, value: number, max: number) => Math.max(min, Math.min(value, max));
+import { ensureRange } from './utils';
 
 import handleSelection from './handle-selection/index';
 import { TSelectableProps } from './Selectable';

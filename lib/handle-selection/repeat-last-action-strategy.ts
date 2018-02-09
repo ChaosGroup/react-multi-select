@@ -1,6 +1,6 @@
+import { ensureRange } from '../utils';
 import { TSelectionStrategy, TStateUpdate, TSelectionContext } from './types';
 
-const ensureRange = (min: number, value: number, max: number) => Math.max(min, Math.min(value, max));
 /**
  * Repeats the last action (addition or deletion) from the last modified selection to the
  * current selection, inclusive.
