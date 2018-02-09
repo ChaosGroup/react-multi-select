@@ -3,6 +3,7 @@ import { TSelectionInfo, TSelectionEvent, SelectionType } from './handle-selecti
 import { MouseEvent, KeyboardEvent } from 'react';
 
 export interface TSelectableProps<DT> {
+	render?: keyof HTMLElementTagNameMap;
 	selected: boolean | undefined;
 	focused: boolean | undefined;
 	data: DT;
@@ -16,6 +17,10 @@ const FOCUS_REF_PROP = { ref: (focusable: HTMLLIElement) => focusable && focusab
 const EMPTY = {};
 
 export default class Selectable<DT> extends React.PureComponent<TSelectableProps<DT>, Readonly<{}>> {
+	static defaultProps = {
+		render: 'li'
+	}
+
 	get _className() {
 		const { selected } = this.props;
 
@@ -43,17 +48,14 @@ export default class Selectable<DT> extends React.PureComponent<TSelectableProps
 	_onBlur = () => this.props.onBlur(this.props.index)
 
 	render() {
-		return (
-			<li
-				{...this._refProps}
-				className={this._className}
-				tabIndex={0}
-				onBlur={this._onBlur}
-				onClick={this._onMouseSelect}
-				onKeyDown={this._onKeyboardSelect}
-			>
-				{this.props.children}
-			</li>
-		);
+		return React.createElement(this.props.render, {
+			...this._refProps,
+			className: this._className,
+			tabIndex: 0,
+			onBlur: this._onBlur,
+			onClick: this._onMouseSelect,
+			onKeyDown: this._onKeyboardSelect,
+			children: this.props.children
+		});
 	}
 }

@@ -18,6 +18,7 @@ export interface TMultiSelectState {
 }
 
 export interface TMultiSelectProps<DT> {
+	render?: keyof HTMLElementTagNameMap;
 	className?: string;
 	selection: Set<DT>;
 	children?: React.ReactNode;
@@ -36,7 +37,8 @@ export default class MultiSelect<DT> extends React.PureComponent<TMultiSelectPro
 	}
 
 	static defaultProps: Partial<TMultiSelectProps<any>> = {
-		children: []
+		children: [],
+		render: 'ul'
 	}
 
 	_onSelectionChange = (event: TSelectionEvent<HTMLLIElement>, selectionInfo: TSelectionInfo): void => {
@@ -70,7 +72,7 @@ export default class MultiSelect<DT> extends React.PureComponent<TMultiSelectPro
 			return;
 		}
 
-		const children= this.props.children as React.ReactElement<TSelectableProps<DT>>[];
+		const children = this.props.children as React.ReactElement<TSelectableProps<DT>>[];
 		const { focusedIndex } = this.state;
 
 		const change = (key === 'ArrowUp') ? -1 : 1;
@@ -117,11 +119,12 @@ export default class MultiSelect<DT> extends React.PureComponent<TMultiSelectPro
 			);
 		});
 
-		return (
-			<ul tabIndex={0} className={this._className} onKeyDown={this._onChangeFocusedIndex}>
-				{childrenWithPassedProps}
-			</ul>
-		);
+		return React.createElement(this.props.render, {
+			tabIndex: 0,
+			className: this._className,
+			onKeyDown: this._onChangeFocusedIndex,
+			children: childrenWithPassedProps
+		});
 	}
 }
 
