@@ -4,7 +4,6 @@
         "sourceMap": true,
         "noImplicitAny": true,
         "jsx": "react",
-        "jsxFactory": "React.createElement",
         "declaration": true,
         "declarationDir": "./dist",
 		"alwaysStrict": true,

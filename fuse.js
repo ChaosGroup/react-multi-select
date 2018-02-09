@@ -2,7 +2,7 @@ const { FuseBox, QuantumPlugin } = require('fuse-box');
 
 const fuse = FuseBox.init({
 	homeDir: 'lib',
-	target: 'browser@es6',
+	target: 'npm',
 	output: 'dist/$name.js',
 	globals: { 'default': '*' },
 	cache: false,
@@ -12,10 +12,10 @@ const fuse = FuseBox.init({
 	tsConfig: [{ target: 'es6' }],
 	plugins: [
 		QuantumPlugin({
+			bakeApiIntoBundle: 'es6',
 			containedAPI: true,
-			// ensureES5: true,
-			// uglify: true,
-			bakeApiIntoBundle: 'es6'
+			globalRequire: false,
+			uglify: true
 		})
 	]
 });
