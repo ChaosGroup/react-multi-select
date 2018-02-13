@@ -22,6 +22,6 @@ const fuse = FuseBox.init({
 
 fuse
 	.bundle('es6')
-	.instructions('> [index.tsx]');
+	.instructions('> [index.ts]');
 
 fuse.run();
