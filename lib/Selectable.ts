@@ -4,8 +4,8 @@ import { MouseEvent, KeyboardEvent } from 'react';
 
 export interface TSelectableProps<DT> {
 	render?: keyof HTMLElementTagNameMap;
-	selected: boolean | undefined;
-	focused: boolean | undefined;
+	selected?: boolean;
+	focused?: boolean;
 	data: DT;
 	onSelect?: ((event: TSelectionEvent<HTMLLIElement>, selectionInfo: TSelectionInfo) => any);
 	onBlur?: ((childIndex: number) => any);
