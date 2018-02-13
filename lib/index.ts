@@ -45,14 +45,14 @@ export default class MultiSelect<DT> extends React.PureComponent<TMultiSelectPro
 		const { ctrlKey, shiftKey, altKey, key = '' } = event;
 		const { selection, onSelectionChange } = this.props;
 		const { lastAction, lastActionIndex } = this.state;
-		const children = [].slice.call(this.props.children);
+		const childrenData = [].map.call(this.props.children, (child: React.ReactElement<TSelectableProps<DT>>) => child.props.data);
 
 		const selectionContext: TSelectionContext<DT> = {
 			...selectionInfo,
 			selection,
 			lastAction,
 			lastActionIndex,
-			children,
+			childrenData,
 			ctrlKey,
 			shiftKey,
 			altKey,

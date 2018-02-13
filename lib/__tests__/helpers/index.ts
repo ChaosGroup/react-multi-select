@@ -13,8 +13,6 @@ const pickSelectors = (selectionContext: { [id: string]: any }) => JSON.stringif
 	].reduce((obj: object, key: string) => ({ ...obj, [key]: selectionContext[key] }), selectionContext)
 );
 
-export const toMockSelectables = <T>(dataItems: T[]) => dataItems.map(data => ({ props: { data } }));
-
 export const testIsMatching = <DT>(strategy: TSelectionStrategy, shouldMatch: Iterable<TSelectionContext<DT>>, shouldNotMatch: Iterable<TSelectionContext<DT>>) => {
 	for (const selectionContext of shouldMatch) {
 		const { selectionType } = selectionContext;
@@ -37,7 +35,7 @@ export const minSelectionContext = Object.freeze({
 	lastAction: ('add' as SelectionAction),
 	lastActionIndex: 2,
 	currentActionIndex: 5,
-	children: toMockSelectables([1, 2, 5, 6, 10, 7, 42]) as React.ReactElement<TSelectableProps<number>>[],
+	childrenData: [1, 2, 5, 6, 10, 7, 42],
 	ctrlKey: false,
 	shiftKey: false,
 	altKey: false,

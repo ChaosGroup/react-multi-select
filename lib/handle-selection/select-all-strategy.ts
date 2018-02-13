@@ -1,9 +1,8 @@
 import { TSelectionStrategy, TStateUpdate, TSelectionContext } from './types';
 
 export const getNewSelection = <DT>(selectionContext: TSelectionContext<DT>): Set<DT> => {
-	const { selection, children } = selectionContext;
-	const childrenDataKeys = children.map(child => child.props.data);
-	return new Set([...selection, ...childrenDataKeys]);
+	const { selection, childrenData } = selectionContext;
+	return new Set([...selection, ...childrenData]);
 };
 
 export const getStateUpdates = <DT>(electionContext: TSelectionContext<DT>): TStateUpdate => {

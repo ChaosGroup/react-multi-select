@@ -41,7 +41,7 @@ export interface TSelectionContext<DT> {
 	 * All selectable items for the current selection modification.
 	 * Provides access to their data key via children[i].props.data .
 	 */
-	children: React.ReactElement<TSelectableProps<DT>>[];
+	childrenData: DT[];
 
 	selectionType: SelectionType;
 

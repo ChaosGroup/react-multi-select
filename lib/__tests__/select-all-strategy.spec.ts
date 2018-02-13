@@ -1,5 +1,5 @@
 import test from 'ava';
-import { testIsMatching, minSelectionContext, toMockSelectables, selectionCtx } from './helpers/index';
+import { testIsMatching, minSelectionContext, selectionCtx } from './helpers/index';
 import * as selectAll from '../handle-selection/select-all-strategy';
 
 {
@@ -35,7 +35,7 @@ test(`doesn't have "mouse" property`, assert => {
 });
 
 test('returns a Set containing the same data when selected children is an empty array', assert => {
-	const selectionContext = selectionCtx<number>({ children: [] });
+	const selectionContext = selectionCtx<number>({ childrenData: [] });
 
 	const expectedSelection = selectionContext.selection;
 	const newSelection = selectAll.getNewSelection(selectionContext);
@@ -46,11 +46,11 @@ test('returns a Set containing the same data when selected children is an empty 
 
 test('returns a new Set containing the data from the set and the data from the children', assert => {
 	const initiallySelected = [1, 5, 'beep boop'];
-	const childrenData = toMockSelectables([7, 5, 'beep']);
+	const childrenData = [7, 5, 'beep'];
 	const selectionContext = selectionCtx({
 		...minSelectionContext,
 		selection: new Set(initiallySelected),
-		children: childrenData.map(data => ({ props: { data } }))
+		childrenData
 	});
 
 	const expectedSelection = new Set([...initiallySelected, ...childrenData]);
@@ -59,7 +59,7 @@ test('returns a new Set containing the data from the set and the data from the c
 });
 
 test('returns empty Set for empty children array and empty prior selection', assert => {
-	const selectionContext = selectionCtx<number>({ selection: new Set, children: [] });
+	const selectionContext = selectionCtx<number>({ selection: new Set, childrenData: [] });
 
 	const newSelection = selectAll.getNewSelection(selectionContext);
 

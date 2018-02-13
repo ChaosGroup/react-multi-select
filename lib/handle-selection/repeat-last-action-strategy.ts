@@ -8,16 +8,16 @@ import { TSelectionStrategy, TStateUpdate, TSelectionContext } from './types';
 export const getNewSelection = <DT>(selectionContext: TSelectionContext<DT>): Set<DT> => {
 	const {
 			selection,
-		lastAction,
-		lastActionIndex,
-		currentActionIndex,
-		children
+			lastAction,
+			lastActionIndex,
+			currentActionIndex,
+			childrenData
 		} = selectionContext;
 
 	const newSelected = new Set(selection);
 
 	const minIndex = 0;
-	const maxIndex = children.length - 1;
+	const maxIndex = childrenData.length - 1;
 	/* get starting index, but ensure at least 0 */
 	const actionStartIndex = ensureRange(minIndex, Math.min(currentActionIndex, lastActionIndex), maxIndex);
 	/* get end index, but ensure at most the last index of children */
@@ -27,9 +27,9 @@ export const getNewSelection = <DT>(selectionContext: TSelectionContext<DT>): Se
 		(data: DT) => newSelected.delete(data) :
 		(data: DT) => newSelected.add(data);
 
-	children
-		.slice(actionStartIndex, actionEndIndex + 1)
-		.forEach(selectable => action(selectable.props.data));
+	for(let i = actionStartIndex; i <= actionEndIndex; ++i) {
+		action(childrenData[i]);
+	}
 
 	return newSelected;
 };

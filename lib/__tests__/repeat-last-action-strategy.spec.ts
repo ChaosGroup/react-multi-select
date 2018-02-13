@@ -1,6 +1,6 @@
 import test from 'ava';
 import { SelectionAction, TSelectionContext } from '../handle-selection/types';
-import { testIsMatching, minSelectionContext, toMockSelectables, selectionCtx } from './helpers/index';
+import { testIsMatching, minSelectionContext,  selectionCtx } from './helpers/index'
 import * as repeatLastSelectionAction from '../handle-selection/repeat-last-action-strategy';
 
 {
@@ -62,7 +62,7 @@ test(`returns set containing old data + every data from the range [start, end] w
 		data: allChildrenData[end],
 		lastAction: ('add' as SelectionAction),
 		selection: new Set(initialSelection),
-		children: toMockSelectables(allChildrenData)
+		childrenData: allChildrenData
 	});
 	const newSelection = repeatLastSelectionAction.getNewSelection(selectionContext);
 
@@ -102,7 +102,7 @@ test(`returns set containing old data minus every data from the range [start, en
 		data: allChildrenData[end],
 		lastAction: ('delete' as SelectionAction),
 		selection: new Set(initialSelection),
-		children: toMockSelectables(allChildrenData)
+		childrenData: allChildrenData
 	});
 
 	const newSelection = repeatLastSelectionAction.getNewSelection(selectionContext);
@@ -138,7 +138,7 @@ test('behaves as called with currentActionIndex: 0 when currentActionIndex is ne
 		data: allChildrenData[end],
 		lastAction: ('delete' as SelectionAction),
 		selection: new Set(initialSelection),
-		children: toMockSelectables(allChildrenData)
+		childrenData: allChildrenData
 	});
 
 	const newSelection = repeatLastSelectionAction.getNewSelection(selectionContext);
@@ -177,7 +177,7 @@ test('behaves as called with children.length - 1 when currentActionIndex is grea
 		data: text[start],
 		lastAction: ('add' as SelectionAction),
 		selection: new Set(initialSelection),
-		children: toMockSelectables(text)
+		childrenData: text
 	});
 
 	const newSelection = repeatLastSelectionAction.getNewSelection(selectionContext);
@@ -206,7 +206,7 @@ test('behaves as called with lastActionIndex: 0 when lastActionIndex is negative
 		data: text[end],
 		lastAction: ('delete' as SelectionAction),
 		selection: new Set(initialSelection),
-		children: toMockSelectables(text)
+		childrenData: text
 	});
 
 	const newSelection = repeatLastSelectionAction.getNewSelection(selectionContext);
@@ -236,7 +236,7 @@ test('behaves as called with children.length - 1 when lastActionIndex is greater
 		data: text[2],
 		lastAction: ('add' as SelectionAction),
 		selection: new Set(initialSelection),
-		children: toMockSelectables(text)
+		childrenData: text
 	});
 
 	const newSelection = repeatLastSelectionAction.getNewSelection(selectionContext);
@@ -249,7 +249,7 @@ test('behaves as called with children.length - 1 when lastActionIndex is greater
 		...minSelectionContext,
 		lastActionIndex: 0,
 		currentActionIndex: 4,
-		children: toMockSelectables([1, 2, 3, 4, 5, 6, 7, 8])
+		childrenData: [1, 2, 3, 4, 5, 6, 7, 8]
 	});
 
 	const { currentActionIndex } = selectionContext;

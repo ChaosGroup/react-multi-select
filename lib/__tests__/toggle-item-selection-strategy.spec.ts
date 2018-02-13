@@ -1,5 +1,5 @@
 import test from 'ava';
-import { testIsMatching, minSelectionContext, toMockSelectables, selectionCtx } from './helpers/index';
+import { testIsMatching, minSelectionContext, selectionCtx } from './helpers/index';
 import * as toggleSelectedItem from '../handle-selection/toggle-item-selection-strategy';
 
 {
@@ -61,9 +61,9 @@ test('removes the passed data from the Set if it was present in the input Set', 
 
 test('sets the lastActionIndex to the currentActionIndex from input context', assert => {
 	const currentActionIndex = 5;
-	const children = toMockSelectables(Array.from({ length: currentActionIndex * 2 }).map((_, i) => i));
+	const childrenData = Array.from({ length: currentActionIndex * 2 }).map((_, i) => i);
 	const selectionContext = selectionCtx({
-		children,
+		childrenData,
 		currentActionIndex
 	});
 
