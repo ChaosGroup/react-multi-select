@@ -1,0 +1,16 @@
+div {
+	display: flex;
+	flex-direction: column;
+	width: 300px;
+}
+
+p {
+	margin-left: 10px;
+	height: 20px;
+	cursor: pointer;
+	opacity: 0.3;
+}
+
+p.selected {
+	opacity: 1;
+}
