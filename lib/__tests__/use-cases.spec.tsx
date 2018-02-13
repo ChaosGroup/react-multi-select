@@ -69,7 +69,7 @@ const runTestsWithTags = (multiselectTag: Tag, selectableTag: Tag) => test('Comb
 
 	// select first element to focus the list
 	wrapper.find('Selectable').first().simulate('click');
-	assert.is([...selection()], [points[0].id]);
+	assert.deepEqual([...selection()], [points[0].id]);
 
 	// select all elements
 	wrapper.find('Selectable').first().simulate('keydown', { key: 'a', ctrlKey: true });
