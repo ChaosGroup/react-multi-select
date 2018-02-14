@@ -47,22 +47,6 @@ const runTestsWithProps = getMinProps => {
 		assert.is(instance._className, 'multiselect__entry');
 	});
 
-	test('_refProps returns object with props ref of type function when props.focused is true', assert => {
-		const minProps = { ...getMinProps(), focused: true };
-		const instance = shallow(<Selectable {...minProps} />).instance() as Selectable<string>;
-		const { ref } = instance._refProps;
-
-		assert.is(typeof ref, 'function');
-	});
-
-	test('returns object without props when props.focused is false', assert => {
-		const minProps = { ...getMinProps(), focused: false };
-		const instance = shallow(<Selectable {...minProps} />).instance() as Selectable<string>;
-		const { ref } = instance._refProps;
-
-		assert.is(ref, undefined);
-	});
-
 	test('_createOnSelect() returns a function when called with string', assert => {
 		const instance = shallow(<Selectable {...getMinProps() } />).instance() as Selectable<string>;
 		const onMouseSelect = instance._createOnSelect('mouse');
@@ -99,56 +83,37 @@ const runTestsWithProps = getMinProps => {
 		assert.deepEqual(passedEvent, expectedEventObject);
 		assert.deepEqual(passedSelectionInfo, expectedSelectionInfo);
 	});
-
-	test('Selectable#_onBlur() calls props.onBlur with index from props', assert => {
-		const minProps = { ...getMinProps(), selected: true, focused: true, index: 2 };
-		const onBlurSpy = spy(minProps, 'onBlur');
-		const instance = shallow(<Selectable {...minProps} />).instance() as Selectable<string>;
-
-		instance._onBlur();
-		onBlurSpy.restore();
-
-		assert.true(onBlurSpy.calledWith(minProps.index));
-	});
 };
 
 const propsProviders = [
 	(): TSelectableProps<string> => ({
 		selected: false,
-		focused: false,
 		data: 'hello',
 		onSelect: () => { },
-		onBlur: () => { },
 		index: 0,
 		children: <h1>Hello</h1>
 	}),
 	(): TSelectableProps<string> => ({
 		selected: false,
-		focused: false,
 		data: 'hello',
 		render: 'p',
 		onSelect: () => { },
-		onBlur: () => { },
 		index: 0,
 		children: <a href="https://www.haskell.org/hoogle/">haha</a>
 	}),
 	(): TSelectableProps<number> => ({
 		selected: false,
-		focused: false,
 		data: 3,
 		render: 'a',
 		onSelect: () => { },
-		onBlur: () => { },
 		index: 0,
 		children: <pre>5</pre>
 	}),
 	(): TSelectableProps<object> => ({
 		selected: false,
-		focused: false,
 		data: {},
 		render: 'div',
 		onSelect: () => { },
-		onBlur: () => { },
 		index: 0,
 		children: <p>Hello</p>
 	})

@@ -8,8 +8,10 @@ import {
 	TSelectionContext,
 	SelectionAction,
 	TSelectionInfo,
-	TSelectionEvent
+	TSelectionEvent,
+	TFocusable
 } from './handle-selection/types';
+import { ReactElement } from 'react';
 
 export interface TMultiSelectState {
 	lastAction: SelectionAction;
@@ -26,14 +28,18 @@ export interface TMultiSelectProps<DT> {
 };
 
 export default class MultiSelect<DT> extends React.PureComponent<TMultiSelectProps<DT>, Partial<TMultiSelectState>> {
+	private _focusedIndex: number;
+	private _focusables: TFocusable[];
+
 	constructor(props: TMultiSelectProps<DT>) {
 		super(props);
 
 		this.state = {
 			lastActionIndex: 0,
-			lastAction: 'add',
-			focusedIndex: null
+			lastAction: 'add'
 		};
+		this._focusables = [];
+		this._focusedIndex = 0;
 	}
 
 	static defaultProps: Partial<TMultiSelectProps<any>> = {
@@ -41,12 +47,15 @@ export default class MultiSelect<DT> extends React.PureComponent<TMultiSelectPro
 		render: 'ul'
 	}
 
+	get _className() {
+		return 'multiselect ' + this.props.className;
+	}
+
 	_onSelectionChange = (event: TSelectionEvent<HTMLLIElement>, selectionInfo: TSelectionInfo): void => {
 		const { ctrlKey, shiftKey, altKey, key = '' } = event;
 		const { selection, onSelectionChange } = this.props;
 		const { lastAction, lastActionIndex } = this.state;
 		const childrenData = [].map.call(this.props.children, (child: React.ReactElement<TSelectableProps<DT>>) => child.props.data);
-
 		const selectionContext: TSelectionContext<DT> = {
 			...selectionInfo,
 			selection,
@@ -65,51 +74,37 @@ export default class MultiSelect<DT> extends React.PureComponent<TMultiSelectPro
 		if (stateUpdates) {
 			this.setState(stateUpdates);
 		}
+
+		if (selectionContext.selectionType !== 'keyboard') {
+			this._focusItemAt(selectionContext.currentActionIndex);
+		}
 	}
 
 	_onChangeFocusedIndex = ({ key }: React.KeyboardEvent<HTMLUListElement>) => {
-		if (key !== 'ArrowUp' && key !== 'ArrowDown') {
-			return;
-		}
-
-		const children = this.props.children as React.ReactElement<TSelectableProps<DT>>[];
-		const { focusedIndex } = this.state;
-
-		const change = (key === 'ArrowUp') ? -1 : 1;
-		const newFocusedIndex = ensureRange(0, children.length - 1, (focusedIndex || 0) + change);
-
-		this.setState({ focusedIndex: newFocusedIndex });
-	}
-
-	_onChildBlur = (childIndex: number) => {
-		if (this.state.focusedIndex === childIndex) {
-			this.setState({ focusedIndex: null });
+		if (key === 'ArrowUp' || key === 'ArrowDown') {
+			const change = (key === 'ArrowUp') ? -1 : 1;
+			this._focusItemAt(this._focusedIndex + change);
 		}
 	}
 
-	get _className() {
-		return 'multiselect ' + this.props.className;
+	_focusItemAt(index: number) {
+		const newFocusedIndex = ensureRange(0, this._focusables.length - 1, index);
+		this._focusedIndex = newFocusedIndex;
+		this._focusables[newFocusedIndex].focus();
 	}
+
+	_getRef = (index: number, ref: TFocusable) => this._focusables[index] = ref
 
 	render() {
-		const {
-			children,
-			selection
-		} = this.props;
-
-		const { focusedIndex } = this.state;
+		const { children, selection } = this.props;
 
 		const childrenWithPassedProps = [].map.call(children, (childElement: React.ReactElement<TSelectableProps<DT>>, index: number) => {
-			const selected = selection.has(childElement.props.data);
-			const focused = focusedIndex === index;
-
 			const selectableChildProps: TSelectableProps<DT> = {
 				...childElement.props,
 				onSelect: this._onSelectionChange,
-				onBlur: this._onChildBlur,
+				exposeElement: this._getRef,
+				selected: selection.has(childElement.props.data),
 				index,
-				selected,
-				focused
 			};
 
 			return React.cloneElement(

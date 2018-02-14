@@ -5,8 +5,11 @@ const ps = [
 	'gosho',
 	'pesho',
 	'shosho',
-	'tosho'
+	'tosho',
+	// ...Array.from({ length: 1000 }).map((_, i) => 'haha' + i)
 ];
+
+document.addEventListener('keydown', e => e.preventDefault());
 
 class App extends Component {
 	constructor(props) {
@@ -14,7 +17,7 @@ class App extends Component {
 		this.state = { selection: new Set };
 	}
 
-	onSelectionChange = selection => this.setState({ selection })
+	onSelectionChange = selection => this.state.selection !== selection && this.setState({ selection })
 
 	render() {
 		const { selection } = this.state;

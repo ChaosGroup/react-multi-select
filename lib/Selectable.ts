@@ -1,34 +1,29 @@
 import * as React from 'react';
-import { TSelectionInfo, TSelectionEvent, SelectionType } from './handle-selection/types';
+import { TSelectionInfo, TSelectionEvent, SelectionType, TFocusable } from './handle-selection/types';
 import { MouseEvent, KeyboardEvent } from 'react';
 
 export interface TSelectableProps<DT> {
 	render?: keyof HTMLElementTagNameMap;
 	selected?: boolean;
-	focused?: boolean;
 	data: DT;
 	onSelect?: ((event: TSelectionEvent<HTMLLIElement>, selectionInfo: TSelectionInfo) => any);
-	onBlur?: ((childIndex: number) => any);
 	index?: number;
 	children: React.ReactNode;
+	ref?: (ref: React.ReactInstance) => any;
+	exposeElement?: (index: number, ref: { focus: () => void }) => any
 }
-
-const FOCUS_REF_PROP = { ref: (focusable: HTMLLIElement) => focusable && focusable.focus() };
-const EMPTY = {};
 
 export default class Selectable<DT> extends React.PureComponent<TSelectableProps<DT>, Readonly<{}>> {
 	static defaultProps = {
 		render: 'li'
 	}
 
+	_element: HTMLInputElement;
+
 	get _className() {
 		const { selected } = this.props;
 
 		return `multiselect__entry${selected ? ' selected' : ''}`;
-	}
-
-	get _refProps(): { ref?: (r: HTMLLIElement) => any } {
-		return this.props.focused ? FOCUS_REF_PROP : EMPTY;
 	}
 
 	_createOnSelect = (selectionType: SelectionType) => (event: TSelectionEvent<HTMLLIElement>) => {
@@ -45,14 +40,13 @@ export default class Selectable<DT> extends React.PureComponent<TSelectableProps
 	_onMouseSelect = this._createOnSelect('mouse')
 	_onKeyboardSelect = this._createOnSelect('keyboard')
 
-	_onBlur = () => this.props.onBlur(this.props.index)
+	_exposeElement = (focusable: TFocusable) => this.props.exposeElement(this.props.index, focusable)
 
 	render() {
 		return React.createElement(this.props.render, {
-			...this._refProps,
+			ref: this._exposeElement,
 			className: this._className,
 			tabIndex: 0,
-			onBlur: this._onBlur,
 			onClick: this._onMouseSelect,
 			onKeyDown: this._onKeyboardSelect,
 			children: this.props.children

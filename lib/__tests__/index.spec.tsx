@@ -80,7 +80,6 @@ test('passes _onSelectionChange as onSelect and _onChildBlur as onBlur to childr
 
 	for (const { props } of renderedSelectables) {
 		assert.is(typeof props.onSelect, 'function');
-		assert.is(typeof props.onBlur, 'function');
 	}
 });
 
@@ -95,15 +94,17 @@ test(`doesn't change state.focusedIndex when event.key is different from up/down
 	const selectables = selectableProps.map(props => <Selectable {...props}>This is for {props.data}</Selectable>);
 
 	const wrapper = mount(<MultiSelect {...multiSelectProps} children={selectables} />);
+	const firstSelectable = wrapper.find('Selectable').first();
+	firstSelectable.simulate('click');
+
 
 	for (const key of ['1', 'a', 'ArrowLeft', 'ArrowRight', 'Home', 'End']) {
 		wrapper.simulate('keydown', { key });
-		const element = wrapper.instance();
-		assert.is(element.state.focusedIndex, null);
+		assert.is(firstSelectable.getDOMNode(), document.activeElement);
 	}
 });
 
-test(`doesn't change state.focusedIndex when event.key is upArrow and state.focusedIndex === 0`, assert => {
+test(`keeps the first element focused when pressing up`, assert => {
 	const selectableProps = getSelectableProps();
 	const selection = new Set(selectableProps.filter(p => p.selected).map(p => p.data))
 	const multiSelectProps = getMinMultiSelectProps(selection);
@@ -112,13 +113,14 @@ test(`doesn't change state.focusedIndex when event.key is upArrow and state.focu
 	const selectables = selectableProps.map(props => <Selectable {...props}>This is for {props.data}</Selectable>);
 
 	const wrapper = mount(<MultiSelect {...multiSelectProps} children={selectables} />);
-	wrapper.setState({ focusedIndex: 0 });
 	wrapper.simulate('keydown', { key: 'ArrowUp' });
 
-	assert.is(wrapper.state().focusedIndex, 0);
+	const firstSelectable = wrapper.find('Selectable').first();
+	assert.is(firstSelectable.getDOMNode(), document.activeElement);
 });
 
-test(`decremenets state.focusedIndex when event.key is up arrow and state.focusedIndex > 0`, assert => {
+test(`focuses the previous item when current item is not the first`, assert => {
+	const focusAt = 3;
 	const selectableProps = getSelectableProps();
 	const selection = new Set(selectableProps.filter(p => p.selected).map(p => p.data))
 	const multiSelectProps = getMinMultiSelectProps(selection);
@@ -127,13 +129,13 @@ test(`decremenets state.focusedIndex when event.key is up arrow and state.focuse
 	const selectables = selectableProps.map(props => <Selectable {...props}>This is for {props.data}</Selectable>);
 
 	const wrapper = mount(<MultiSelect {...multiSelectProps} children={selectables} />);
-	wrapper.setState({ focusedIndex: 3 });
+	wrapper.find('Selectable').at(focusAt).simulate('click');
 	wrapper.simulate('keydown', { key: 'ArrowUp' });
 
-	assert.is(wrapper.state().focusedIndex, 2);
+	assert.is(wrapper.find('Selectable').at(focusAt - 1).getDOMNode(), document.activeElement);
 });
 
-test(`does't change state.focusedIndex when event.key is down arrow and state.focusedIndex === props.children.length - 1`, assert => {
+test(`keeps the last element focused when the down arrow is pressed`, assert => {
 	const selectableProps = getSelectableProps();
 	const selection = new Set(selectableProps.filter(p => p.selected).map(p => p.data))
 	const multiSelectProps = getMinMultiSelectProps(selection);
@@ -147,10 +149,10 @@ test(`does't change state.focusedIndex when event.key is down arrow and state.fo
 	last.simulate('click');
 	wrapper.simulate('keydown', { key: 'ArrowDown' });
 
-	assert.is(wrapper.state().focusedIndex, selectableProps.length - 1);
+	assert.is(last.getDOMNode(), document.activeElement);
 });
 
-test(`increments state.focusedIndex when event.key is down arrow and state.focusedIndex < props.children.length - 1`, assert => {
+test(`focuses next item when event.key is down arrow and current item is not the last`, assert => {
 	const selectableProps = getSelectableProps();
 	const selection = new Set(selectableProps.filter(p => p.selected).map(p => p.data))
 	const multiSelectProps = getMinMultiSelectProps(selection);
@@ -162,40 +164,7 @@ test(`increments state.focusedIndex when event.key is down arrow and state.focus
 	wrapper.find('Selectable').first().simulate('click');
 	wrapper.simulate('keydown', { key: 'ArrowDown' });
 
-	assert.is(wrapper.state().focusedIndex, 1);
-});
-
-test('changes state.focusedIndex to null when an list is blurred', assert => {
-	const selectableProps = getSelectableProps();
-	const selection = new Set(selectableProps.filter(p => p.selected).map(p => p.data))
-	const multiSelectProps = getMinMultiSelectProps(selection);
-
-	const cmpKeys = ['selected', 'focused', 'data'];
-	const selectables = selectableProps.map(props => <Selectable {...props}>This is for {props.data}</Selectable>);
-
-	const wrapper = mount(<MultiSelect {...multiSelectProps} children={selectables} />);
-	const focused = wrapper.find('Selectable').first();
-	focused.simulate('click');
-	focused.simulate('blur');
-
-	assert.is(wrapper.state().focusedIndex, null);
-});
-
-test(`doesn't change state.focusedIndex to null when an element inside the list is focused`, assert => {
-	const selectableProps = getSelectableProps();
-	const selection = new Set(selectableProps.filter(p => p.selected).map(p => p.data))
-	const multiSelectProps = getMinMultiSelectProps(selection);
-
-	const cmpKeys = ['selected', 'focused', 'data'];
-	const selectables = selectableProps.map(props => <Selectable {...props}>This is for {props.data}</Selectable>);
-
-	const wrapper = mount(<MultiSelect {...multiSelectProps} children={selectables} />);
-	const focused = wrapper.find('Selectable').first();
-	focused.simulate('click');
-	focused.simulate('blur');
-
-	wrapper.simulate('keydown', { key: 'ArrowDown' });
-	assert.truthy(wrapper.state().focusedIndex);
+	assert.is(wrapper.find('Selectable').at(1).getDOMNode(), document.activeElement);
 });
 
 test(`allows to plugin in custom classes`, assert => {

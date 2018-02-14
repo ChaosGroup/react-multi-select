@@ -20,8 +20,7 @@ const fuse = FuseBox.init({
 	]
 });
 
-fuse
-	.bundle('es6')
-	.instructions('> [index.ts]');
+
+const instructions = fuse.bundle('es6').instructions('> [index.ts]');
 
 fuse.run();

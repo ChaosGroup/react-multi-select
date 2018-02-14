@@ -84,9 +84,9 @@ const runTestsWithTags = (multiselectTag: Tag, selectableTag: Tag) => test('Comb
 
 	// toggle one selection on and off a few times
 	// selection is preserved because of even amount of repetitions
-	for(const i of [2, 3, 0, points.length - 1]) {
+	for (const i of [2, 3, 0, points.length - 1]) {
 		const victim /* :D */ = wrapper.find('Selectable').at(i);
-		for(let j = 0; j < 4; ++j) {
+		for (let j = 0; j < 4; ++j) {
 			const isInSelection = selection().has(i);
 			victim.simulate('click', { ctrlKey: true });
 			assert.not(selection().has(i), isInSelection);
@@ -116,10 +116,24 @@ const runTestsWithTags = (multiselectTag: Tag, selectableTag: Tag) => test('Comb
 	assert.false(selection().has(6));
 
 	// do some clicking
-	for(const i of [0, 1, 2, 3, 6, 6, 4, 0]) {
-		wrapper.find('Selectable').at(i).simulate('click');
+	for (const i of [0, 1, 2, 3, 6, 6, 4, 0]) {
+		const ithSelectable = wrapper.find('Selectable').at(i);
+		ithSelectable.simulate('click');
+		// check if selection works
 		assert.deepEqual([...selection()], [i]);
+		// check if focus works
+		assert.is(ithSelectable.getDOMNode(), document.activeElement);
 	}
+
+	wrapper.find('Selectable').first().simulate('click');
+	const moveDownCount = 3;
+	Array.from({ length: moveDownCount })
+		.forEach(() => wrapper.simulate('keydown', { key: 'ArrowDown' }))
+
+	assert.is(wrapper.find('Selectable').at(moveDownCount).getDOMNode(), document.activeElement);
+
+	wrapper.simulate('keydown', { key: 'ArrowUp' });
+	assert.is(wrapper.find('Selectable').at(moveDownCount - 1).getDOMNode(), document.activeElement);
 });
 
 [

@@ -1,6 +1,8 @@
 import * as React from 'react';
 import Selectable, { TSelectableProps } from '../Selectable';
 
+export type TFocusable = { focus: () => void };
+
 export type SelectionType = 'mouse' | 'keyboard';
 
 /**
