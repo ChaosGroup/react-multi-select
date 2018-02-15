@@ -8,3 +8,7 @@ react-multi-select-tests:
     - yarn
   script:
     - yarn test
+    - yarn coverage
+  artifacts:
+    paths:
+      - coverage/

@@ -10,7 +10,8 @@
 	"license": "MIT",
 	"scripts": {
 		"build": "node fuse.js",
-		"test": "tsc --p ./tsconfig.test.json && ava",
+		"test": "tsc --p ./tsconfig.test.json && nyc ava",
+		"coverage": "nyc report --reporter=html",
 		"clean": "rm -rf ./dump ./dist"
 	},
 	"devDependencies": {
@@ -24,12 +25,13 @@
 		"enzyme-adapter-react-16": "^1.1.1",
 		"fuse-box": "^3.0.2",
 		"jsdom": "^11.6.2",
-		"sinon": "^4.2.1",
-		"typescript": "^2.6.2",
-		"uglify-es": "^3.3.9",
+		"nyc": "^11.4.1",
 		"prop-types": ">= 15.6.0",
 		"react": ">= 15.4.2",
-		"react-dom": ">= 15.4.2"
+		"react-dom": ">= 15.4.2",
+		"sinon": "^4.2.1",
+		"typescript": "^2.6.2",
+		"uglify-es": "^3.3.9"
 	},
 	"peerDependencies": {
 		"prop-types": ">= 15.6.0",

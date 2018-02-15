@@ -3,3 +3,5 @@ node_modules/
 *.d.ts
 dump/
 dist/
+.nyc_output
+.coverage
