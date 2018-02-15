@@ -12,7 +12,7 @@ import * as selectNewEntry from '../handle-selection/select-new-entry-strategy';
 		selectionCtx({ selectionType: 'mouse', ctrlKey: true, shiftKey: true })
 	];
 
-	testIsMatching(selectNewEntry, shouldMatch, shouldNotMatch);
+	testIsMatching(selectNewEntry, shouldMatch, shouldNotMatch, 'select-new');
 }
 
 {
@@ -26,7 +26,7 @@ import * as selectNewEntry from '../handle-selection/select-new-entry-strategy';
 		selectionCtx({ selectionType: 'keyboard', ctrlKey: true, shiftKey: true })
 	];
 
-	testIsMatching(selectNewEntry, shouldMatch, shouldNotMatch);
+	testIsMatching(selectNewEntry, shouldMatch, shouldNotMatch, 'select-new');
 }
 
 test('returns a new Set containing only the data that has been passed in', assert => {

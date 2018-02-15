@@ -67,7 +67,7 @@ test('propagates index, selected and focused properties to children', assert => 
 	}
 });
 
-test('passes _onSelectionChange as onSelect and _onChildBlur as onBlur to children', assert => {
+test('passes _onSelectionChange as onSelect to children', assert => {
 	const selectableProps = getSelectableProps();
 	const selection = new Set(selectableProps.filter(p => p.selected).map(p => p.data));
 	const multiSelectProps = getMinMultiSelectProps(selection);
@@ -84,7 +84,7 @@ test('passes _onSelectionChange as onSelect and _onChildBlur as onBlur to childr
 });
 
 
-test(`doesn't change state.focusedIndex when event.key is different from up/down arrow`, assert => {
+test(`doesn't focus another element when event.key is different from up/down arrow`, assert => {
 	const selectableProps = getSelectableProps();
 	const selection = new Set(selectableProps.filter(p => p.selected).map(p => p.data));
 
@@ -109,14 +109,13 @@ test(`keeps the first element focused when pressing up`, assert => {
 	const selection = new Set(selectableProps.filter(p => p.selected).map(p => p.data))
 	const multiSelectProps = getMinMultiSelectProps(selection);
 
-	const cmpKeys = ['selected', 'focused', 'data'];
 	const selectables = selectableProps.map(props => <Selectable {...props}>This is for {props.data}</Selectable>);
 
 	const wrapper = mount(<MultiSelect {...multiSelectProps} children={selectables} />);
+	wrapper.find('Selectable').first().simulate('click');
 	wrapper.simulate('keydown', { key: 'ArrowUp' });
-
-	const firstSelectable = wrapper.find('Selectable').first();
-	assert.is(firstSelectable.getDOMNode(), document.activeElement);
+	const firstSelectable = wrapper.find('Selectable').first().getDOMNode();
+	assert.is(firstSelectable, document.activeElement);
 });
 
 test(`focuses the previous item when current item is not the first`, assert => {

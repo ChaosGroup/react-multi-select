@@ -14,7 +14,7 @@ import * as repeatLastSelectionAction from '../handle-selection/repeat-last-acti
 		selectionCtx({ selectionType, ctrlKey: false, shiftKey: false })
 	];
 
-	testIsMatching(repeatLastSelectionAction, shouldMatch, shouldNotMatch);
+	testIsMatching(repeatLastSelectionAction, shouldMatch, shouldNotMatch, 'repeat-action');
 }
 
 {
@@ -30,7 +30,7 @@ import * as repeatLastSelectionAction from '../handle-selection/repeat-last-acti
 		selectionCtx({ selectionType, key, ctrlKey: false, shiftKey: false })
 	];
 
-	testIsMatching(repeatLastSelectionAction, shouldMatch, shouldNotMatch);
+	testIsMatching(repeatLastSelectionAction, shouldMatch, shouldNotMatch, 'repeat-action');
 }
 
 test(`returns set containing old data + every data from the range [start, end] when last action was 'add'`, test => {

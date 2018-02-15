@@ -27,7 +27,7 @@ import * as selectAll from '../handle-selection/select-all-strategy';
 		})
 	];
 
-	testIsMatching(selectAll, shouldMatch, shouldNotMatch);
+	testIsMatching(selectAll, shouldMatch, shouldNotMatch, 'select all');
 }
 
 test(`doesn't have "mouse" property`, assert => {

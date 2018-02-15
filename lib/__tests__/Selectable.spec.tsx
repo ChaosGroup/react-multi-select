@@ -10,8 +10,8 @@ import { MouseEvent } from 'react';
 enzyme.configure({ adapter: new Adapter() });
 const { shallow } = enzyme;
 
-const runTestsWithProps = getMinProps => {
-	test('enders without crashing with valid minimal props', assert => {
+const runTestsWithProps = (getMinProps, i) => {
+	test(`${i}. renders without crashing with valid minimal props`, assert => {
 		shallow(<Selectable {...getMinProps() } />);
 		assert.pass();
 	});
@@ -19,7 +19,7 @@ const runTestsWithProps = getMinProps => {
 	{
 		const minProps = getMinProps();
 		if (minProps.render) {
-			test('renders element with tag from props.render', assert => {
+			test(`${i}. renders element with tag from props.render`, assert => {
 				const wrapper = shallow(<Selectable {...minProps} />);
 				const element = wrapper.find(minProps.render).getElement();
 				assert.is(element.type, minProps.render);
@@ -27,27 +27,27 @@ const runTestsWithProps = getMinProps => {
 		}
 	}
 
-	test('renders renders children inside wrapper', assert => {
+	test(`${i}. renders renders children inside wrapper`, assert => {
 		const minProps = getMinProps();
 		const wrapper = shallow(<Selectable {...minProps} />);
 		assert.deepEqual(wrapper.children().getElement(), minProps.children);
 	});
 
-	test(`_classname returns "multiselect__entry selected" when props.selected is true`, assert => {
+	test(`${i}. _classname returns "multiselect__entry selected" when props.selected is true`, assert => {
 		const minProps = { ...getMinProps(), selected: true };
 		const instance = shallow(<Selectable {...minProps} />).instance() as Selectable<string>;
 
 		assert.is(instance._className, 'multiselect__entry selected');
 	});
 
-	test(`_classname returns "multiselect__entry" when props.selected`, assert => {
+	test(`${i}. _classname returns "multiselect__entry" when props.selected`, assert => {
 		const wrapper = shallow(<Selectable {...getMinProps() } />);
 		const instance = wrapper.instance() as Selectable<string>;
 
 		assert.is(instance._className, 'multiselect__entry');
 	});
 
-	test('_createOnSelect() returns a function when called with string', assert => {
+	test(`${i}. _createOnSelect() returns a function when called with string`, assert => {
 		const instance = shallow(<Selectable {...getMinProps() } />).instance() as Selectable<string>;
 		const onMouseSelect = instance._createOnSelect('mouse');
 		assert.is(typeof onMouseSelect, 'function');
@@ -56,7 +56,7 @@ const runTestsWithProps = getMinProps => {
 		assert.is(typeof onKeyboardSelect, 'function');
 	});
 
-	test('returned function passes event and selection info to props.onSelect', assert => {
+	test(`${i}. returned function passes event and selection info to props.onSelect`, assert => {
 		const data = 333;
 		const selectionType = 'mouse';
 		const index = 5;

@@ -14,7 +14,7 @@ import * as toggleSelectedItem from '../handle-selection/toggle-item-selection-s
 		selectionCtx({ selectionType, ctrlKey: false, shiftKey: false })
 	];
 
-	testIsMatching(toggleSelectedItem, shouldMatch, shouldNotMatch);
+	testIsMatching(toggleSelectedItem, shouldMatch, shouldNotMatch, 'toggle-selection');
 }
 
 {
@@ -30,7 +30,7 @@ import * as toggleSelectedItem from '../handle-selection/toggle-item-selection-s
 		selectionCtx({ selectionType, key, ctrlKey: false, shiftKey: false })
 	];
 
-	testIsMatching(toggleSelectedItem, shouldMatch, shouldNotMatch);
+	testIsMatching(toggleSelectedItem, shouldMatch, shouldNotMatch, 'toggle-selection');
 }
 
 test(`adds the passed data to the resulting Set if it wasn't present in the input Set`, assert => {

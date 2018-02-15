@@ -13,17 +13,22 @@ const pickSelectors = (selectionContext: { [id: string]: any }) => JSON.stringif
 	].reduce((obj: object, key: string) => ({ ...obj, [key]: selectionContext[key] }), selectionContext)
 );
 
-export const testIsMatching = <DT>(strategy: TSelectionStrategy, shouldMatch: Iterable<TSelectionContext<DT>>, shouldNotMatch: Iterable<TSelectionContext<DT>>) => {
+export const testIsMatching = <DT>(
+	strategy: TSelectionStrategy,
+	shouldMatch: Iterable<TSelectionContext<DT>>,
+	shouldNotMatch: Iterable<TSelectionContext<DT>>,
+	name: string
+) => {
 	for (const selectionContext of shouldMatch) {
 		const { selectionType } = selectionContext;
-		test(`matches for ${pickSelectors(selectionContext)}`, assert => {
+		test(`${name} matches for ${pickSelectors(selectionContext)}`, assert => {
 			assert.true(strategy.matches[selectionType](selectionContext));
 		});
 	}
 
 	for (const selectionContext of shouldNotMatch) {
 		const { selectionType } = selectionContext;
-		test(`doesn't match for ${pickSelectors(selectionContext)}`, assert => {
+		test(`${name} doesn't match for ${pickSelectors(selectionContext)}`, assert => {
 			assert.false(strategy.matches[selectionType](selectionContext));
 		});
 	}
