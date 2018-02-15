@@ -20,7 +20,6 @@ const getSelectableProps = () => [
 ].map((data, index) => ({
 	key: data,
 	selected: index % 2 === 0,
-	focused: false,
 	data
 }));
 
@@ -32,19 +31,18 @@ const getMinMultiSelectProps = function <T>(selection: Set<T> = new Set): TMulti
 };
 
 test('renders without crashing with valid minimal props', assert => {
-	const selectableProps = {
-		selected: true,
-		focused: true,
-		data: 5,
-		index: 0
-	};
-
 	shallow(
-		<MultiSelect {...getMinMultiSelectProps<number>() }>
-			<Selectable {...selectableProps}>{selectableProps.data}</Selectable>
+		<MultiSelect {...getMinMultiSelectProps<number>()}>
+			<Selectable selected data={5}>5</Selectable>
 		</MultiSelect>
 	);
 
+	assert.pass();
+});
+
+test('empty multiselect does not crash on focus', assert => {
+	const wrapper = mount(<MultiSelect selection={new Set} onSelectionChange={() => { }} />);
+	wrapper.simulate('focus');
 	assert.pass();
 });
 
@@ -166,7 +164,7 @@ test(`focuses next item when event.key is down arrow and current item is not the
 	assert.is(wrapper.find('Selectable').at(1).getDOMNode(), document.activeElement);
 });
 
-test(`allows to plugin in custom classes`, assert => {
+test(`allows to provide custom classes`, assert => {
 	const wrapper = mount(<MultiSelect className="penka" {...getMinMultiSelectProps()} />);
 	const className = wrapper.getDOMNode().className;
 	assert.is(className, 'multiselect penka');

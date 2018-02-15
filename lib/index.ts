@@ -39,7 +39,6 @@ export default class MultiSelect<DT> extends React.PureComponent<TMultiSelectPro
 			lastAction: 'add'
 		};
 		this._focusables = [];
-		this._focusedIndex = 0;
 	}
 
 	static defaultProps: Partial<TMultiSelectProps<any>> = {
@@ -76,24 +75,26 @@ export default class MultiSelect<DT> extends React.PureComponent<TMultiSelectPro
 		}
 
 		if (selectionContext.selectionType !== 'keyboard') {
-			this._focusItemAt(selectionContext.currentActionIndex);
+			this._focusables[selectionContext.currentActionIndex].focus();
 		}
 	}
 
 	_onChangeFocusedIndex = ({ key }: React.KeyboardEvent<HTMLUListElement>) => {
-		if (key === 'ArrowUp' || key === 'ArrowDown') {
-			const change = (key === 'ArrowUp') ? -1 : 1;
-			this._focusItemAt(this._focusedIndex + change);
+		const { nextSibling, previousSibling } = document.activeElement;
+		if (key === 'ArrowDown' && nextSibling) {
+			(nextSibling as HTMLInputElement).focus();
+		} else if (key === 'ArrowUp' && previousSibling) {
+			(previousSibling as HTMLInputElement).focus();
 		}
 	}
 
-	_focusItemAt(index: number) {
-		const newFocusedIndex = ensureRange(0, this._focusables.length - 1, index);
-		this._focusedIndex = newFocusedIndex;
-		this._focusables[newFocusedIndex].focus();
-	}
-
 	_getRef = (index: number, ref: TFocusable) => this._focusables[index] = ref
+
+	_onFocus = () => {
+		if(this._focusables.length) {
+			this._focusables[0].focus()
+		}
+	}
 
 	render() {
 		const { children, selection } = this.props;
@@ -116,6 +117,7 @@ export default class MultiSelect<DT> extends React.PureComponent<TMultiSelectPro
 
 		return React.createElement(this.props.render, {
 			tabIndex: 0,
+			onFocus: this._onFocus,
 			className: this._className,
 			onKeyDown: this._onChangeFocusedIndex,
 			children: childrenWithPassedProps
