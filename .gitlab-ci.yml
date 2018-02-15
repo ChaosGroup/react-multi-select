@@ -1,0 +1,10 @@
+react-multi-select-tests:
+  tags:
+    - docker
+  image: node:latest
+  before_script:
+    - node -v
+    - yarn -v
+    - yarn
+  script:
+    - yarn test
