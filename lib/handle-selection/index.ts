@@ -28,7 +28,7 @@ export default function handleSelection<DT>(
 
 	if (!matchingStrategy) {
 		return {
-			newSelection: selectionContext.selection,
+			newSelection: null,
 			stateUpdates: null
 		};
 	}

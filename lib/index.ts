@@ -16,7 +16,6 @@ import { ReactElement } from 'react';
 export interface TMultiSelectState {
 	lastAction: SelectionAction;
 	lastActionIndex: number;
-	focusedIndex?: number;
 }
 
 export interface TMultiSelectProps<DT> {
@@ -69,7 +68,10 @@ export default class MultiSelect<DT> extends React.PureComponent<TMultiSelectPro
 
 		const { newSelection, stateUpdates } = handleSelection(selectionContext);
 
-		onSelectionChange(newSelection);
+		if(newSelection) {
+			onSelectionChange(newSelection);
+		}
+
 		if (stateUpdates) {
 			this.setState(stateUpdates);
 		}
