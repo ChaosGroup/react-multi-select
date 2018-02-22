@@ -41,18 +41,20 @@ const runTestsWithProps = (getMinProps, i) => {
 	});
 
 	test(`${i}. _classname returns "multiselect__entry" when props.selected`, assert => {
-		const wrapper = shallow(<Selectable {...getMinProps() } />);
+		const wrapper = shallow(<Selectable {...getMinProps()} />);
 		const instance = wrapper.instance() as Selectable<string>;
 
 		assert.is(instance._className, 'multiselect__entry');
 	});
 
 	test(`${i}. _createOnSelect() returns a function when called with string`, assert => {
-		const instance = shallow(<Selectable {...getMinProps() } />).instance() as Selectable<string>;
-		const onMouseSelect = instance._createOnSelect('mouse');
+		const instance = shallow(<Selectable {...getMinProps()} />).instance() as Selectable<string>;
+		// tslint:disable-next-line no-string-literal
+		const onMouseSelect = instance['_createOnSelect']('mouse');
 		assert.is(typeof onMouseSelect, 'function');
 
-		const onKeyboardSelect = instance._createOnSelect('keyboard');
+		// tslint:disable-next-line no-string-literal
+		const onKeyboardSelect = instance['_createOnSelect']('keyboard');
 		assert.is(typeof onKeyboardSelect, 'function');
 	});
 
@@ -73,7 +75,8 @@ const runTestsWithProps = (getMinProps, i) => {
 		const onSelectSpy = spy(minProps, 'onSelect');
 		const instance = shallow(<Selectable {...minProps} />).instance() as Selectable<string>;
 
-		const onMouseSelect = instance._createOnSelect(selectionType);
+		// tslint:disable-next-line no-string-literal
+		const onMouseSelect = instance['_createOnSelect'](selectionType);
 		onMouseSelect(expectedEventObject as MouseEvent<HTMLLIElement>);
 
 		onSelectSpy.restore();
@@ -99,7 +102,7 @@ const propsProviders = [
 		render: 'p',
 		onSelect: () => { },
 		index: 0,
-		children: <a href="https://www.haskell.org/hoogle/">haha</a>
+		children: <a href='https://www.haskell.org/hoogle/'>haha</a>
 	}),
 	(): TSelectableProps<number> => ({
 		selected: false,

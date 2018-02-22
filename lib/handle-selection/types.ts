@@ -16,7 +16,8 @@ export interface TSelectionInfo {
 	currentActionIndex: number;
 }
 
-export type TSelectionEvent<TElement> = (React.MouseEvent<TElement> | React.KeyboardEvent<TElement>) & { key?: string; };
+export type TSelectionEvent<TElement> =
+	( React.MouseEvent<TElement> | React.KeyboardEvent<TElement>) & { key?: string; };
 
 export interface TSelectionContext<DT> {
 	/**
@@ -54,7 +55,7 @@ export interface TSelectionContext<DT> {
 	shiftKey: boolean;
 	altKey: boolean;
 	key?: string;
-};
+}
 
 export interface TStateUpdate {
 	lastAction?: SelectionAction;
@@ -66,21 +67,21 @@ export interface TStateUpdate {
  * Interface which selection strategies should provide.
  */
 export interface TSelectionStrategy {
+	matches: {
+		[id in SelectionType]?: <DT>(selectionContext: TSelectionContext<DT>) => boolean;
+	};
 	/**
-	 * Calculates and returns a new Set of data keys based on the selectionContext, which can be mapped to the currently selected items.
+	 * Calculates and returns a new Set of data keys based on the selectionContext,
+	 * which can be mapped to the currently selected items.
 	 */
 	getNewSelection<DT>(selectionContext: TSelectionContext<DT>): Set<DT>;
 	/**
 	 * Calculate state updates based on the passed selectionContext.
 	 */
 	getStateUpdates<DT>(selectionContext: TSelectionContext<DT>): TStateUpdate;
-
-	matches: {
-		[id in SelectionType]?: <DT>(selectionContext: TSelectionContext<DT>) => boolean;
-	};
 }
 
 export interface TSelectionResult<DT> {
 	stateUpdates: TStateUpdate;
-	newSelection: Set<DT>
+	newSelection: Set<DT>;
 }

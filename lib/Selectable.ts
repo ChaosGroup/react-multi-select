@@ -14,11 +14,11 @@ export interface TSelectableProps<DT> {
 }
 
 export default class Selectable<DT> extends React.PureComponent<TSelectableProps<DT>, Readonly<{}>> {
-	static defaultProps = {
+	public static defaultProps = {
 		render: 'li'
-	}
+	};
 
-	_element: HTMLInputElement;
+	private _element: HTMLInputElement;
 
 	get _className() {
 		const { selected } = this.props;
@@ -26,7 +26,7 @@ export default class Selectable<DT> extends React.PureComponent<TSelectableProps
 		return `multiselect__entry${selected ? ' selected' : ''}`;
 	}
 
-	_createOnSelect = (selectionType: SelectionType) => (event: TSelectionEvent<HTMLLIElement>) => {
+	private _createOnSelect = (selectionType: SelectionType) => (event: TSelectionEvent<HTMLLIElement>) => {
 		const { onSelect, data, index } = this.props;
 		const selectionInfo = {
 			data,
@@ -37,12 +37,12 @@ export default class Selectable<DT> extends React.PureComponent<TSelectableProps
 		onSelect(event, selectionInfo);
 	}
 
-	_onMouseSelect = this._createOnSelect('mouse')
-	_onKeyboardSelect = this._createOnSelect('keyboard')
+	private _onMouseSelect = this._createOnSelect('mouse')
+	private _onKeyboardSelect = this._createOnSelect('keyboard')
 
-	_exposeElement = (focusable: TFocusable) => this.props.exposeElement(this.props.index, focusable)
+	private _exposeElement = (focusable: TFocusable) => this.props.exposeElement(this.props.index, focusable)
 
-	render() {
+	public render() {
 		return React.createElement(this.props.render, {
 			ref: this._exposeElement,
 			className: this._className,

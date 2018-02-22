@@ -11,6 +11,7 @@
 	"scripts": {
 		"build": "node fuse.js",
 		"test": "tsc --p ./tsconfig.test.json && nyc ava",
+		"lint": "tslint lib/*.ts lib/**/*.ts",
 		"coverage": "nyc report --reporter=html",
 		"clean": "rm -rf ./dump ./dist"
 	},
@@ -30,6 +31,8 @@
 		"react": ">= 15.4.2",
 		"react-dom": ">= 15.4.2",
 		"sinon": "^4.2.1",
+		"tslint": "^5.9.1",
+		"tslint-react": "^3.5.1",
 		"typescript": "^2.6.2",
 		"uglify-es": "^3.3.9"
 	},

@@ -13,4 +13,4 @@ export const matches = {
 	keyboard<DT>({ ctrlKey, key }: TSelectionContext<DT>): boolean {
 		return ctrlKey && (key === 'a');
 	}
-}
+};

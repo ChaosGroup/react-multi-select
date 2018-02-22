@@ -47,4 +47,4 @@ export const matches = {
 	keyboard<DT>({ shiftKey, key }: TSelectionContext<DT>): boolean {
 		return shiftKey && (key === ' ');
 	}
-}
+};

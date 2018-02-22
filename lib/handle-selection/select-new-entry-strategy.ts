@@ -25,4 +25,4 @@ export const matches = {
 	keyboard<DT>({ ctrlKey, shiftKey, key }: TSelectionContext<DT>): boolean {
 		return !ctrlKey && !shiftKey && (key === ' ');
 	}
-}
+};
