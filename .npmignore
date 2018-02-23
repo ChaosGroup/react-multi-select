@@ -1,4 +1,8 @@
 lib/__tests__/
 dump/
+git-hooks/
+examples/
 fuse.js
 tsconfig.test.json
+init.hooks.js
+tslint.json
