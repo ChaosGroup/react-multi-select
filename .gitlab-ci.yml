@@ -1,7 +1,16 @@
-react-multi-select-tests:
+stages:
+  - test
+  - build
+  - publish
+
+.common: &common
   tags:
     - docker
   image: node:latest
+
+test:
+  <<: *common
+  stage: test
   before_script:
     - node -v
     - yarn -v
@@ -13,3 +22,25 @@ react-multi-select-tests:
   artifacts:
     paths:
       - coverage/
+
+build:
+  <<: *common
+  stage: build
+  before_script:
+    - node -v
+    - yarn -v
+    - yarn
+  script:
+    - yarn build
+  artifacts:
+    paths:
+      - dist/
+
+publish:
+  <<: *common
+  stage: publish
+  when: manual
+  dependencies:
+    - build
+  script:
+    - npm publish
