@@ -4,15 +4,16 @@ import { spy } from 'sinon';
 import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
 
-import Selectable, { TSelectableProps } from '../Selectable';
 import { MouseEvent } from 'react';
+import Selectable, { TSelectableProps } from '../Selectable';
+import { noop } from './helpers';
 
 enzyme.configure({ adapter: new Adapter() });
 const { shallow } = enzyme;
 
 const runTestsWithProps = (getMinProps, i) => {
 	test(`${i}. renders without crashing with valid minimal props`, assert => {
-		shallow(<Selectable {...getMinProps() } />);
+		shallow(<Selectable {...getMinProps()} />);
 		assert.pass();
 	});
 
@@ -92,7 +93,7 @@ const propsProviders = [
 	(): TSelectableProps<string> => ({
 		selected: false,
 		data: 'hello',
-		onSelect: () => { },
+		onSelect: noop,
 		index: 0,
 		children: <h1>Hello</h1>
 	}),
@@ -100,15 +101,15 @@ const propsProviders = [
 		selected: false,
 		data: 'hello',
 		render: 'p',
-		onSelect: () => { },
+		onSelect: noop,
 		index: 0,
-		children: <a href='https://www.haskell.org/hoogle/'>haha</a>
+		children: <a href="https://www.haskell.org/hoogle/">haha</a>
 	}),
 	(): TSelectableProps<number> => ({
 		selected: false,
 		data: 3,
 		render: 'a',
-		onSelect: () => { },
+		onSelect: noop,
 		index: 0,
 		children: <pre>5</pre>
 	}),
@@ -116,7 +117,7 @@ const propsProviders = [
 		selected: false,
 		data: {},
 		render: 'div',
-		onSelect: () => { },
+		onSelect: noop,
 		index: 0,
 		children: <p>Hello</p>
 	})

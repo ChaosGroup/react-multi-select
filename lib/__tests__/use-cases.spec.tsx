@@ -14,46 +14,53 @@ type Point = {
 	id: number;
 	x: number;
 	y: number;
-}
+};
 
 type Tag = keyof HTMLElementTagNameMap;
 
 class Test extends React.Component {
-	state: {
+	public state: {
 		selection: Set<number>;
-	}
+	};
 
-	props: {
+	public props: {
 		points: Point[];
 		renderM: Tag;
 		renderS: Tag;
-	}
+	};
 
 	constructor(props) {
 		super(props);
 		this.state = { selection: new Set };
 	}
 
-	onSelectionChange = selection => this.setState({ selection })
+	public onSelectionChange = selection => this.setState({ selection });
 
-	render() {
+	public render() {
 		const { renderS, renderM } = this.props;
+		const points = this.props.points.map(p => (
+			<Selectable
+				key={p.id}
+				data={p.id}
+				render={renderS}
+			>
+				[x = {p.x}, y = {p.y}]
+			</Selectable>
+		));
 		return (
 			<MultiSelect
 				selection={this.state.selection}
 				onSelectionChange={this.onSelectionChange}
 				render={renderM}
 			>
-				{
-					this.props.points.map(p => <Selectable key={p.id} data={p.id} render={renderS}>[x = {p.x}, y = {p.y}]</Selectable>)
-				}
+				{points}
 			</MultiSelect>
-		)
+		);
 	}
 }
 
 const runTestsWithTags = (multiselectTag: Tag, selectableTag: Tag) => test(
-	`Combination of toggle, repeat action and select all works for multiselect ${multiselectTag} and selectables ${selectableTag}`,
+	`Combination of toggle/repeat/select all works for multiselect ${multiselectTag} and selectables ${selectableTag}`,
 	assert => {
 		const points = [
 			{ x: 3, y: 4 },
@@ -128,7 +135,7 @@ const runTestsWithTags = (multiselectTag: Tag, selectableTag: Tag) => test(
 		wrapper.find('Selectable').first().simulate('click');
 		const moveDownCount = 3;
 		Array.from({ length: moveDownCount })
-			.forEach(() => wrapper.simulate('keydown', { key: 'ArrowDown' }))
+			.forEach(() => wrapper.simulate('keydown', { key: 'ArrowDown' }));
 
 		assert.is(wrapper.find('Selectable').at(moveDownCount).getDOMNode(), document.activeElement);
 
@@ -137,10 +144,12 @@ const runTestsWithTags = (multiselectTag: Tag, selectableTag: Tag) => test(
 	}
 );
 
-for(const [m, s] of [
+const testCases = [
 	['div', 'div'],
 	['div', 'p'],
 	['ul', 'li'],
 	['ol', 'li'],
 	['div', 'a']
-]) runTestsWithTags(m as Tag, s as Tag);
+];
+
+testCases.forEach(([m, s]: [Tag, Tag]) => runTestsWithTags(m, s));

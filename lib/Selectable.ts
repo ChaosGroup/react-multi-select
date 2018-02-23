@@ -10,7 +10,7 @@ export interface TSelectableProps<DT> {
 	index?: number;
 	children: React.ReactNode;
 	ref?: (ref: React.ReactInstance) => any;
-	exposeElement?: (index: number, ref: { focus: () => void }) => any
+	exposeElement?: (index: number, ref: { focus: () => void }) => any;
 }
 
 export default class Selectable<DT> extends React.PureComponent<TSelectableProps<DT>, Readonly<{}>> {
@@ -37,10 +37,10 @@ export default class Selectable<DT> extends React.PureComponent<TSelectableProps
 		onSelect(event, selectionInfo);
 	}
 
-	private _onMouseSelect = this._createOnSelect('mouse')
-	private _onKeyboardSelect = this._createOnSelect('keyboard')
+	private _onMouseSelect = this._createOnSelect('mouse');
+	private _onKeyboardSelect = this._createOnSelect('keyboard');
 
-	private _exposeElement = (focusable: TFocusable) => this.props.exposeElement(this.props.index, focusable)
+	private _exposeElement = (focusable: TFocusable) => this.props.exposeElement(this.props.index, focusable);
 
 	public render() {
 		return React.createElement(this.props.render, {

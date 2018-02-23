@@ -15,6 +15,7 @@
 		],
 		"quotemark": [
 			true,
+			"jsx-double",
 			"single"
 		],
 		"new-parens": false,
@@ -25,6 +26,11 @@
 			"allow-leading-underscore"
 		],
 		"use-isnan": true,
-		"member-ordering": false
+		"member-ordering": false,
+		"ordered-imports": false,
+		"object-literal-sort-keys": false,
+		"trailing-comma": false,
+		"jsx-boolean-value": [true, "never"],
+		"interface-name": false
 	}
 }

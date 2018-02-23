@@ -8,10 +8,10 @@ import { TSelectionStrategy, TStateUpdate, TSelectionContext } from './types';
 export const getNewSelection = <DT>(selectionContext: TSelectionContext<DT>): Set<DT> => {
 	const {
 			selection,
-			lastAction,
-			lastActionIndex,
-			currentActionIndex,
-			childrenData
+		lastAction,
+		lastActionIndex,
+		currentActionIndex,
+		childrenData
 		} = selectionContext;
 
 	const newSelected = new Set(selection);
@@ -27,7 +27,7 @@ export const getNewSelection = <DT>(selectionContext: TSelectionContext<DT>): Se
 		(data: DT) => newSelected.delete(data) :
 		(data: DT) => newSelected.add(data);
 
-	for(let i = actionStartIndex; i <= actionEndIndex; ++i) {
+	for (let i = actionStartIndex; i <= actionEndIndex; ++i) {
 		action(childrenData[i]);
 	}
 

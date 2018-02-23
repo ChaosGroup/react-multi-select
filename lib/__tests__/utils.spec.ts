@@ -23,7 +23,7 @@ const testCases = [
 ];
 
 test('ensureRange works', assert => {
-	for(const [min, max, value, expectedValue] of testCases) {
+	for (const [min, max, value, expectedValue] of testCases) {
 		const result = utils.ensureRange(min, value, max);
 		const failMessage = `Expected ${expectedValue} for ${[min, max, value]} but got ${result}`;
 		assert.is(result, expectedValue, failMessage);

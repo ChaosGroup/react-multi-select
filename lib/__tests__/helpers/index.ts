@@ -1,7 +1,12 @@
 import test from 'ava';
 import * as React from 'react';
 import { TSelectableProps } from '../../Selectable';
-import { SelectionAction, SelectionType, TSelectionStrategy, TSelectionContext } from '../../handle-selection/types';
+import {
+	SelectionAction,
+	SelectionType,
+	TSelectionStrategy,
+	TSelectionContext
+} from '../../handle-selection/types';
 
 const pickSelectors = (selectionContext: { [id: string]: any }) => JSON.stringify(
 	[
@@ -50,3 +55,6 @@ export const minSelectionContext = Object.freeze({
 export const selectionCtx = <DT>(overrides: object): TSelectionContext<DT> => {
 	return ({ ...minSelectionContext, ...overrides } as TSelectionContext<DT>);
 };
+
+// tslint:disable-next-line no-empty
+export const noop = () => { };

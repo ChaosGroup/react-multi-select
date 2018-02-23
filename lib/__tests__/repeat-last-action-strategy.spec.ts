@@ -1,6 +1,6 @@
 import test from 'ava';
 import { SelectionAction, TSelectionContext } from '../handle-selection/types';
-import { testIsMatching, minSelectionContext,  selectionCtx } from './helpers/index'
+import { testIsMatching, minSelectionContext,  selectionCtx } from './helpers/index';
 import * as repeatLastSelectionAction from '../handle-selection/repeat-last-action-strategy';
 
 {
@@ -33,7 +33,7 @@ import * as repeatLastSelectionAction from '../handle-selection/repeat-last-acti
 	testIsMatching(repeatLastSelectionAction, shouldMatch, shouldNotMatch, 'repeat-action');
 }
 
-test(`returns set containing old data + every data from the range [start, end] when last action was 'add'`, test => {
+test(`returns set containing old data + every data from the range [start, end] when last action was 'add'`, assert => {
 	const start = 1;
 	const end = 5;
 	const notInitiallySelected = [
@@ -66,11 +66,11 @@ test(`returns set containing old data + every data from the range [start, end] w
 	});
 	const newSelection = repeatLastSelectionAction.getNewSelection(selectionContext);
 
-	test.is(newSelection.size, expectedSelection.length);
-	test.deepEqual([...newSelection].sort(), expectedSelection.sort());
+	assert.is(newSelection.size, expectedSelection.length);
+	assert.deepEqual([...newSelection].sort(), expectedSelection.sort());
 });
 
-test(`returns set containing old data minus every data from the range [start, end] when last action was 'delete'`, assert => {
+test(`returns set with old data minus every data from the range [start, end] when last action was delete`, assert => {
 	const start = 3;
 	const end = 9;
 	const expectedSelection = [
@@ -123,7 +123,7 @@ test('behaves as called with currentActionIndex: 0 when currentActionIndex is ne
 		'class Program1 {',
 		...expectedSelection,
 	];
-	
+
 	const allChildrenData = [
 		'using System;',
 		'using System.Collection.Generics;',
@@ -166,10 +166,10 @@ test('behaves as called with children.length - 1 when currentActionIndex is grea
 					else return () :: IO ()
 	return newTime) lastTimeModified
 `.split('\n');
-	
+
 	const initialSelection = text.slice(start, 4);
 	const expectedSelection = text.slice(start);
-	
+
 	const selectionContext = selectionCtx({
 		...minSelectionContext,
 		lastActionIndex: start,
@@ -213,7 +213,6 @@ test('behaves as called with lastActionIndex: 0 when lastActionIndex is negative
 	assert.is(newSelection.size, expectedSelection.length);
 	assert.deepEqual([...newSelection], expectedSelection);
 });
-
 
 test('behaves as called with children.length - 1 when lastActionIndex is greater then children.length', assert => {
 	const text = `
