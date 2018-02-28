@@ -3,6 +3,7 @@ import * as React from 'react';
 import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
 import './helpers/browser';
+import { spy } from 'sinon';
 
 import MultiSelect, { TMultiSelectProps } from '../index';
 import Selectable from '../Selectable';
@@ -63,7 +64,7 @@ test('propagates index, selected and focused properties to children', assert => 
 
 	const multiSelectProps = getMinMultiSelectProps(selection);
 
-	const cmpKeys = ['selected', 'focused', 'data'];
+	const cmpKeys = ['selected', 'data'];
 	const selectables = selectableProps.map((props, key) => <Selectable key={key} {...props}>{props.data}</Selectable>);
 
 	const wrapper = shallow(<MultiSelect {...multiSelectProps} children={selectables} />);
@@ -81,7 +82,7 @@ test('passes _onSelectionChange as onSelect to children', assert => {
 	const selection = new Set(selectableProps.filter(p => p.selected).map(p => p.data));
 	const multiSelectProps = getMinMultiSelectProps(selection);
 
-	const cmpKeys = ['selected', 'focused', 'data'];
+	const cmpKeys = ['selected', 'data'];
 	const selectables = selectableProps.map((props, key) => <Selectable key={key} {...props}>{props.data}</Selectable>);
 
 	const wrapper = shallow(<MultiSelect {...multiSelectProps} children={selectables} />);
@@ -92,13 +93,26 @@ test('passes _onSelectionChange as onSelect to children', assert => {
 	}
 });
 
+test('_onSelectionChange does not call props.onSelectionChange when no selection new selection', assert => {
+	const props = { selection: new Set, onSelectionChange: spy() };
+	const instance = shallow(<MultiSelect {...props} />).instance();
+	const noMatch = selectionCtx({
+		altKey: true,
+		selectionType: 'keyboard'
+	});
+
+	// tslint:disable-next-line no-string-literal
+	instance['_onSelectionChange']({ altKey: true }, { selectionType: 'keyboard' });
+	assert.false(props.onSelectionChange.called);
+});
+
 test(`doesn't focus another element when event.key is different from up/down arrow`, assert => {
 	const selectableProps = getSelectableProps();
 	const selection = new Set(selectableProps.filter(p => p.selected).map(p => p.data));
 
 	const multiSelectProps = getMinMultiSelectProps(selection);
 
-	const cmpKeys = ['selected', 'focused', 'data'];
+	const cmpKeys = ['selected', 'data'];
 	const selectables = selectableProps.map((props, key) => <Selectable key={key} {...props}>{props.data}</Selectable>);
 
 	const wrapper = mount(<MultiSelect {...multiSelectProps} children={selectables} />);
@@ -131,7 +145,7 @@ test(`focuses the previous item when current item is not the first`, assert => {
 	const selection = new Set(selectableProps.filter(p => p.selected).map(p => p.data));
 	const multiSelectProps = getMinMultiSelectProps(selection);
 
-	const cmpKeys = ['selected', 'focused', 'data'];
+	const cmpKeys = ['selected', 'data'];
 	const selectables = selectableProps.map((props, key) => <Selectable key={key} {...props}>{props.data}</Selectable>);
 
 	const wrapper = mount(<MultiSelect {...multiSelectProps} children={selectables} />);
@@ -146,7 +160,7 @@ test(`keeps the last element focused when the down arrow is pressed`, assert => 
 	const selection = new Set(selectableProps.filter(p => p.selected).map(p => p.data));
 	const multiSelectProps = getMinMultiSelectProps(selection);
 
-	const cmpKeys = ['selected', 'focused', 'data'];
+	const cmpKeys = ['selected', 'data'];
 	const selectables = selectableProps.map((props, key) => <Selectable key={key} {...props}>{props.data}</Selectable>);
 
 	const wrapper = mount(<MultiSelect {...multiSelectProps} children={selectables} />);
@@ -162,7 +176,7 @@ test(`focuses next item when event.key is down arrow and current item is not the
 	const selection = new Set(selectableProps.filter(p => p.selected).map(p => p.data));
 	const multiSelectProps = getMinMultiSelectProps(selection);
 
-	const cmpKeys = ['selected', 'focused', 'data'];
+	const cmpKeys = ['selected', 'data'];
 	const selectables = selectableProps.map((props, key) => <Selectable key={key} {...props}>{props.data}</Selectable>);
 
 	const wrapper = mount(<MultiSelect {...multiSelectProps} children={selectables} />);
