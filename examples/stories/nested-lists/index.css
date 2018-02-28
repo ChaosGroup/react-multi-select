@@ -1,0 +1,8 @@
+li.selected {
+	background: lightgray;
+}
+
+li {
+	list-style: none;
+	user-select: none;
+}

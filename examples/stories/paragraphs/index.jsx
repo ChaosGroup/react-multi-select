@@ -3,13 +3,6 @@ import MultiSelect, { Selectable } from '../../../dist/es6';
 
 import './index.css';
 
-const ps = [
-	'gosho',
-	'pesho',
-	'shosho',
-	'tosho',
-];
-
 export default class Paragraphs extends React.Component {
 	constructor(props) {
 		super(props);
@@ -27,7 +20,7 @@ export default class Paragraphs extends React.Component {
 		return (
 			<MultiSelect render="div" selection={selection} onSelectionChange={this.onSelectionChange}>
 				{
-					ps.map(p => (
+					this.props.texts.map(p => (
 						<Selectable render="p" key={p} data={p}>
 							{p}{selection.has(p) && ' <'}
 						</Selectable>
