@@ -45,6 +45,18 @@ test('empty multiselect does not crash on focus', assert => {
 	assert.pass();
 });
 
+test('non-empty multiselect focuses the first selectable element on focus', assert => {
+	const wrapper = mount(
+		<MultiSelect selection={new Set} onSelectionChange={noop}>
+			<Selectable data={5}>5</Selectable>
+		</MultiSelect>
+	);
+
+	wrapper.simulate('focus');
+	const firstSelectable = wrapper.find('Selectable').first().getDOMNode();
+	assert.is(firstSelectable, document.activeElement);
+});
+
 test('propagates index, selected and focused properties to children', assert => {
 	const selectableProps = getSelectableProps();
 	const selection = new Set(selectableProps.filter(p => p.selected).map(p => p.data));

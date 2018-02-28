@@ -95,15 +95,14 @@ export default class MultiSelect<DT> extends React.PureComponent<TMultiSelectPro
 	private _getRef = (index: number, ref: TFocusable) => this._focusables[index] = ref;
 
 	private _onFocus = () => {
-		if (this._focusables.length) {
+		if (this._focusables.length > 0) {
 			this._focusables[0].focus();
 		}
 	}
 
 	public render() {
 		const { children, selection } = this.props;
-
-		const childrenWithPassedProps = [].map.call(
+		const childrenWithPassedProps = React.Children.map(
 			children,
 			(childElement: React.ReactElement<TSelectableProps<DT>>, index: number) => {
 				const selectableChildProps: TSelectableProps<DT> = {
