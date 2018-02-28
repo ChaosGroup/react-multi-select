@@ -35,6 +35,7 @@ export default class MultiSelect<DT> extends React.PureComponent<TMultiSelectPro
 
 	private _focusedIndex: number;
 	private _focusables: TFocusable[];
+	private _multiselect: Element;
 
 	constructor(props: TMultiSelectProps<DT>) {
 		super(props);
@@ -100,11 +101,13 @@ export default class MultiSelect<DT> extends React.PureComponent<TMultiSelectPro
 
 	private _getRef = (index: number, ref: TFocusable) => this._focusables[index] = ref;
 
-	private _onFocus = () => {
-		if (this._focusables.length > 0) {
+	private _onFocus = (event: UIEvent) => {
+		if (event.target === this._multiselect && this._focusables.length > 0) {
 			this._focusables[0].focus();
 		}
 	}
+
+	private _ref = (ref: Element) => this._multiselect = ref;
 
 	public render() {
 		const { children, selection } = this.props;
@@ -127,6 +130,7 @@ export default class MultiSelect<DT> extends React.PureComponent<TMultiSelectPro
 			});
 
 		return React.createElement(this.props.render, {
+			ref: this._ref,
 			tabIndex: 0,
 			onFocus: this._onFocus,
 			className: this._className,
