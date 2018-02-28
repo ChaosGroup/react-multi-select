@@ -16,10 +16,10 @@ const strategies: TSelectionStrategy[] = [
 	selectAll
 ];
 
-export default function handleSelection<DT>(
+export default <DT>(
 	selectionContext: TSelectionContext<DT>,
 	defaultStrategy?: TSelectionStrategy
-): TSelectionResult<DT> {
+): TSelectionResult<DT> => {
 	const { selectionType } = selectionContext;
 	const matchingStrategy = strategies.find(strat => {
 		const isMatchFn = strat.matches[selectionType];
@@ -37,4 +37,4 @@ export default function handleSelection<DT>(
 	const stateUpdates = matchingStrategy.getStateUpdates(selectionContext);
 
 	return { newSelection, stateUpdates };
-}
+};
