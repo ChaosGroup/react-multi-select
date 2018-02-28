@@ -1,23 +1,25 @@
-import React, { Component } from 'react';
-import MultiSelect, { Selectable } from 'react-multi-select';
+import React from 'react';
+import MultiSelect, { Selectable } from '../../../dist/es6';
+
+import './index.css';
 
 const ps = [
 	'gosho',
 	'pesho',
 	'shosho',
 	'tosho',
-	// ...Array.from({ length: 1000 }).map((_, i) => 'haha' + i)
 ];
 
-document.addEventListener('keydown', e => e.preventDefault());
-
-class App extends Component {
+export default class Paragraphs extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = { selection: new Set };
+		this.onSelectionChange = this.onSelectionChange.bind(this);
 	}
 
-	onSelectionChange = selection => this.state.selection !== selection && this.setState({ selection })
+	onSelectionChange(selection) {
+		this.state.selection !== selection && this.setState({ selection });
+	}
 
 	render() {
 		const { selection } = this.state;
@@ -34,6 +36,4 @@ class App extends Component {
 			</MultiSelect>
 		);
 	}
-}
-
-export default App;
+};
