@@ -1,8 +1,8 @@
+import './helpers/browser';
 import test from 'ava';
 import * as React from 'react';
 import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
-import './helpers/browser';
 import { spy } from 'sinon';
 
 import MultiSelect, { TMultiSelectProps } from '../index';

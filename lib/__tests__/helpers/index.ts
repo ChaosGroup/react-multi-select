@@ -37,7 +37,7 @@ export const testIsMatching = <DT>(
 			assert.false(strategy.matches[selectionType](selectionContext));
 		});
 	}
-}
+};
 
 export const minSelectionContext = Object.freeze({
 	selection: new Set([1, 5, 10, 42]),

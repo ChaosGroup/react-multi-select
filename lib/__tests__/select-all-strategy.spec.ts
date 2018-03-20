@@ -1,3 +1,4 @@
+import './helpers/browser';
 import test from 'ava';
 import { testIsMatching, minSelectionContext, selectionCtx } from './helpers/index';
 import * as selectAll from '../handle-selection/select-all-strategy';

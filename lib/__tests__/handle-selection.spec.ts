@@ -1,3 +1,4 @@
+import './helpers/browser';
 import test from 'ava';
 import handleSelection from '../handle-selection/index';
 import { selectionCtx } from './helpers';

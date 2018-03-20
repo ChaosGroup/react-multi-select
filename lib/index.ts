@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ensureRange } from './utils';
+import { ensureRange, getOsName } from './utils';
 
 import handleSelection from './handle-selection/index';
 import { TSelectableProps } from './Selectable';
@@ -11,7 +11,7 @@ import {
 	TSelectionEvent,
 	TFocusable
 } from './handle-selection/types';
-import { ReactElement } from 'react';
+import { OSName } from './constants';
 
 export interface TMultiSelectState {
 	lastAction: SelectionAction;
@@ -31,6 +31,7 @@ export default class MultiSelect<DT> extends React.PureComponent<TMultiSelectPro
 		children: [],
 		render: 'ul'
 	};
+	public static getOsName: () => OSName = getOsName;
 
 	private _focusedIndex: number;
 	private _focusables: TFocusable[];
@@ -49,8 +50,13 @@ export default class MultiSelect<DT> extends React.PureComponent<TMultiSelectPro
 		return 'multiselect ' + this.props.className;
 	}
 
+	get _isMacOs() {
+		return MultiSelect.getOsName() === OSName.MAC;
+	}
+
 	private _onSelectionChange = (event: TSelectionEvent<HTMLLIElement>, selectionInfo: TSelectionInfo): void => {
-		const { ctrlKey, shiftKey, altKey, key = '' } = event;
+		const { ctrlKey: ctrl, shiftKey, altKey, metaKey, key = '' } = event;
+		const ctrlKey = this._isMacOs ? metaKey : ctrl;
 		const { selection, onSelectionChange } = this.props;
 		const { lastAction, lastActionIndex } = this.state;
 		const childrenData = React.Children.map(

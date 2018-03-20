@@ -1,12 +1,13 @@
+import './helpers/browser';
 import test from 'ava';
 import * as React from 'react';
 import { spy } from 'sinon';
 import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
-import './helpers/browser';
 
 import MultiSelect, { TMultiSelectProps } from '../index';
 import Selectable from '../Selectable';
+import { OSName } from '../constants';
 
 enzyme.configure({ adapter: new Adapter() });
 
@@ -59,18 +60,20 @@ class Test extends React.Component {
 	}
 }
 
+const getTestData = () => [
+	{ x: 3, y: 4 },
+	{ x: 10, y: 33 },
+	{ x: -3, y: 0 },
+	{ x: 4, y: -332 },
+	{ x: -42, y: -42 },
+	{ x: 22, y: 44 },
+	{ x: 7575, y: 393 }
+];
+
 const runTestsWithTags = (multiselectTag: Tag, selectableTag: Tag) => test(
 	`Combination of toggle/repeat/select all works for multiselect ${multiselectTag} and selectables ${selectableTag}`,
 	assert => {
-		const points = [
-			{ x: 3, y: 4 },
-			{ x: 10, y: 33 },
-			{ x: -3, y: 0 },
-			{ x: 4, y: -332 },
-			{ x: -42, y: -42 },
-			{ x: 22, y: 44 },
-			{ x: 7575, y: 393 }
-		].map((p, id) => ({ id, ...p }));
+		const points = getTestData().map((p, id) => ({ id, ...p }));
 
 		const wrapper = enzyme.mount(<Test points={points} renderM={multiselectTag} renderS={selectableTag} />);
 		const selection = () => wrapper.state().selection;
@@ -153,3 +156,64 @@ const testCases = [
 ];
 
 testCases.forEach(([m, s]: [Tag, Tag]) => runTestsWithTags(m, s));
+
+type ToggleTestOptions = {
+	platform: OSName;
+	title: string;
+	toggle: (node: enzyme.ReactWrapper) => void;
+	plainClick: (node: enzyme.ReactWrapper) => void;
+};
+
+const testToggleOnPlatform = (options: ToggleTestOptions) => test(options.title, assert => {
+	const getOsNameMock = () => options.platform;
+	const { getOsName } = MultiSelect;
+	try {
+		MultiSelect.getOsName = getOsNameMock;
+		const points = getTestData().map((p, id) => ({ id, ...p }));
+
+		const wrapper = enzyme.mount(<Test points={points} renderM="ul" renderS="li" />);
+		const selection = () => wrapper.state().selection;
+		const { toggle, plainClick } = options;
+
+		assert.is(selection().size, 0);
+		const selectable = wrapper.find('Selectable').first();
+		toggle(selectable);
+		assert.is(selection().size, 1);
+		toggle(selectable);
+		assert.is(selection().size, 0);
+
+		const start = 1;
+		const end = 3;
+		wrapper.find('Selectable').slice(start, end).forEach(toggle);
+		assert.is(selection().size, end - start);
+
+		wrapper
+			.find('Selectable')
+			.slice(start, end)
+			.forEach(s => {
+				plainClick(s);
+				assert.is(selection().size, 1);
+			});
+	} catch (error) {
+		assert.fail(String(error));
+	} finally {
+		MultiSelect.getOsName = getOsName;
+	}
+});
+
+const toggleTestCases: ToggleTestOptions[] = [
+	{
+		platform: OSName.MAC,
+		title: 'toggle matches command + click but not ctrl + click on darwin',
+		toggle: node => node.simulate('click', { metaKey: true }),
+		plainClick: node => node.simulate('click', { ctrlKey: true })
+	},
+	{
+		platform: OSName.OTHER,
+		title: 'toggle matches ctrl + click but not metaKey + click when not on darwin',
+		toggle: node => node.simulate('click', { ctrlKey: true }),
+		plainClick: node => node.simulate('click', { metaKey: true })
+	}
+];
+
+toggleTestCases.forEach(testToggleOnPlatform);

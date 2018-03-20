@@ -1,3 +1,4 @@
+import './helpers/browser';
 import test from 'ava';
 import { testIsMatching, minSelectionContext, selectionCtx } from './helpers/index';
 import * as toggleSelectedItem from '../handle-selection/toggle-item-selection-strategy';

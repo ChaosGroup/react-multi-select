@@ -1,3 +1,4 @@
+import './helpers/browser';
 import test from 'ava';
 import * as React from 'react';
 import { spy } from 'sinon';

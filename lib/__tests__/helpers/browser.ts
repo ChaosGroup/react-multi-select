@@ -17,7 +17,7 @@ const copyProperties = (src, target) => {
 		}), {});
 
 	Object.defineProperties(target, propertiesToDefine);
-}
+};
 
 Object.assign(global, {
 	window,
