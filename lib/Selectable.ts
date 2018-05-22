@@ -10,23 +10,35 @@ export interface TSelectableProps<DT> {
 	index?: number;
 	children: React.ReactNode;
 	ref?: (ref: React.ReactInstance) => any;
-	exposeElement?: (index: number, ref: { focus: () => void }) => any;
+	tabIndex?: number;
+	disabled?: boolean;
 }
 
 export default class Selectable<DT> extends React.PureComponent<TSelectableProps<DT>, Readonly<{}>> {
 	public static defaultProps = {
-		render: 'li'
+		render: 'li',
+		tabIndex: 0,
+		disabled: false
 	};
 
 	private _element: HTMLInputElement;
 
 	get _className() {
-		const { selected } = this.props;
+		const { selected, disabled } = this.props;
 
-		return `multiselect__entry${selected ? ' selected' : ''}`;
+		return `multiselect__entry${selected ? ' selected' : ''}${disabled ? ' disabled' : ''}`;
+	}
+
+	get _tabIndex() {
+		const { disabled, tabIndex } = this.props;
+		return disabled ? -1 : tabIndex;
 	}
 
 	private _createOnSelect = (selectionType: SelectionType) => (event: TSelectionEvent<HTMLLIElement>) => {
+		if (this.props.disabled) {
+			return;
+		}
+
 		const { onSelect, data, index } = this.props;
 		const selectionInfo = {
 			data,
@@ -40,16 +52,14 @@ export default class Selectable<DT> extends React.PureComponent<TSelectableProps
 	private _onMouseSelect = this._createOnSelect('mouse');
 	private _onKeyboardSelect = this._createOnSelect('keyboard');
 
-	private _exposeElement = (focusable: TFocusable) => this.props.exposeElement(this.props.index, focusable);
-
 	public render() {
 		return React.createElement(this.props.render, {
-			ref: this._exposeElement,
 			className: this._className,
-			tabIndex: 0,
+			tabIndex: this._tabIndex,
 			onClick: this._onMouseSelect,
 			onKeyDown: this._onKeyboardSelect,
-			children: this.props.children
+			children: this.props.children,
+			disabled: this.props.disabled
 		});
 	}
 }
