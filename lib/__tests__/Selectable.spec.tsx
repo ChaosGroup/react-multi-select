@@ -52,7 +52,7 @@ const runTestsWithProps = (getMinProps, i) => {
 	test(`${i}. _createOnSelect() returns a function when called with string`, assert => {
 		const instance = shallow(<Selectable {...getMinProps()} />).instance() as Selectable<string>;
 		// tslint:disable-next-line no-string-literal
-		const onMouseSelect = instance['_createOnSelect']('mouse');
+		const onMouseSelect = (instance as any)._createOnSelect('mouse');
 		assert.is(typeof onMouseSelect, 'function');
 
 		// tslint:disable-next-line no-string-literal
@@ -78,8 +78,8 @@ const runTestsWithProps = (getMinProps, i) => {
 		const instance = shallow(<Selectable {...minProps} />).instance() as Selectable<string>;
 
 		// tslint:disable-next-line no-string-literal
-		const onMouseSelect = instance['_createOnSelect'](selectionType);
-		onMouseSelect(expectedEventObject as MouseEvent<HTMLLIElement>);
+		const onMouseSelect = (instance as any)._createOnSelect(selectionType);
+		onMouseSelect(expectedEventObject as MouseEvent<HTMLElement>);
 
 		onSelectSpy.restore();
 
