@@ -10,7 +10,7 @@ import Selectable from '../Selectable';
 import { minSelectionContext, selectionCtx, noop } from './helpers';
 
 enzyme.configure({ adapter: new Adapter() });
-const { shallow, mount } = enzyme;
+const { mount } = enzyme;
 
 const getSelectableProps = () => [
 	'pesho',
@@ -31,18 +31,12 @@ const getMinMultiSelectProps =
 	});
 
 test('renders without crashing with valid minimal props', assert => {
-	shallow(
+	mount(
 		<MultiSelect {...getMinMultiSelectProps<number>()}>
 			<Selectable selected data={5}>5</Selectable>
 		</MultiSelect>
 	);
 
-	assert.pass();
-});
-
-test('empty multiselect does not crash on focus', assert => {
-	const wrapper = mount(<MultiSelect selection={new Set} onSelectionChange={noop} />);
-	wrapper.simulate('focus');
 	assert.pass();
 });
 
@@ -67,7 +61,7 @@ test('propagates index, selected and focused properties to children', assert => 
 	const cmpKeys = ['selected', 'data'];
 	const selectables = selectableProps.map((props, key) => <Selectable key={key} {...props}>{props.data}</Selectable>);
 
-	const wrapper = shallow(<MultiSelect {...multiSelectProps} children={selectables} />);
+	const wrapper = mount(<MultiSelect {...multiSelectProps} children={selectables} />);
 	const renderedSelectables = wrapper.find('Selectable').getElements();
 
 	for (const { props } of renderedSelectables) {
@@ -85,7 +79,7 @@ test('passes _onSelectionChange as onSelect to children', assert => {
 	const cmpKeys = ['selected', 'data'];
 	const selectables = selectableProps.map((props, key) => <Selectable key={key} {...props}>{props.data}</Selectable>);
 
-	const wrapper = shallow(<MultiSelect {...multiSelectProps} children={selectables} />);
+	const wrapper = mount(<MultiSelect {...multiSelectProps} children={selectables} />);
 	const renderedSelectables = wrapper.find('Selectable').getElements();
 
 	for (const { props } of renderedSelectables) {
@@ -95,7 +89,7 @@ test('passes _onSelectionChange as onSelect to children', assert => {
 
 test('_onSelectionChange does not call props.onSelectionChange when no selection new selection', assert => {
 	const props = { selection: new Set, onSelectionChange: spy() };
-	const instance = shallow(<MultiSelect {...props} />).instance();
+	const instance = mount(<MultiSelect {...props} />).instance();
 	const noMatch = selectionCtx({
 		altKey: true,
 		selectionType: 'keyboard'
@@ -141,7 +135,7 @@ test(`keeps the first element focused when pressing up`, assert => {
 
 test(`focuses the previous item when current item is not the first`, assert => {
 	const focusAt = 3;
-	const selectableProps = getSelectableProps();
+	const selectableProps = getSelectableProps().concat([{ data: 'ze frig', key: 'umm', selected: false }]);
 	const selection = new Set(selectableProps.filter(p => p.selected).map(p => p.data));
 	const multiSelectProps = getMinMultiSelectProps(selection);
 
@@ -149,10 +143,12 @@ test(`focuses the previous item when current item is not the first`, assert => {
 	const selectables = selectableProps.map((props, key) => <Selectable key={key} {...props}>{props.data}</Selectable>);
 
 	const wrapper = mount(<MultiSelect {...multiSelectProps} children={selectables} />);
-	wrapper.find('Selectable').at(focusAt).simulate('click');
+	const initial = wrapper.find('Selectable').at(focusAt);
+	initial.simulate('click');
 	wrapper.simulate('keydown', { key: 'ArrowUp' });
 
-	assert.is(wrapper.find('Selectable').at(focusAt - 1).getDOMNode(), document.activeElement);
+	const expectedFocused = wrapper.find('Selectable').at(focusAt - 1).getDOMNode();
+	assert.is(expectedFocused, document.activeElement);
 });
 
 test(`keeps the last element focused when the down arrow is pressed`, assert => {

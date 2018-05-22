@@ -24,18 +24,43 @@ export interface TMultiSelectProps<DT> {
 	selection: Set<DT>;
 	children?: React.ReactNode;
 	onSelectionChange: (selected: Set<DT>) => any;
+	manageFocus?: boolean;
 }
 
 export default class MultiSelect<DT> extends React.PureComponent<TMultiSelectProps<DT>, Partial<TMultiSelectState>> {
 	public static defaultProps: Partial<TMultiSelectProps<any>> = {
 		children: [],
-		render: 'ul'
+		render: 'ul',
+		manageFocus: true,
+		className: ''
 	};
 	public static getOsName: () => OSName = getOsName;
 
-	private _focusedIndex: number;
-	private _focusables: TFocusable[];
+	private static _getNextFocusable(walker: TreeWalker, forward: boolean): HTMLElement {
+		const move = forward ? () => walker.nextNode() : () => walker.previousNode();
+		const last = walker.currentNode;
+
+		while (true) {
+			const current = move();
+			if (!current) {
+				walker.currentNode = last;
+				break;
+			}
+
+			const { classList } = walker.currentNode as HTMLElement;
+			const isSelectable = classList.contains('multiselect__entry');
+			const isDisabled = classList.contains('disabled');
+
+			if (isSelectable && !isDisabled) {
+				break;
+			}
+		}
+
+		return walker.currentNode as HTMLElement;
+	}
+
 	private _multiselect: Element;
+	private _walker: TreeWalker;
 
 	constructor(props: TMultiSelectProps<DT>) {
 		super(props);
@@ -44,7 +69,22 @@ export default class MultiSelect<DT> extends React.PureComponent<TMultiSelectPro
 			lastActionIndex: 0,
 			lastAction: 'add'
 		};
-		this._focusables = [];
+	}
+
+	public componentDidMount() {
+		this._walker = document.createTreeWalker(
+			this._multiselect,
+			NodeFilter.SHOW_ELEMENT,
+			{
+				acceptNode: (node: HTMLElement) => {
+					const tabIndex = parseInt(node.getAttribute('tabindex'));
+					return Number.isNaN(tabIndex) ? NodeFilter.FILTER_SKIP : NodeFilter.FILTER_ACCEPT;
+				}
+			},
+			false
+		);
+
+		MultiSelect._getNextFocusable(this._walker, true).focus();
 	}
 
 	get _className() {
@@ -56,7 +96,7 @@ export default class MultiSelect<DT> extends React.PureComponent<TMultiSelectPro
 	}
 
 	private _onSelectionChange = (event: TSelectionEvent<HTMLLIElement>, selectionInfo: TSelectionInfo): void => {
-		const { ctrlKey: ctrl, shiftKey, altKey, metaKey, key = '' } = event;
+		const { target, ctrlKey: ctrl, shiftKey, altKey, metaKey, key = '' } = event;
 		const ctrlKey = this._isMacOs ? metaKey : ctrl;
 		const { selection, onSelectionChange } = this.props;
 		const { lastAction, lastActionIndex } = this.state;
@@ -85,39 +125,29 @@ export default class MultiSelect<DT> extends React.PureComponent<TMultiSelectPro
 			this.setState(stateUpdates);
 		}
 
-		if (selectionContext.selectionType !== 'keyboard') {
-			this._focusables[selectionContext.currentActionIndex].focus();
+		if (this.props.manageFocus && target) {
+			target.focus();
+			this._walker.currentNode = target;
 		}
 	}
 
 	private _onChangeFocusedIndex = ({ key }: React.KeyboardEvent<HTMLUListElement>) => {
-		const { nextSibling, previousSibling } = document.activeElement;
-		if (key === 'ArrowDown' && nextSibling) {
-			(nextSibling as HTMLInputElement).focus();
-		} else if (key === 'ArrowUp' && previousSibling) {
-			(previousSibling as HTMLInputElement).focus();
+		const goForward = key === 'ArrowDown';
+		const goBackward = key === 'ArrowUp';
+
+		if (goForward || goBackward) {
+			MultiSelect._getNextFocusable(this._walker, goForward).focus();
 		}
 	}
-
-	private _getRef = (index: number, ref: TFocusable) => this._focusables[index] = ref;
-
-	private _onFocus = (event: UIEvent) => {
-		if (event.target === this._multiselect && this._focusables.length > 0) {
-			this._focusables[0].focus();
-		}
-	}
-
-	private _ref = (ref: Element) => this._multiselect = ref;
 
 	public render() {
-		const { children, selection } = this.props;
+		const { render, children, selection, manageFocus } = this.props;
 		const childrenWithPassedProps = React.Children.map(
 			children,
 			(childElement: React.ReactElement<TSelectableProps<DT>>, index: number) => {
 				const selectableChildProps: TSelectableProps<DT> = {
 					...childElement.props,
 					onSelect: this._onSelectionChange,
-					exposeElement: this._getRef,
 					selected: selection.has(childElement.props.data),
 					index,
 				};
@@ -129,12 +159,11 @@ export default class MultiSelect<DT> extends React.PureComponent<TMultiSelectPro
 				);
 			});
 
-		return React.createElement(this.props.render, {
-			ref: this._ref,
-			tabIndex: 0,
-			onFocus: this._onFocus,
+		return React.createElement(render, {
+			ref: (ref: Element) => this._multiselect = ref,
+			tabIndex: -1,
 			className: this._className,
-			onKeyDown: this._onChangeFocusedIndex,
+			onKeyDown: manageFocus ? this._onChangeFocusedIndex : null,
 			children: childrenWithPassedProps
 		});
 	}
