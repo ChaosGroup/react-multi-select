@@ -17,7 +17,7 @@ export interface TSelectionInfo {
 }
 
 export type TSelectionEvent<TElement> =
-	( React.MouseEvent<TElement> | React.KeyboardEvent<TElement>) & { key?: string; };
+	(React.MouseEvent<TElement> | React.KeyboardEvent<TElement>) & { key?: string; target: TElement; };
 
 export interface TSelectionContext<DT> {
 	/**
