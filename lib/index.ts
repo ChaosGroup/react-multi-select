@@ -71,7 +71,23 @@ export default class MultiSelect<DT> extends React.PureComponent<TMultiSelectPro
 		};
 	}
 
+	public componentWillReceiveProps({ manageFocus }: TMultiSelectProps<DT>) {
+		if (manageFocus && manageFocus !== this.props.manageFocus) {
+			this._initWalker();
+		}
+	}
+
 	public componentDidMount() {
+		if (this.props.manageFocus) {
+			this._initWalker();
+		}
+	}
+
+	get _className() {
+		return 'multiselect ' + this.props.className;
+	}
+
+	private _initWalker() {
 		this._walker = document.createTreeWalker(
 			this._multiselect,
 			NodeFilter.SHOW_ELEMENT,
@@ -85,10 +101,6 @@ export default class MultiSelect<DT> extends React.PureComponent<TMultiSelectPro
 		);
 
 		MultiSelect._getNextFocusable(this._walker, true).focus();
-	}
-
-	get _className() {
-		return 'multiselect ' + this.props.className;
 	}
 
 	get _isMacOs() {
@@ -124,11 +136,6 @@ export default class MultiSelect<DT> extends React.PureComponent<TMultiSelectPro
 		if (stateUpdates) {
 			this.setState(stateUpdates);
 		}
-
-		if (this.props.manageFocus && target) {
-			target.focus();
-			this._walker.currentNode = target;
-		}
 	}
 
 	private _onChangeFocusedIndex = ({ key }: React.KeyboardEvent<HTMLUListElement>) => {
@@ -139,6 +146,8 @@ export default class MultiSelect<DT> extends React.PureComponent<TMultiSelectPro
 			MultiSelect._getNextFocusable(this._walker, goForward).focus();
 		}
 	}
+
+	private _onClick = () => this._walker.currentNode = document.activeElement;
 
 	public render() {
 		const { render, children, selection, manageFocus } = this.props;
@@ -164,6 +173,7 @@ export default class MultiSelect<DT> extends React.PureComponent<TMultiSelectPro
 			tabIndex: -1,
 			className: this._className,
 			onKeyDown: manageFocus ? this._onChangeFocusedIndex : null,
+			onClick: manageFocus ? this._onClick : null,
 			children: childrenWithPassedProps
 		});
 	}

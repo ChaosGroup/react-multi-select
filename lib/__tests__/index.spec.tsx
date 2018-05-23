@@ -4,6 +4,7 @@ import * as React from 'react';
 import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
 import { spy } from 'sinon';
+import { simulateFocus } from './helpers';
 
 import MultiSelect, { TMultiSelectProps } from '../index';
 import Selectable from '../Selectable';
@@ -115,7 +116,7 @@ test(`doesn't focus another element when event.key is different from up/down arr
 
 	for (const key of ['1', 'a', 'ArrowLeft', 'ArrowRight', 'Home', 'End']) {
 		wrapper.simulate('keydown', { key });
-		assert.is(firstSelectable.getDOMNode(), document.activeElement);
+		assert.true(firstSelectable.getDOMNode() === document.activeElement);
 	}
 });
 
@@ -130,7 +131,7 @@ test(`keeps the first element focused when pressing up`, assert => {
 	wrapper.find('Selectable').first().simulate('click');
 	wrapper.simulate('keydown', { key: 'ArrowUp' });
 	const firstSelectable = wrapper.find('Selectable').first().getDOMNode();
-	assert.is(firstSelectable, document.activeElement);
+	assert.true(firstSelectable === document.activeElement);
 });
 
 test(`focuses the previous item when current item is not the first`, assert => {
@@ -144,11 +145,11 @@ test(`focuses the previous item when current item is not the first`, assert => {
 
 	const wrapper = mount(<MultiSelect {...multiSelectProps} children={selectables} />);
 	const initial = wrapper.find('Selectable').at(focusAt);
-	initial.simulate('click');
+	simulateFocus(wrapper, initial);
 	wrapper.simulate('keydown', { key: 'ArrowUp' });
 
 	const expectedFocused = wrapper.find('Selectable').at(focusAt - 1).getDOMNode();
-	assert.is(expectedFocused, document.activeElement);
+	assert.true(expectedFocused === document.activeElement);
 });
 
 test(`keeps the last element focused when the down arrow is pressed`, assert => {
@@ -161,10 +162,10 @@ test(`keeps the last element focused when the down arrow is pressed`, assert => 
 
 	const wrapper = mount(<MultiSelect {...multiSelectProps} children={selectables} />);
 	const last = wrapper.find('Selectable').last();
-	last.simulate('click');
+	simulateFocus(wrapper, last);
 	wrapper.simulate('keydown', { key: 'ArrowDown' });
 
-	assert.is(last.getDOMNode(), document.activeElement);
+	assert.true(last.getDOMNode() === document.activeElement);
 });
 
 test(`focuses next item when event.key is down arrow and current item is not the last`, assert => {
@@ -179,7 +180,7 @@ test(`focuses next item when event.key is down arrow and current item is not the
 	wrapper.find('Selectable').first().simulate('click');
 	wrapper.simulate('keydown', { key: 'ArrowDown' });
 
-	assert.is(wrapper.find('Selectable').at(1).getDOMNode(), document.activeElement);
+	assert.true(wrapper.find('Selectable').at(1).getDOMNode() === document.activeElement);
 });
 
 test(`allows to provide custom classes`, assert => {

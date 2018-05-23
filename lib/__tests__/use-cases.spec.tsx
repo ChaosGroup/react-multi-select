@@ -4,6 +4,8 @@ import * as React from 'react';
 import { spy } from 'sinon';
 import * as enzyme from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
+import './helpers/browser';
+import { simulateFocus } from './helpers';
 
 import MultiSelect, { TMultiSelectProps } from '../index';
 import Selectable from '../Selectable';
@@ -130,20 +132,21 @@ const runTestsWithTags = (multiselectTag: Tag, selectableTag: Tag) => test(
 		for (const i of [0, 1, 2, 3, 6, 6, 4, 0]) {
 			const ithSelectable = wrapper.find('Selectable').at(i);
 			ithSelectable.simulate('click');
+			simulateFocus(wrapper, ithSelectable);
 			// check if selection works
 			assert.deepEqual([...selection()], [i]);
 			// check if focus works
-			assert.is(ithSelectable.getDOMNode(), document.activeElement);
+			assert.true(ithSelectable.getDOMNode() === document.activeElement);
 		}
 		wrapper.find('Selectable').first().simulate('click');
 		const moveDownCount = 3;
 		Array.from({ length: moveDownCount })
 			.forEach(() => wrapper.simulate('keydown', { key: 'ArrowDown' }));
 
-		assert.is(wrapper.find('Selectable').at(moveDownCount).getDOMNode(), document.activeElement);
+		assert.true(wrapper.find('Selectable').at(moveDownCount).getDOMNode() === document.activeElement);
 
 		wrapper.simulate('keydown', { key: 'ArrowUp' });
-		assert.is(wrapper.find('Selectable').at(moveDownCount - 1).getDOMNode(), document.activeElement);
+		assert.true(wrapper.find('Selectable').at(moveDownCount - 1).getDOMNode() === document.activeElement);
 	}
 );
 

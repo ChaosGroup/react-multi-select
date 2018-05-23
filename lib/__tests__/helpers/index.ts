@@ -1,4 +1,5 @@
 import test from 'ava';
+import * as enzyme from 'enzyme';
 import * as React from 'react';
 import { TSelectableProps } from '../../Selectable';
 import {
@@ -53,8 +54,15 @@ export const minSelectionContext = Object.freeze({
 });
 
 export const selectionCtx = <DT>(overrides: object): TSelectionContext<DT> => {
-	return ({ ...minSelectionContext, ...overrides } as TSelectionContext<DT>);
+	return ({ ...minSelectionContext, ...overrides } as any /* GJ typescript */ as TSelectionContext<DT>);
 };
 
-// tslint:disable-next-line no-empty
-export const noop = () => { };
+export const noop = () => undefined;
+
+export const simulateFocus = (
+	wrapper: enzyme.ReactWrapper<any, any>,
+	selectableWrapper: enzyme.ReactWrapper<any, any>
+) => {
+	(selectableWrapper.getDOMNode() as HTMLElement).focus();
+	wrapper.simulate('click');
+};
