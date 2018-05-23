@@ -66,3 +66,5 @@ export const simulateFocus = (
 	(selectableWrapper.getDOMNode() as HTMLElement).focus();
 	wrapper.simulate('click');
 };
+
+export const repeat = (n: number, action: (i: number) => any): void => Array.from({ length: n }).forEach(action);

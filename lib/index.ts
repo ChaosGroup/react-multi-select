@@ -72,7 +72,7 @@ export default class MultiSelect<DT> extends React.PureComponent<TMultiSelectPro
 	}
 
 	public componentWillReceiveProps({ manageFocus }: TMultiSelectProps<DT>) {
-		if (manageFocus && manageFocus !== this.props.manageFocus) {
+		if (manageFocus && !this._walker && manageFocus !== this.props.manageFocus) {
 			this._initWalker();
 		}
 	}

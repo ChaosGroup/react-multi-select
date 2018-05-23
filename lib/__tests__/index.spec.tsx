@@ -8,7 +8,7 @@ import { simulateFocus } from './helpers';
 
 import MultiSelect, { TMultiSelectProps } from '../index';
 import Selectable from '../Selectable';
-import { minSelectionContext, selectionCtx, noop } from './helpers';
+import { minSelectionContext, selectionCtx, noop, repeat } from './helpers';
 
 enzyme.configure({ adapter: new Adapter() });
 const { mount } = enzyme;
@@ -187,4 +187,59 @@ test(`allows to provide custom classes`, assert => {
 	const wrapper = mount(<MultiSelect className="penka" {...getMinMultiSelectProps()} />);
 	const className = wrapper.getDOMNode().className;
 	assert.is(className, 'multiselect penka');
+});
+
+test('does not change focus on up/down arrow when focus management is disabled', assert => {
+	const selectableProps = getSelectableProps();
+	const selection = new Set(selectableProps.filter(p => p.selected).map(p => p.data));
+	const multiSelectProps = getMinMultiSelectProps(selection);
+	const selectables = selectableProps.map((props, key) => <Selectable key={key} {...props}>{props.data}</Selectable>);
+	const wrapper = mount(<MultiSelect {...multiSelectProps} manageFocus={false} children={selectables} />);
+
+	const expectedActiveElement = document.activeElement;
+	repeat(5, () => wrapper.simulate('keydown', { key: 'ArrowDown' }));
+
+	assert.true(expectedActiveElement === document.activeElement);
+});
+
+test('starts managing focus when props.manageFocus changes to true', assert => {
+	type TState = { manageFocus: boolean; };
+	type TProps = {};
+	class ToggleManageFocus extends React.Component<TProps, TState> {
+		constructor(props) {
+			super(props);
+			this.state = { manageFocus: false };
+		}
+
+		public render() {
+			const { manageFocus } = this.state;
+			const selectableProps = getSelectableProps();
+			const selection = new Set(selectableProps.filter(p => p.selected).map(p => p.data));
+			const multiSelectProps = getMinMultiSelectProps(selection);
+
+			const selectableChildren = selectableProps.map((props, key) => (
+				<Selectable key={key} {...props}>{props.data}</Selectable>
+			));
+			return <MultiSelect {...multiSelectProps} manageFocus={manageFocus} children={selectableChildren} />;
+		}
+	}
+
+	const wrapper = mount(<ToggleManageFocus />);
+	const multiselectWrapper = wrapper.find('MultiSelect');
+	const selectables = () => multiselectWrapper.find('Selectable');
+	const focusAt = 4;
+	assert.true(selectables().length > focusAt);
+
+	simulateFocus(multiselectWrapper, selectables().at(0));
+	const initialActiveElement = document.activeElement;
+	repeat(focusAt, () => multiselectWrapper.simulate('keydown', { key: 'ArrowDown' }));
+
+	assert.true(initialActiveElement === document.activeElement);
+
+	wrapper.setState({ manageFocus: true });
+	simulateFocus(multiselectWrapper, selectables().at(0));
+	repeat(focusAt, () => multiselectWrapper.simulate('keydown', { key: 'ArrowDown' }));
+
+	const last = selectables().at(focusAt).getDOMNode();
+	assert.true(last === document.activeElement);
 });
