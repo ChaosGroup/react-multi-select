@@ -10,7 +10,8 @@
 	"license": "MIT",
 	"scripts": {
 		"build": "node fuse.js",
-		"test": "tsc --p ./tsconfig.test.json && nyc ava",
+		"test": "tsc --p ./tsconfig.test.json && ava",
+		"test-with-coverage": "tsc --p ./tsconfig.test.json && nyc ava",
 		"lint": "tslint lib/*.ts lib/**/*.ts",
 		"coverage": "nyc report --reporter=html",
 		"clean": "rm -rf ./dump ./dist",

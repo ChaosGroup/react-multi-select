@@ -16,7 +16,7 @@ test:
     - yarn -v
     - yarn
   script:
-    - yarn test
+    - yarn test-with-coverage
     - yarn coverage
     - yarn lint
   artifacts:
