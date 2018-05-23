@@ -8,15 +8,15 @@ const { window } = new JSDOM(`
 	</html>
 `);
 
-const copyProperties = (src, target) => {
+const copyProperties = (src: object, target: object) => {
 	const propertiesToDefine = Object.getOwnPropertyNames(src)
-		.filter(propKey => typeof target[propKey] === 'undefined')
-		.reduce((propMap, propKey) => ({
-			...propMap,
-			[propKey]: Object.getOwnPropertyDescriptor(src, propKey)
-		}), {});
+		.filter(key => !target.hasOwnProperty(key))
+		.map(key => ({ [key]: Object.getOwnPropertyDescriptor(src, key) }));
 
-	Object.defineProperties(target, propertiesToDefine);
+	Object.defineProperties(
+		target,
+		Object.assign({}, ...propertiesToDefine)
+	);
 };
 
 Object.assign(global, {
