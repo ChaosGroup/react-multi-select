@@ -2,34 +2,27 @@
 # yarn lockfile v1
 
 
-"@ava/babel-plugin-throws-helper@^3.0.0-beta.3":
-  version "3.0.0-beta.3"
-  resolved "https://npm.chaosgroup.com/@ava%2fbabel-plugin-throws-helper/-/babel-plugin-throws-helper-3.0.0-beta.3.tgz#7fb5f64fae8bd1b0a525634b302347819c1baee7"
+"@ava/babel-plugin-throws-helper@3.0.0-beta.4":
+  version "3.0.0-beta.4"
+  resolved "https://npm.chaosgroup.com/@ava%2fbabel-plugin-throws-helper/-/babel-plugin-throws-helper-3.0.0-beta.4.tgz#15e2d7962aa922b457f6b9978c9cb488fa9720aa"
 
-"@ava/babel-preset-stage-4@^2.0.0-beta.4":
-  version "2.0.0-beta.4"
-  resolved "https://npm.chaosgroup.com/@ava%2fbabel-preset-stage-4/-/babel-preset-stage-4-2.0.0-beta.4.tgz#5bc97752a3536a1574472ebdcab7513531b12165"
+"@ava/babel-preset-stage-4@2.0.0-beta.5":
+  version "2.0.0-beta.5"
+  resolved "https://npm.chaosgroup.com/@ava%2fbabel-preset-stage-4/-/babel-preset-stage-4-2.0.0-beta.5.tgz#8b71107a9e6b0140a0c640e772450ce678801eab"
   dependencies:
-    "@babel/plugin-check-constants" "^7.0.0-beta.38"
-    "@babel/plugin-proposal-async-generator-functions" "^7.0.0-beta.40"
-    "@babel/plugin-proposal-object-rest-spread" "^7.0.0-beta.40"
-    "@babel/plugin-transform-async-to-generator" "^7.0.0-beta.40"
-    "@babel/plugin-transform-destructuring" "^7.0.0-beta.40"
-    "@babel/plugin-transform-dotall-regex" "^7.0.0-beta.40"
-    "@babel/plugin-transform-exponentiation-operator" "^7.0.0-beta.40"
-    "@babel/plugin-transform-function-name" "^7.0.0-beta.40"
-    "@babel/plugin-transform-modules-commonjs" "^7.0.0-beta.40"
-    "@babel/plugin-transform-parameters" "^7.0.0-beta.40"
-    "@babel/plugin-transform-spread" "^7.0.0-beta.40"
-    "@babel/plugin-transform-sticky-regex" "^7.0.0-beta.40"
-    "@babel/plugin-transform-unicode-regex" "^7.0.0-beta.40"
+    "@babel/plugin-proposal-async-generator-functions" "7.0.0-beta.44"
+    "@babel/plugin-proposal-object-rest-spread" "7.0.0-beta.44"
+    "@babel/plugin-transform-async-to-generator" "7.0.0-beta.44"
+    "@babel/plugin-transform-dotall-regex" "7.0.0-beta.44"
+    "@babel/plugin-transform-exponentiation-operator" "7.0.0-beta.44"
+    "@babel/plugin-transform-modules-commonjs" "7.0.0-beta.44"
 
-"@ava/babel-preset-transform-test-files@^4.0.0-beta.3":
-  version "4.0.0-beta.3"
-  resolved "https://npm.chaosgroup.com/@ava%2fbabel-preset-transform-test-files/-/babel-preset-transform-test-files-4.0.0-beta.3.tgz#4a666c725304f8be543cdec7c4a1291997c61d0d"
+"@ava/babel-preset-transform-test-files@4.0.0-beta.4":
+  version "4.0.0-beta.4"
+  resolved "https://npm.chaosgroup.com/@ava%2fbabel-preset-transform-test-files/-/babel-preset-transform-test-files-4.0.0-beta.4.tgz#d2b1ac21fa070b1639591f32ce25fd9bf83be10f"
   dependencies:
-    "@ava/babel-plugin-throws-helper" "^3.0.0-beta.3"
-    babel-plugin-espower "^3.0.0-beta.1"
+    "@ava/babel-plugin-throws-helper" "3.0.0-beta.4"
+    babel-plugin-espower "3.0.0-beta.1"
 
 "@ava/write-file-atomic@^2.2.0":
   version "2.2.0"
@@ -39,270 +32,259 @@
     imurmurhash "^0.1.4"
     slide "^1.1.5"
 
-"@babel/code-frame@7.0.0-beta.40":
-  version "7.0.0-beta.40"
-  resolved "https://npm.chaosgroup.com/@babel%2fcode-frame/-/code-frame-7.0.0-beta.40.tgz#37e2b0cf7c56026b4b21d3927cadf81adec32ac6"
+"@babel/code-frame@7.0.0-beta.44":
+  version "7.0.0-beta.44"
+  resolved "https://npm.chaosgroup.com/@babel%2fcode-frame/-/code-frame-7.0.0-beta.44.tgz#2a02643368de80916162be70865c97774f3adbd9"
   dependencies:
-    "@babel/highlight" "7.0.0-beta.40"
+    "@babel/highlight" "7.0.0-beta.44"
 
-"@babel/core@^7.0.0-beta.40":
-  version "7.0.0-beta.40"
-  resolved "https://npm.chaosgroup.com/@babel%2fcore/-/core-7.0.0-beta.40.tgz#455464dd81d499fd97d32b473f0331f74379a33f"
+"@babel/core@7.0.0-beta.44":
+  version "7.0.0-beta.44"
+  resolved "https://npm.chaosgroup.com/@babel%2fcore/-/core-7.0.0-beta.44.tgz#90bb9e897427e7ebec2a1b857f458ff74ca28057"
   dependencies:
-    "@babel/code-frame" "7.0.0-beta.40"
-    "@babel/generator" "7.0.0-beta.40"
-    "@babel/helpers" "7.0.0-beta.40"
-    "@babel/template" "7.0.0-beta.40"
-    "@babel/traverse" "7.0.0-beta.40"
-    "@babel/types" "7.0.0-beta.40"
-    babylon "7.0.0-beta.40"
+    "@babel/code-frame" "7.0.0-beta.44"
+    "@babel/generator" "7.0.0-beta.44"
+    "@babel/helpers" "7.0.0-beta.44"
+    "@babel/template" "7.0.0-beta.44"
+    "@babel/traverse" "7.0.0-beta.44"
+    "@babel/types" "7.0.0-beta.44"
+    babylon "7.0.0-beta.44"
     convert-source-map "^1.1.0"
-    debug "^3.0.1"
+    debug "^3.1.0"
     json5 "^0.5.0"
     lodash "^4.2.0"
     micromatch "^2.3.11"
     resolve "^1.3.2"
+    semver "^5.4.1"
     source-map "^0.5.0"
 
-"@babel/generator@7.0.0-beta.40", "@babel/generator@^7.0.0-beta.35", "@babel/generator@^7.0.0-beta.40":
-  version "7.0.0-beta.40"
-  resolved "https://npm.chaosgroup.com/@babel%2fgenerator/-/generator-7.0.0-beta.40.tgz#ab61f9556f4f71dbd1138949c795bb9a21e302ea"
+"@babel/generator@7.0.0-beta.44":
+  version "7.0.0-beta.44"
+  resolved "https://npm.chaosgroup.com/@babel%2fgenerator/-/generator-7.0.0-beta.44.tgz#c7e67b9b5284afcf69b309b50d7d37f3e5033d42"
   dependencies:
-    "@babel/types" "7.0.0-beta.40"
+    "@babel/types" "7.0.0-beta.44"
     jsesc "^2.5.1"
     lodash "^4.2.0"
     source-map "^0.5.0"
     trim-right "^1.0.1"
 
-"@babel/helper-annotate-as-pure@7.0.0-beta.40":
-  version "7.0.0-beta.40"
-  resolved "https://npm.chaosgroup.com/@babel%2fhelper-annotate-as-pure/-/helper-annotate-as-pure-7.0.0-beta.40.tgz#095dd4c70b231eba17ebf61c3434e6f9d71bd574"
+"@babel/generator@^7.0.0-beta.35":
+  version "7.0.0-beta.47"
+  resolved "https://npm.chaosgroup.com/@babel%2fgenerator/-/generator-7.0.0-beta.47.tgz#1835709f377cc4d2a4affee6d9258a10bbf3b9d1"
   dependencies:
-    "@babel/types" "7.0.0-beta.40"
+    "@babel/types" "7.0.0-beta.47"
+    jsesc "^2.5.1"
+    lodash "^4.17.5"
+    source-map "^0.5.0"
+    trim-right "^1.0.1"
 
-"@babel/helper-builder-binary-assignment-operator-visitor@7.0.0-beta.40":
-  version "7.0.0-beta.40"
-  resolved "https://npm.chaosgroup.com/@babel%2fhelper-builder-binary-assignment-operator-visitor/-/helper-builder-binary-assignment-operator-visitor-7.0.0-beta.40.tgz#bec4240c95d8b646812c5d4ac536a5579dbcdd53"
+"@babel/helper-annotate-as-pure@7.0.0-beta.44":
+  version "7.0.0-beta.44"
+  resolved "https://npm.chaosgroup.com/@babel%2fhelper-annotate-as-pure/-/helper-annotate-as-pure-7.0.0-beta.44.tgz#8ecf33cc5235295afcc7f160a63cab17ce7776f4"
   dependencies:
-    "@babel/helper-explode-assignable-expression" "7.0.0-beta.40"
-    "@babel/types" "7.0.0-beta.40"
+    "@babel/types" "7.0.0-beta.44"
 
-"@babel/helper-call-delegate@7.0.0-beta.40":
-  version "7.0.0-beta.40"
-  resolved "https://npm.chaosgroup.com/@babel%2fhelper-call-delegate/-/helper-call-delegate-7.0.0-beta.40.tgz#5d5000d0bf76c68ee6866961e0b7eb6e9ed52438"
+"@babel/helper-builder-binary-assignment-operator-visitor@7.0.0-beta.44":
+  version "7.0.0-beta.44"
+  resolved "https://npm.chaosgroup.com/@babel%2fhelper-builder-binary-assignment-operator-visitor/-/helper-builder-binary-assignment-operator-visitor-7.0.0-beta.44.tgz#0e86d393c192bc846f871f3fcf4920b08a9cbb27"
   dependencies:
-    "@babel/helper-hoist-variables" "7.0.0-beta.40"
-    "@babel/traverse" "7.0.0-beta.40"
-    "@babel/types" "7.0.0-beta.40"
+    "@babel/helper-explode-assignable-expression" "7.0.0-beta.44"
+    "@babel/types" "7.0.0-beta.44"
 
-"@babel/helper-explode-assignable-expression@7.0.0-beta.40":
-  version "7.0.0-beta.40"
-  resolved "https://npm.chaosgroup.com/@babel%2fhelper-explode-assignable-expression/-/helper-explode-assignable-expression-7.0.0-beta.40.tgz#0ef579288d894a987c60bf0577c074ad18cfa9dd"
+"@babel/helper-explode-assignable-expression@7.0.0-beta.44":
+  version "7.0.0-beta.44"
+  resolved "https://npm.chaosgroup.com/@babel%2fhelper-explode-assignable-expression/-/helper-explode-assignable-expression-7.0.0-beta.44.tgz#1f06b9f76017deac2767ee09f3021d5b209bf5cd"
   dependencies:
-    "@babel/traverse" "7.0.0-beta.40"
-    "@babel/types" "7.0.0-beta.40"
+    "@babel/traverse" "7.0.0-beta.44"
+    "@babel/types" "7.0.0-beta.44"
 
-"@babel/helper-function-name@7.0.0-beta.40":
-  version "7.0.0-beta.40"
-  resolved "https://npm.chaosgroup.com/@babel%2fhelper-function-name/-/helper-function-name-7.0.0-beta.40.tgz#9d033341ab16517f40d43a73f2d81fc431ccd7b6"
+"@babel/helper-function-name@7.0.0-beta.44":
+  version "7.0.0-beta.44"
+  resolved "https://npm.chaosgroup.com/@babel%2fhelper-function-name/-/helper-function-name-7.0.0-beta.44.tgz#e18552aaae2231100a6e485e03854bc3532d44dd"
   dependencies:
-    "@babel/helper-get-function-arity" "7.0.0-beta.40"
-    "@babel/template" "7.0.0-beta.40"
-    "@babel/types" "7.0.0-beta.40"
+    "@babel/helper-get-function-arity" "7.0.0-beta.44"
+    "@babel/template" "7.0.0-beta.44"
+    "@babel/types" "7.0.0-beta.44"
 
-"@babel/helper-get-function-arity@7.0.0-beta.40":
-  version "7.0.0-beta.40"
-  resolved "https://npm.chaosgroup.com/@babel%2fhelper-get-function-arity/-/helper-get-function-arity-7.0.0-beta.40.tgz#ac0419cf067b0ec16453e1274f03878195791c6e"
+"@babel/helper-get-function-arity@7.0.0-beta.44":
+  version "7.0.0-beta.44"
+  resolved "https://npm.chaosgroup.com/@babel%2fhelper-get-function-arity/-/helper-get-function-arity-7.0.0-beta.44.tgz#d03ca6dd2b9f7b0b1e6b32c56c72836140db3a15"
   dependencies:
-    "@babel/types" "7.0.0-beta.40"
+    "@babel/types" "7.0.0-beta.44"
 
-"@babel/helper-hoist-variables@7.0.0-beta.40":
-  version "7.0.0-beta.40"
-  resolved "https://npm.chaosgroup.com/@babel%2fhelper-hoist-variables/-/helper-hoist-variables-7.0.0-beta.40.tgz#59d47fd133782d60db89af0d18083ad3c9f4801c"
+"@babel/helper-module-imports@7.0.0-beta.44":
+  version "7.0.0-beta.44"
+  resolved "https://npm.chaosgroup.com/@babel%2fhelper-module-imports/-/helper-module-imports-7.0.0-beta.44.tgz#60edc68cdf17e13eaca5be813c96127303085133"
   dependencies:
-    "@babel/types" "7.0.0-beta.40"
-
-"@babel/helper-module-imports@7.0.0-beta.40":
-  version "7.0.0-beta.40"
-  resolved "https://npm.chaosgroup.com/@babel%2fhelper-module-imports/-/helper-module-imports-7.0.0-beta.40.tgz#251cbb6404599282e8f7356a5b32c9381bef5d2d"
-  dependencies:
-    "@babel/types" "7.0.0-beta.40"
+    "@babel/types" "7.0.0-beta.44"
     lodash "^4.2.0"
 
-"@babel/helper-module-transforms@7.0.0-beta.40":
-  version "7.0.0-beta.40"
-  resolved "https://npm.chaosgroup.com/@babel%2fhelper-module-transforms/-/helper-module-transforms-7.0.0-beta.40.tgz#e5240afd47bd98f6ae65874b9ae508533abfee76"
+"@babel/helper-module-transforms@7.0.0-beta.44":
+  version "7.0.0-beta.44"
+  resolved "https://npm.chaosgroup.com/@babel%2fhelper-module-transforms/-/helper-module-transforms-7.0.0-beta.44.tgz#185dc17b37c4b9cc3daee0f0f44e74f000e21bb7"
   dependencies:
-    "@babel/helper-module-imports" "7.0.0-beta.40"
-    "@babel/helper-simple-access" "7.0.0-beta.40"
-    "@babel/template" "7.0.0-beta.40"
-    "@babel/types" "7.0.0-beta.40"
+    "@babel/helper-module-imports" "7.0.0-beta.44"
+    "@babel/helper-simple-access" "7.0.0-beta.44"
+    "@babel/helper-split-export-declaration" "7.0.0-beta.44"
+    "@babel/template" "7.0.0-beta.44"
+    "@babel/types" "7.0.0-beta.44"
     lodash "^4.2.0"
 
-"@babel/helper-regex@7.0.0-beta.40":
-  version "7.0.0-beta.40"
-  resolved "https://npm.chaosgroup.com/@babel%2fhelper-regex/-/helper-regex-7.0.0-beta.40.tgz#b47018ecca8ff66bb390c34a95ff71bc01495833"
+"@babel/helper-plugin-utils@7.0.0-beta.44":
+  version "7.0.0-beta.44"
+  resolved "https://npm.chaosgroup.com/@babel%2fhelper-plugin-utils/-/helper-plugin-utils-7.0.0-beta.44.tgz#9f590bc3ae6daa8a10b853233baa3e25d263751d"
+
+"@babel/helper-regex@7.0.0-beta.44":
+  version "7.0.0-beta.44"
+  resolved "https://npm.chaosgroup.com/@babel%2fhelper-regex/-/helper-regex-7.0.0-beta.44.tgz#f5b6828c1e40f0b74ab6ed90abdd52be0c38a74e"
   dependencies:
     lodash "^4.2.0"
 
-"@babel/helper-remap-async-to-generator@7.0.0-beta.40":
-  version "7.0.0-beta.40"
-  resolved "https://npm.chaosgroup.com/@babel%2fhelper-remap-async-to-generator/-/helper-remap-async-to-generator-7.0.0-beta.40.tgz#33414d1cc160ebf0991ebc60afebe36b08feae05"
+"@babel/helper-remap-async-to-generator@7.0.0-beta.44":
+  version "7.0.0-beta.44"
+  resolved "https://npm.chaosgroup.com/@babel%2fhelper-remap-async-to-generator/-/helper-remap-async-to-generator-7.0.0-beta.44.tgz#8ad8c12a57444042ca281bdb16734841425938ad"
   dependencies:
-    "@babel/helper-annotate-as-pure" "7.0.0-beta.40"
-    "@babel/helper-wrap-function" "7.0.0-beta.40"
-    "@babel/template" "7.0.0-beta.40"
-    "@babel/traverse" "7.0.0-beta.40"
-    "@babel/types" "7.0.0-beta.40"
+    "@babel/helper-annotate-as-pure" "7.0.0-beta.44"
+    "@babel/helper-wrap-function" "7.0.0-beta.44"
+    "@babel/template" "7.0.0-beta.44"
+    "@babel/traverse" "7.0.0-beta.44"
+    "@babel/types" "7.0.0-beta.44"
 
-"@babel/helper-simple-access@7.0.0-beta.40":
-  version "7.0.0-beta.40"
-  resolved "https://npm.chaosgroup.com/@babel%2fhelper-simple-access/-/helper-simple-access-7.0.0-beta.40.tgz#018f765090a3d25153778958969f235dc6ce5b57"
+"@babel/helper-simple-access@7.0.0-beta.44":
+  version "7.0.0-beta.44"
+  resolved "https://npm.chaosgroup.com/@babel%2fhelper-simple-access/-/helper-simple-access-7.0.0-beta.44.tgz#03fb6bfc91eb0a95f6c11499153f8c663654dce5"
   dependencies:
-    "@babel/template" "7.0.0-beta.40"
-    "@babel/types" "7.0.0-beta.40"
+    "@babel/template" "7.0.0-beta.44"
+    "@babel/types" "7.0.0-beta.44"
     lodash "^4.2.0"
 
-"@babel/helper-wrap-function@7.0.0-beta.40":
-  version "7.0.0-beta.40"
-  resolved "https://npm.chaosgroup.com/@babel%2fhelper-wrap-function/-/helper-wrap-function-7.0.0-beta.40.tgz#4db4630cdaf4fd47fa2c45b5b7a9ecc33ff3f2be"
+"@babel/helper-split-export-declaration@7.0.0-beta.44":
+  version "7.0.0-beta.44"
+  resolved "https://npm.chaosgroup.com/@babel%2fhelper-split-export-declaration/-/helper-split-export-declaration-7.0.0-beta.44.tgz#c0b351735e0fbcb3822c8ad8db4e583b05ebd9dc"
   dependencies:
-    "@babel/helper-function-name" "7.0.0-beta.40"
-    "@babel/template" "7.0.0-beta.40"
-    "@babel/traverse" "7.0.0-beta.40"
-    "@babel/types" "7.0.0-beta.40"
+    "@babel/types" "7.0.0-beta.44"
 
-"@babel/helpers@7.0.0-beta.40":
-  version "7.0.0-beta.40"
-  resolved "https://npm.chaosgroup.com/@babel%2fhelpers/-/helpers-7.0.0-beta.40.tgz#82f8e144f56b2896b1d624ca88ac4603023ececd"
+"@babel/helper-wrap-function@7.0.0-beta.44":
+  version "7.0.0-beta.44"
+  resolved "https://npm.chaosgroup.com/@babel%2fhelper-wrap-function/-/helper-wrap-function-7.0.0-beta.44.tgz#d128718a543f313264dff7cb386957e3e465c95d"
   dependencies:
-    "@babel/template" "7.0.0-beta.40"
-    "@babel/traverse" "7.0.0-beta.40"
-    "@babel/types" "7.0.0-beta.40"
+    "@babel/helper-function-name" "7.0.0-beta.44"
+    "@babel/template" "7.0.0-beta.44"
+    "@babel/traverse" "7.0.0-beta.44"
+    "@babel/types" "7.0.0-beta.44"
 
-"@babel/highlight@7.0.0-beta.40":
-  version "7.0.0-beta.40"
-  resolved "https://npm.chaosgroup.com/@babel%2fhighlight/-/highlight-7.0.0-beta.40.tgz#b43d67d76bf46e1d10d227f68cddcd263786b255"
+"@babel/helpers@7.0.0-beta.44":
+  version "7.0.0-beta.44"
+  resolved "https://npm.chaosgroup.com/@babel%2fhelpers/-/helpers-7.0.0-beta.44.tgz#b1cc87fdc3b77351c0a4860bcd9d4ef457919bfd"
+  dependencies:
+    "@babel/template" "7.0.0-beta.44"
+    "@babel/traverse" "7.0.0-beta.44"
+    "@babel/types" "7.0.0-beta.44"
+
+"@babel/highlight@7.0.0-beta.44":
+  version "7.0.0-beta.44"
+  resolved "https://npm.chaosgroup.com/@babel%2fhighlight/-/highlight-7.0.0-beta.44.tgz#18c94ce543916a80553edcdcf681890b200747d5"
   dependencies:
     chalk "^2.0.0"
     esutils "^2.0.2"
     js-tokens "^3.0.0"
 
-"@babel/plugin-check-constants@^7.0.0-beta.38":
-  version "7.0.0-beta.38"
-  resolved "https://npm.chaosgroup.com/@babel%2fplugin-check-constants/-/plugin-check-constants-7.0.0-beta.38.tgz#bbda6306d45a4f097ccb416c0b52d6503f6502cf"
-
-"@babel/plugin-proposal-async-generator-functions@^7.0.0-beta.40":
-  version "7.0.0-beta.40"
-  resolved "https://npm.chaosgroup.com/@babel%2fplugin-proposal-async-generator-functions/-/plugin-proposal-async-generator-functions-7.0.0-beta.40.tgz#64f4aebc3fff33d2ae8f0a0870f0dfe2ff6815d6"
+"@babel/plugin-proposal-async-generator-functions@7.0.0-beta.44":
+  version "7.0.0-beta.44"
+  resolved "https://npm.chaosgroup.com/@babel%2fplugin-proposal-async-generator-functions/-/plugin-proposal-async-generator-functions-7.0.0-beta.44.tgz#b08d90cd0f6a82e11cb5ae64eee4fba7d0d7999e"
   dependencies:
-    "@babel/helper-remap-async-to-generator" "7.0.0-beta.40"
-    "@babel/plugin-syntax-async-generators" "7.0.0-beta.40"
+    "@babel/helper-plugin-utils" "7.0.0-beta.44"
+    "@babel/helper-remap-async-to-generator" "7.0.0-beta.44"
+    "@babel/plugin-syntax-async-generators" "7.0.0-beta.44"
 
-"@babel/plugin-proposal-object-rest-spread@^7.0.0-beta.40":
-  version "7.0.0-beta.40"
-  resolved "https://npm.chaosgroup.com/@babel%2fplugin-proposal-object-rest-spread/-/plugin-proposal-object-rest-spread-7.0.0-beta.40.tgz#ce35d2240908e52706a612eb26d67db667cd700f"
+"@babel/plugin-proposal-object-rest-spread@7.0.0-beta.44":
+  version "7.0.0-beta.44"
+  resolved "https://npm.chaosgroup.com/@babel%2fplugin-proposal-object-rest-spread/-/plugin-proposal-object-rest-spread-7.0.0-beta.44.tgz#b7817770cb9cf72f2e73ca6fcb83d61a87305259"
   dependencies:
-    "@babel/plugin-syntax-object-rest-spread" "7.0.0-beta.40"
+    "@babel/helper-plugin-utils" "7.0.0-beta.44"
+    "@babel/plugin-syntax-object-rest-spread" "7.0.0-beta.44"
 
-"@babel/plugin-syntax-async-generators@7.0.0-beta.40", "@babel/plugin-syntax-async-generators@^7.0.0-beta.40":
-  version "7.0.0-beta.40"
-  resolved "https://npm.chaosgroup.com/@babel%2fplugin-syntax-async-generators/-/plugin-syntax-async-generators-7.0.0-beta.40.tgz#6c45889569add3b3721cc9a481ae99906f240874"
-
-"@babel/plugin-syntax-object-rest-spread@7.0.0-beta.40", "@babel/plugin-syntax-object-rest-spread@^7.0.0-beta.40":
-  version "7.0.0-beta.40"
-  resolved "https://npm.chaosgroup.com/@babel%2fplugin-syntax-object-rest-spread/-/plugin-syntax-object-rest-spread-7.0.0-beta.40.tgz#d5e04536062e4df685c203ae48bb19bfe2cf235c"
-
-"@babel/plugin-transform-async-to-generator@^7.0.0-beta.40":
-  version "7.0.0-beta.40"
-  resolved "https://npm.chaosgroup.com/@babel%2fplugin-transform-async-to-generator/-/plugin-transform-async-to-generator-7.0.0-beta.40.tgz#9195e2473a435b9a9aabc0b64572e9d1ec1c57cb"
+"@babel/plugin-syntax-async-generators@7.0.0-beta.44":
+  version "7.0.0-beta.44"
+  resolved "https://npm.chaosgroup.com/@babel%2fplugin-syntax-async-generators/-/plugin-syntax-async-generators-7.0.0-beta.44.tgz#5cf7ec4256ddd7df62654171059188bee2b3addc"
   dependencies:
-    "@babel/helper-module-imports" "7.0.0-beta.40"
-    "@babel/helper-remap-async-to-generator" "7.0.0-beta.40"
+    "@babel/helper-plugin-utils" "7.0.0-beta.44"
 
-"@babel/plugin-transform-destructuring@^7.0.0-beta.40":
-  version "7.0.0-beta.40"
-  resolved "https://npm.chaosgroup.com/@babel%2fplugin-transform-destructuring/-/plugin-transform-destructuring-7.0.0-beta.40.tgz#503a4719eb9ed8c933b50d4ec3f106ed371852ee"
-
-"@babel/plugin-transform-dotall-regex@^7.0.0-beta.40":
-  version "7.0.0-beta.40"
-  resolved "https://npm.chaosgroup.com/@babel%2fplugin-transform-dotall-regex/-/plugin-transform-dotall-regex-7.0.0-beta.40.tgz#89b5ccff477624b97129f9a7e262a436437d7ae2"
+"@babel/plugin-syntax-object-rest-spread@7.0.0-beta.44":
+  version "7.0.0-beta.44"
+  resolved "https://npm.chaosgroup.com/@babel%2fplugin-syntax-object-rest-spread/-/plugin-syntax-object-rest-spread-7.0.0-beta.44.tgz#c37d271e4edf8a1b5d4623fb2917ba0f5a9da3b3"
   dependencies:
-    "@babel/helper-regex" "7.0.0-beta.40"
+    "@babel/helper-plugin-utils" "7.0.0-beta.44"
+
+"@babel/plugin-transform-async-to-generator@7.0.0-beta.44":
+  version "7.0.0-beta.44"
+  resolved "https://npm.chaosgroup.com/@babel%2fplugin-transform-async-to-generator/-/plugin-transform-async-to-generator-7.0.0-beta.44.tgz#b91881aa6e1a6bd330be31df43a936feeb145c29"
+  dependencies:
+    "@babel/helper-module-imports" "7.0.0-beta.44"
+    "@babel/helper-plugin-utils" "7.0.0-beta.44"
+    "@babel/helper-remap-async-to-generator" "7.0.0-beta.44"
+
+"@babel/plugin-transform-dotall-regex@7.0.0-beta.44":
+  version "7.0.0-beta.44"
+  resolved "https://npm.chaosgroup.com/@babel%2fplugin-transform-dotall-regex/-/plugin-transform-dotall-regex-7.0.0-beta.44.tgz#414bd71f39199e45a8ddaa8053cb5bd9690707f4"
+  dependencies:
+    "@babel/helper-plugin-utils" "7.0.0-beta.44"
+    "@babel/helper-regex" "7.0.0-beta.44"
     regexpu-core "^4.1.3"
 
-"@babel/plugin-transform-exponentiation-operator@^7.0.0-beta.40":
-  version "7.0.0-beta.40"
-  resolved "https://npm.chaosgroup.com/@babel%2fplugin-transform-exponentiation-operator/-/plugin-transform-exponentiation-operator-7.0.0-beta.40.tgz#bf0bafdd5aad7061c25dba25e29e12329838baeb"
+"@babel/plugin-transform-exponentiation-operator@7.0.0-beta.44":
+  version "7.0.0-beta.44"
+  resolved "https://npm.chaosgroup.com/@babel%2fplugin-transform-exponentiation-operator/-/plugin-transform-exponentiation-operator-7.0.0-beta.44.tgz#e6a9699b5036a7a75274e1546c23414ba945a135"
   dependencies:
-    "@babel/helper-builder-binary-assignment-operator-visitor" "7.0.0-beta.40"
+    "@babel/helper-builder-binary-assignment-operator-visitor" "7.0.0-beta.44"
+    "@babel/helper-plugin-utils" "7.0.0-beta.44"
 
-"@babel/plugin-transform-function-name@^7.0.0-beta.40":
-  version "7.0.0-beta.40"
-  resolved "https://npm.chaosgroup.com/@babel%2fplugin-transform-function-name/-/plugin-transform-function-name-7.0.0-beta.40.tgz#37b5ca4f90fba207d359c0be3af5bfecdc737a3d"
+"@babel/plugin-transform-modules-commonjs@7.0.0-beta.44":
+  version "7.0.0-beta.44"
+  resolved "https://npm.chaosgroup.com/@babel%2fplugin-transform-modules-commonjs/-/plugin-transform-modules-commonjs-7.0.0-beta.44.tgz#864a1fef64091bd5241b0aa7d4b235fb29f60580"
   dependencies:
-    "@babel/helper-function-name" "7.0.0-beta.40"
+    "@babel/helper-module-transforms" "7.0.0-beta.44"
+    "@babel/helper-plugin-utils" "7.0.0-beta.44"
+    "@babel/helper-simple-access" "7.0.0-beta.44"
 
-"@babel/plugin-transform-modules-commonjs@^7.0.0-beta.40":
-  version "7.0.0-beta.40"
-  resolved "https://npm.chaosgroup.com/@babel%2fplugin-transform-modules-commonjs/-/plugin-transform-modules-commonjs-7.0.0-beta.40.tgz#a85f8c311f498a94a45531cc4ed5ff98b338a70a"
+"@babel/template@7.0.0-beta.44":
+  version "7.0.0-beta.44"
+  resolved "https://npm.chaosgroup.com/@babel%2ftemplate/-/template-7.0.0-beta.44.tgz#f8832f4fdcee5d59bf515e595fc5106c529b394f"
   dependencies:
-    "@babel/helper-module-transforms" "7.0.0-beta.40"
-    "@babel/helper-simple-access" "7.0.0-beta.40"
-
-"@babel/plugin-transform-parameters@^7.0.0-beta.40":
-  version "7.0.0-beta.40"
-  resolved "https://npm.chaosgroup.com/@babel%2fplugin-transform-parameters/-/plugin-transform-parameters-7.0.0-beta.40.tgz#efa366fab0dcbd0221b46aa2662c324b4b414d1d"
-  dependencies:
-    "@babel/helper-call-delegate" "7.0.0-beta.40"
-    "@babel/helper-get-function-arity" "7.0.0-beta.40"
-
-"@babel/plugin-transform-spread@^7.0.0-beta.40":
-  version "7.0.0-beta.40"
-  resolved "https://npm.chaosgroup.com/@babel%2fplugin-transform-spread/-/plugin-transform-spread-7.0.0-beta.40.tgz#881578938e5750137301750bef7fdd0e01be76be"
-
-"@babel/plugin-transform-sticky-regex@^7.0.0-beta.40":
-  version "7.0.0-beta.40"
-  resolved "https://npm.chaosgroup.com/@babel%2fplugin-transform-sticky-regex/-/plugin-transform-sticky-regex-7.0.0-beta.40.tgz#5b44b31f8539fc66af18962e55752b82298032ee"
-  dependencies:
-    "@babel/helper-regex" "7.0.0-beta.40"
-
-"@babel/plugin-transform-unicode-regex@^7.0.0-beta.40":
-  version "7.0.0-beta.40"
-  resolved "https://npm.chaosgroup.com/@babel%2fplugin-transform-unicode-regex/-/plugin-transform-unicode-regex-7.0.0-beta.40.tgz#a956187aad2965d7c095d64b1ae87eba10e0a2c6"
-  dependencies:
-    "@babel/helper-regex" "7.0.0-beta.40"
-    regexpu-core "^4.1.3"
-
-"@babel/template@7.0.0-beta.40":
-  version "7.0.0-beta.40"
-  resolved "https://npm.chaosgroup.com/@babel%2ftemplate/-/template-7.0.0-beta.40.tgz#034988c6424eb5c3268fe6a608626de1f4410fc8"
-  dependencies:
-    "@babel/code-frame" "7.0.0-beta.40"
-    "@babel/types" "7.0.0-beta.40"
-    babylon "7.0.0-beta.40"
+    "@babel/code-frame" "7.0.0-beta.44"
+    "@babel/types" "7.0.0-beta.44"
+    babylon "7.0.0-beta.44"
     lodash "^4.2.0"
 
-"@babel/traverse@7.0.0-beta.40":
-  version "7.0.0-beta.40"
-  resolved "https://npm.chaosgroup.com/@babel%2ftraverse/-/traverse-7.0.0-beta.40.tgz#d140e449b2e093ef9fe1a2eecc28421ffb4e521e"
+"@babel/traverse@7.0.0-beta.44":
+  version "7.0.0-beta.44"
+  resolved "https://npm.chaosgroup.com/@babel%2ftraverse/-/traverse-7.0.0-beta.44.tgz#a970a2c45477ad18017e2e465a0606feee0d2966"
   dependencies:
-    "@babel/code-frame" "7.0.0-beta.40"
-    "@babel/generator" "7.0.0-beta.40"
-    "@babel/helper-function-name" "7.0.0-beta.40"
-    "@babel/types" "7.0.0-beta.40"
-    babylon "7.0.0-beta.40"
-    debug "^3.0.1"
+    "@babel/code-frame" "7.0.0-beta.44"
+    "@babel/generator" "7.0.0-beta.44"
+    "@babel/helper-function-name" "7.0.0-beta.44"
+    "@babel/helper-split-export-declaration" "7.0.0-beta.44"
+    "@babel/types" "7.0.0-beta.44"
+    babylon "7.0.0-beta.44"
+    debug "^3.1.0"
     globals "^11.1.0"
     invariant "^2.2.0"
     lodash "^4.2.0"
 
-"@babel/types@7.0.0-beta.40":
-  version "7.0.0-beta.40"
-  resolved "https://npm.chaosgroup.com/@babel%2ftypes/-/types-7.0.0-beta.40.tgz#25c3d7aae14126abe05fcb098c65a66b6d6b8c14"
+"@babel/types@7.0.0-beta.44":
+  version "7.0.0-beta.44"
+  resolved "https://npm.chaosgroup.com/@babel%2ftypes/-/types-7.0.0-beta.44.tgz#6b1b164591f77dec0a0342aca995f2d046b3a757"
   dependencies:
     esutils "^2.0.2"
     lodash "^4.2.0"
+    to-fast-properties "^2.0.0"
+
+"@babel/types@7.0.0-beta.47":
+  version "7.0.0-beta.47"
+  resolved "https://npm.chaosgroup.com/@babel%2ftypes/-/types-7.0.0-beta.47.tgz#e6fcc1a691459002c2671d558a586706dddaeef8"
+  dependencies:
+    esutils "^2.0.2"
+    lodash "^4.17.5"
     to-fast-properties "^2.0.0"
 
 "@concordance/react@^1.0.0":
@@ -440,6 +422,10 @@ ansi-escapes@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/ansi-escapes/-/ansi-escapes-3.0.0.tgz#ec3e8b4e9f8064fc02c3ac9b65f1c275bda8ef92"
 
+ansi-escapes@^3.1.0:
+  version "3.1.0"
+  resolved "https://npm.chaosgroup.com/ansi-escapes/-/ansi-escapes-3.1.0.tgz#f73207bb81207d75fd6c83f125af26eea378ca30"
+
 ansi-regex@^2.0.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-2.1.1.tgz#c3b33ab5ee360d86e0e628f0468ae7ef27d654df"
@@ -452,9 +438,15 @@ ansi-styles@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-2.2.1.tgz#b432dd3358b634cf75e1e4664368240533c1ddbe"
 
-ansi-styles@^3.1.0, ansi-styles@^3.2.0:
+ansi-styles@^3.1.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-3.2.0.tgz#c159b8d5be0f9e5a6f346dab94f16ce022161b88"
+  dependencies:
+    color-convert "^1.9.0"
+
+ansi-styles@^3.2.1:
+  version "3.2.1"
+  resolved "https://npm.chaosgroup.com/ansi-styles/-/ansi-styles-3.2.1.tgz#41fbb20243e50b12be0f04b8dedbf07520ce841d"
   dependencies:
     color-convert "^1.9.0"
 
@@ -524,10 +516,6 @@ arr-diff@^2.0.0:
 arr-diff@^4.0.0:
   version "4.0.0"
   resolved "https://npm.chaosgroup.com/arr-diff/-/arr-diff-4.0.0.tgz#d6461074febfec71e7e15235761a329a5dc7c520"
-
-arr-exclude@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/arr-exclude/-/arr-exclude-1.0.0.tgz#dfc7c2e552a270723ccda04cf3128c8cbfe5c631"
 
 arr-flatten@^1.0.1, arr-flatten@^1.1.0:
   version "1.1.0"
@@ -611,49 +599,38 @@ asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
 
-atob@^2.0.0:
-  version "2.0.3"
-  resolved "https://npm.chaosgroup.com/atob/-/atob-2.0.3.tgz#19c7a760473774468f20b2d2d03372ad7d4cbf5d"
+atob@^2.1.1:
+  version "2.1.1"
+  resolved "https://npm.chaosgroup.com/atob/-/atob-2.1.1.tgz#ae2d5a729477f289d60dd7f96a6314a22dd6c22a"
 
 auto-bind@^1.2.0:
   version "1.2.0"
   resolved "https://npm.chaosgroup.com/auto-bind/-/auto-bind-1.2.0.tgz#8b7e318aad53d43ba8a8ecaf0066d85d5f798cd6"
 
-ava-init@^0.2.1:
-  version "0.2.1"
-  resolved "https://npm.chaosgroup.com/ava-init/-/ava-init-0.2.1.tgz#75ac4c8553326290d2866e63b62fa7035684bd58"
+ava@1.0.0-beta.4:
+  version "1.0.0-beta.4"
+  resolved "https://npm.chaosgroup.com/ava/-/ava-1.0.0-beta.4.tgz#67602aab01e8bf97bfd0a7f80e384655dd369dd0"
   dependencies:
-    arr-exclude "^1.0.0"
-    execa "^0.7.0"
-    has-yarn "^1.0.0"
-    read-pkg-up "^2.0.0"
-    write-pkg "^3.1.0"
-
-ava@^1.0.0-beta.2:
-  version "1.0.0-beta.2"
-  resolved "https://npm.chaosgroup.com/ava/-/ava-1.0.0-beta.2.tgz#3645d992fc7a60a005aeb17b6065670a6aa412cf"
-  dependencies:
-    "@ava/babel-preset-stage-4" "^2.0.0-beta.4"
-    "@ava/babel-preset-transform-test-files" "^4.0.0-beta.3"
+    "@ava/babel-preset-stage-4" "2.0.0-beta.5"
+    "@ava/babel-preset-transform-test-files" "4.0.0-beta.4"
     "@ava/write-file-atomic" "^2.2.0"
-    "@babel/core" "^7.0.0-beta.40"
-    "@babel/generator" "^7.0.0-beta.40"
-    "@babel/plugin-syntax-async-generators" "^7.0.0-beta.40"
-    "@babel/plugin-syntax-object-rest-spread" "^7.0.0-beta.40"
+    "@babel/core" "7.0.0-beta.44"
+    "@babel/generator" "7.0.0-beta.44"
+    "@babel/plugin-syntax-async-generators" "7.0.0-beta.44"
+    "@babel/plugin-syntax-object-rest-spread" "7.0.0-beta.44"
     "@concordance/react" "^1.0.0"
     "@ladjs/time-require" "^0.1.4"
-    ansi-escapes "^3.0.0"
-    ansi-styles "^3.2.0"
+    ansi-escapes "^3.1.0"
+    ansi-styles "^3.2.1"
     arr-flatten "^1.1.0"
     array-union "^1.0.1"
     array-uniq "^1.0.2"
     arrify "^1.0.0"
     auto-bind "^1.2.0"
-    ava-init "^0.2.1"
     bluebird "^3.5.1"
     caching-transform "^1.0.0"
-    chalk "^2.3.1"
-    chokidar "^2.0.1"
+    chalk "^2.3.2"
+    chokidar "^2.0.3"
     clean-stack "^1.1.1"
     clean-yaml-object "^0.1.0"
     cli-cursor "^2.1.0"
@@ -672,7 +649,7 @@ ava@^1.0.0-beta.2:
     figures "^2.0.0"
     get-port "^3.2.0"
     globby "^7.1.1"
-    hullabaloo-config-manager "^2.0.0-beta.3"
+    hullabaloo-config-manager "2.0.0-beta.4"
     ignore-by-default "^1.0.0"
     import-local "^1.0.0"
     indent-string "^3.2.0"
@@ -689,7 +666,7 @@ ava@^1.0.0-beta.2:
     lodash.difference "^4.3.0"
     lodash.flatten "^4.2.0"
     loud-rejection "^1.2.0"
-    make-dir "^1.1.0"
+    make-dir "^1.2.0"
     matcher "^1.1.0"
     md5-hex "^2.0.0"
     meow "^4.0.0"
@@ -703,16 +680,16 @@ ava@^1.0.0-beta.2:
     require-precompiled "^0.1.0"
     resolve-cwd "^2.0.0"
     safe-buffer "^5.1.1"
-    slash "^1.0.0"
-    source-map-support "^0.5.3"
+    slash "^2.0.0"
+    source-map-support "^0.5.4"
     stack-utils "^1.0.1"
     strip-ansi "^4.0.0"
     strip-bom-buf "^1.0.0"
     supertap "^1.0.0"
-    supports-color "^5.2.0"
+    supports-color "^5.3.0"
     trim-off-newlines "^1.0.1"
     unique-temp-dir "^1.0.0"
-    update-notifier "^2.3.0"
+    update-notifier "^2.4.0"
 
 aws-sign2@~0.6.0:
   version "0.6.0"
@@ -753,7 +730,7 @@ babel-messages@^6.23.0:
   dependencies:
     babel-runtime "^6.22.0"
 
-babel-plugin-espower@^3.0.0-beta.1:
+babel-plugin-espower@3.0.0-beta.1:
   version "3.0.0-beta.1"
   resolved "https://npm.chaosgroup.com/babel-plugin-espower/-/babel-plugin-espower-3.0.0-beta.1.tgz#62f118c775b1b340b813cbfc6634db73300ad5a4"
   dependencies:
@@ -813,9 +790,9 @@ babel-types@^6.18.0, babel-types@^6.26.0:
     lodash "^4.17.4"
     to-fast-properties "^1.0.3"
 
-babylon@7.0.0-beta.40:
-  version "7.0.0-beta.40"
-  resolved "https://npm.chaosgroup.com/babylon/-/babylon-7.0.0-beta.40.tgz#91fc8cd56d5eb98b28e6fde41045f2957779940a"
+babylon@7.0.0-beta.44:
+  version "7.0.0-beta.44"
+  resolved "https://npm.chaosgroup.com/babylon/-/babylon-7.0.0-beta.44.tgz#89159e15e6e30c5096e22d738d8c0af8a0e8ca1d"
 
 babylon@^6.18.0:
   version "6.18.0"
@@ -936,13 +913,12 @@ braces@^1.8.2:
     preserve "^0.2.0"
     repeat-element "^1.1.2"
 
-braces@^2.3.0:
-  version "2.3.0"
-  resolved "https://npm.chaosgroup.com/braces/-/braces-2.3.0.tgz#a46941cb5fb492156b3d6a656e06c35364e3e66e"
+braces@^2.3.0, braces@^2.3.1:
+  version "2.3.2"
+  resolved "https://npm.chaosgroup.com/braces/-/braces-2.3.2.tgz#5979fd3f14cd531565e5fa2df1abfff1dfaee729"
   dependencies:
     arr-flatten "^1.1.0"
     array-unique "^0.3.2"
-    define-property "^1.0.0"
     extend-shallow "^2.0.1"
     fill-range "^4.0.0"
     isobject "^3.0.1"
@@ -955,6 +931,10 @@ braces@^2.3.0:
 browser-process-hrtime@^0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/browser-process-hrtime/-/browser-process-hrtime-0.1.2.tgz#425d68a58d3447f02a04aa894187fce8af8b7b8e"
+
+buffer-from@^1.0.0:
+  version "1.0.0"
+  resolved "https://npm.chaosgroup.com/buffer-from/-/buffer-from-1.0.0.tgz#4cb8832d23612589b0406e9e2956c17f06fdf531"
 
 builtin-modules@^1.0.0, builtin-modules@^1.1.1:
   version "1.1.1"
@@ -1064,13 +1044,13 @@ chalk@^2.0.0, chalk@^2.0.1, chalk@^2.3.0:
     escape-string-regexp "^1.0.5"
     supports-color "^4.0.0"
 
-chalk@^2.3.1:
-  version "2.3.1"
-  resolved "https://npm.chaosgroup.com/chalk/-/chalk-2.3.1.tgz#523fe2678aec7b04e8041909292fe8b17059b796"
+chalk@^2.3.2:
+  version "2.4.1"
+  resolved "https://npm.chaosgroup.com/chalk/-/chalk-2.4.1.tgz#18c49ab16a037b6eb0152cc83e3471338215b66e"
   dependencies:
-    ansi-styles "^3.2.0"
+    ansi-styles "^3.2.1"
     escape-string-regexp "^1.0.5"
-    supports-color "^5.2.0"
+    supports-color "^5.3.0"
 
 chardet@^0.4.0:
   version "0.4.2"
@@ -1102,9 +1082,9 @@ chokidar@^1.6.1:
   optionalDependencies:
     fsevents "^1.0.0"
 
-chokidar@^2.0.1:
-  version "2.0.2"
-  resolved "https://npm.chaosgroup.com/chokidar/-/chokidar-2.0.2.tgz#4dc65139eeb2714977735b6a35d06e97b494dfd7"
+chokidar@^2.0.3:
+  version "2.0.3"
+  resolved "https://npm.chaosgroup.com/chokidar/-/chokidar-2.0.3.tgz#dcbd4f6cbb2a55b4799ba8a840ac527e5f4b1176"
   dependencies:
     anymatch "^2.0.0"
     async-each "^1.0.0"
@@ -1118,7 +1098,11 @@ chokidar@^2.0.1:
     readdirp "^2.0.0"
     upath "^1.0.0"
   optionalDependencies:
-    fsevents "^1.0.0"
+    fsevents "^1.1.2"
+
+chownr@^1.0.1:
+  version "1.0.1"
+  resolved "https://npm.chaosgroup.com/chownr/-/chownr-1.0.1.tgz#e2a75042a9551908bebd25b8523d5f9769d79181"
 
 ci-info@^1.0.0:
   version "1.1.2"
@@ -1152,8 +1136,8 @@ cli-cursor@^2.1.0:
     restore-cursor "^2.0.0"
 
 cli-spinners@^1.1.0:
-  version "1.1.0"
-  resolved "https://npm.chaosgroup.com/cli-spinners/-/cli-spinners-1.1.0.tgz#f1847b168844d917a671eb9d147e3df497c90d06"
+  version "1.3.1"
+  resolved "https://npm.chaosgroup.com/cli-spinners/-/cli-spinners-1.3.1.tgz#002c1990912d0d59580c93bd36c056de99e4259a"
 
 cli-truncate@^1.1.0:
   version "1.1.0"
@@ -1428,13 +1412,13 @@ debug-log@^1.0.1:
   version "1.0.1"
   resolved "https://npm.chaosgroup.com/debug-log/-/debug-log-1.0.1.tgz#2307632d4c04382b8df8a32f70b895046d52745f"
 
-debug@2.6.9, debug@^2.2.0, debug@^2.3.3, debug@^2.6.8:
+debug@2.6.9, debug@^2.1.2, debug@^2.2.0, debug@^2.3.3, debug@^2.6.8:
   version "2.6.9"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
   dependencies:
     ms "2.0.0"
 
-debug@^3.0.1, debug@^3.1.0:
+debug@^3.1.0:
   version "3.1.0"
   resolved "https://npm.chaosgroup.com/debug/-/debug-3.1.0.tgz#5bb5a0672628b64149566ba16819e61518c67261"
   dependencies:
@@ -1492,6 +1476,13 @@ define-property@^1.0.0:
   dependencies:
     is-descriptor "^1.0.0"
 
+define-property@^2.0.2:
+  version "2.0.2"
+  resolved "https://npm.chaosgroup.com/define-property/-/define-property-2.0.2.tgz#d459689e8d654ba77e02a817f8710d702cb16e9d"
+  dependencies:
+    is-descriptor "^1.0.2"
+    isobject "^3.0.1"
+
 delayed-stream@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/delayed-stream/-/delayed-stream-1.0.0.tgz#df3ae199acadfb7d440aaae0b29e2272b24ec619"
@@ -1517,10 +1508,6 @@ detect-indent@^4.0.0:
   resolved "https://npm.chaosgroup.com/detect-indent/-/detect-indent-4.0.0.tgz#f76d064352cdf43a1cb6ce619c4ee3a9475de208"
   dependencies:
     repeating "^2.0.0"
-
-detect-indent@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/detect-indent/-/detect-indent-5.0.0.tgz#3871cc0a6a002e8c3e5b3cf7f336264675f06b9d"
 
 detect-libc@^1.0.2:
   version "1.0.3"
@@ -1584,7 +1571,7 @@ domutils@^1.5.1:
 
 dot-prop@^4.1.0, dot-prop@^4.2.0:
   version "4.2.0"
-  resolved "https://registry.yarnpkg.com/dot-prop/-/dot-prop-4.2.0.tgz#1f19e0c2e1aa0e32797c49799f2837ac6af69c57"
+  resolved "https://npm.chaosgroup.com/dot-prop/-/dot-prop-4.2.0.tgz#1f19e0c2e1aa0e32797c49799f2837ac6af69c57"
   dependencies:
     is-obj "^1.0.0"
 
@@ -1833,7 +1820,7 @@ extend-shallow@^2.0.1:
   dependencies:
     is-extendable "^0.1.0"
 
-extend-shallow@^3.0.0:
+extend-shallow@^3.0.0, extend-shallow@^3.0.2:
   version "3.0.2"
   resolved "https://npm.chaosgroup.com/extend-shallow/-/extend-shallow-3.0.2.tgz#26a71aaf073b39fb2127172746131c2704028db8"
   dependencies:
@@ -1858,7 +1845,7 @@ extglob@^0.3.1:
   dependencies:
     is-extglob "^1.0.0"
 
-extglob@^2.0.2:
+extglob@^2.0.4:
   version "2.0.4"
   resolved "https://npm.chaosgroup.com/extglob/-/extglob-2.0.4.tgz#ad00fe4dc612a9232e8718711dc5cb5ab0285543"
   dependencies:
@@ -2056,6 +2043,12 @@ fs-extra@^2.0.0:
     graceful-fs "^4.1.2"
     jsonfile "^2.1.0"
 
+fs-minipass@^1.2.5:
+  version "1.2.5"
+  resolved "https://npm.chaosgroup.com/fs-minipass/-/fs-minipass-1.2.5.tgz#06c277218454ec288df77ada54a03b8702aacb9d"
+  dependencies:
+    minipass "^2.2.1"
+
 fs.realpath@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/fs.realpath/-/fs.realpath-1.0.0.tgz#1504ad2523158caa40db4a2787cb01411994ea4f"
@@ -2066,6 +2059,13 @@ fsevents@^1.0.0:
   dependencies:
     nan "^2.3.0"
     node-pre-gyp "^0.6.39"
+
+fsevents@^1.1.2:
+  version "1.2.4"
+  resolved "https://npm.chaosgroup.com/fsevents/-/fsevents-1.2.4.tgz#f41dcb1af2582af3692da36fc55cbd8e1041c426"
+  dependencies:
+    nan "^2.9.2"
+    node-pre-gyp "^0.10.0"
 
 fstream-ignore@^1.0.5:
   version "1.0.5"
@@ -2206,8 +2206,8 @@ global-dirs@^0.1.0:
     ini "^1.3.4"
 
 globals@^11.1.0:
-  version "11.3.0"
-  resolved "https://npm.chaosgroup.com/globals/-/globals-11.3.0.tgz#e04fdb7b9796d8adac9c8f64c14837b2313378b0"
+  version "11.5.0"
+  resolved "https://npm.chaosgroup.com/globals/-/globals-11.5.0.tgz#6bc840de6771173b191f13d3a9c94d441ee92642"
 
 globals@^9.18.0:
   version "9.18.0"
@@ -2333,10 +2333,6 @@ has-values@^1.0.0:
     is-number "^3.0.0"
     kind-of "^4.0.0"
 
-has-yarn@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/has-yarn/-/has-yarn-1.0.0.tgz#89e25db604b725c8f5976fff0addc921b828a5a7"
-
 has@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/has/-/has-1.0.1.tgz#8461733f538b0837c9361e39a9ab9e9704dc2f28"
@@ -2415,16 +2411,16 @@ http-signature@~1.2.0:
     jsprim "^1.2.2"
     sshpk "^1.7.0"
 
-hullabaloo-config-manager@^2.0.0-beta.3:
-  version "2.0.0-beta.3"
-  resolved "https://npm.chaosgroup.com/hullabaloo-config-manager/-/hullabaloo-config-manager-2.0.0-beta.3.tgz#cdf21d2a380dfde14de5c1b041a04c075e3bb7e7"
+hullabaloo-config-manager@2.0.0-beta.4:
+  version "2.0.0-beta.4"
+  resolved "https://npm.chaosgroup.com/hullabaloo-config-manager/-/hullabaloo-config-manager-2.0.0-beta.4.tgz#1bd60080d6b20887a13a69aa30fa09188da8df34"
   dependencies:
     dot-prop "^4.2.0"
     graceful-fs "^4.1.11"
     indent-string "^3.2.0"
-    json5 "^0.5.1"
+    json5 "^1.0.1"
     lodash.isequal "^4.5.0"
-    lodash.merge "^4.6.0"
+    lodash.merge "^4.6.1"
     md5-hex "^2.0.0"
     package-hash "^2.0.0"
     pirates "^3.0.2"
@@ -2435,6 +2431,12 @@ iconv-lite@0.4.19, iconv-lite@^0.4.17, iconv-lite@~0.4.13:
   version "0.4.19"
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.19.tgz#f7468f60135f5e5dad3399c0a81be9a1603a082b"
 
+iconv-lite@^0.4.4:
+  version "0.4.23"
+  resolved "https://npm.chaosgroup.com/iconv-lite/-/iconv-lite-0.4.23.tgz#297871f63be507adcfbfca715d0cd0eed84e9a63"
+  dependencies:
+    safer-buffer ">= 2.1.2 < 3"
+
 ieee754@^1.1.8:
   version "1.1.8"
   resolved "https://registry.yarnpkg.com/ieee754/-/ieee754-1.1.8.tgz#be33d40ac10ef1926701f6f08a2d86fbfd1ad3e4"
@@ -2443,9 +2445,15 @@ ignore-by-default@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/ignore-by-default/-/ignore-by-default-1.0.1.tgz#48ca6d72f6c6a3af00a9ad4ae6876be3889e2b09"
 
+ignore-walk@^3.0.1:
+  version "3.0.1"
+  resolved "https://npm.chaosgroup.com/ignore-walk/-/ignore-walk-3.0.1.tgz#a83e62e7d272ac0e3b551aaa82831a19b69f82f8"
+  dependencies:
+    minimatch "^3.0.4"
+
 ignore@^3.3.5:
-  version "3.3.7"
-  resolved "https://npm.chaosgroup.com/ignore/-/ignore-3.3.7.tgz#612289bfb3c220e186a58118618d5be8c1bab021"
+  version "3.3.8"
+  resolved "https://npm.chaosgroup.com/ignore/-/ignore-3.3.8.tgz#3f8e9c35d38708a3a7e0e9abb6c73e7ee7707b2b"
 
 import-lazy@^2.1.0:
   version "2.1.0"
@@ -2518,7 +2526,13 @@ inquirer@^3.0.6:
     strip-ansi "^4.0.0"
     through "^2.3.6"
 
-invariant@^2.2.0, invariant@^2.2.2:
+invariant@^2.2.0:
+  version "2.2.4"
+  resolved "https://npm.chaosgroup.com/invariant/-/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
+  dependencies:
+    loose-envify "^1.0.0"
+
+invariant@^2.2.2:
   version "2.2.2"
   resolved "https://npm.chaosgroup.com/invariant/-/invariant-2.2.2.tgz#9e1f56ac0acdb6bf303306f338be3b204ae60360"
   dependencies:
@@ -2576,7 +2590,7 @@ is-callable@^1.1.1, is-callable@^1.1.3:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/is-callable/-/is-callable-1.1.3.tgz#86eb75392805ddc33af71c92a0eedf74ee7604b2"
 
-is-ci@^1.1.0:
+is-ci@^1.0.10, is-ci@^1.1.0:
   version "1.1.0"
   resolved "https://npm.chaosgroup.com/is-ci/-/is-ci-1.1.0.tgz#247e4162e7860cebbdaf30b774d6b0ac7dcfe7a5"
   dependencies:
@@ -2606,7 +2620,7 @@ is-descriptor@^0.1.0:
     is-data-descriptor "^0.1.4"
     kind-of "^5.0.0"
 
-is-descriptor@^1.0.0:
+is-descriptor@^1.0.0, is-descriptor@^1.0.2:
   version "1.0.2"
   resolved "https://npm.chaosgroup.com/is-descriptor/-/is-descriptor-1.0.2.tgz#3b159746a66604b04f8c81524ba365c5f14d86ec"
   dependencies:
@@ -2711,6 +2725,10 @@ is-number@^3.0.0:
   dependencies:
     kind-of "^3.0.2"
 
+is-number@^4.0.0:
+  version "4.0.0"
+  resolved "https://npm.chaosgroup.com/is-number/-/is-number-4.0.0.tgz#0026e37f5454d73e356dfe6564699867c6a7f0ff"
+
 is-obj@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/is-obj/-/is-obj-1.0.1.tgz#3e4729ac1f5fde025cd7d83a896dab9f4f67db0f"
@@ -2727,11 +2745,11 @@ is-observable@^1.1.0:
   dependencies:
     symbol-observable "^1.1.0"
 
-is-odd@^1.0.0:
-  version "1.0.0"
-  resolved "https://npm.chaosgroup.com/is-odd/-/is-odd-1.0.0.tgz#3b8a932eb028b3775c39bb09e91767accdb69088"
+is-odd@^2.0.0:
+  version "2.0.0"
+  resolved "https://npm.chaosgroup.com/is-odd/-/is-odd-2.0.0.tgz#7646624671fd7ea558ccd9a2795182f2958f1b24"
   dependencies:
-    is-number "^3.0.0"
+    is-number "^4.0.0"
 
 is-path-inside@^1.0.0:
   version "1.0.1"
@@ -2739,9 +2757,9 @@ is-path-inside@^1.0.0:
   dependencies:
     path-is-inside "^1.0.1"
 
-is-plain-obj@^1.0.0, is-plain-obj@^1.1.0:
+is-plain-obj@^1.1.0:
   version "1.1.0"
-  resolved "https://registry.yarnpkg.com/is-plain-obj/-/is-plain-obj-1.1.0.tgz#71a50c8429dfca773c92a390a4a03b39fcd51d3e"
+  resolved "https://npm.chaosgroup.com/is-plain-obj/-/is-plain-obj-1.1.0.tgz#71a50c8429dfca773c92a390a4a03b39fcd51d3e"
 
 is-plain-object@^2.0.1, is-plain-object@^2.0.3, is-plain-object@^2.0.4:
   version "2.0.4"
@@ -2802,6 +2820,10 @@ is-url@^1.2.1:
 is-utf8@^0.2.0, is-utf8@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/is-utf8/-/is-utf8-0.2.1.tgz#4b0da1442104d1b336340e80797e865cf39f7d72"
+
+is-windows@^1.0.2:
+  version "1.0.2"
+  resolved "https://npm.chaosgroup.com/is-windows/-/is-windows-1.0.2.tgz#d1850eb9791ecd18e6182ce12a30f396634bb19d"
 
 isarray@0.0.1:
   version "0.0.1"
@@ -2967,9 +2989,15 @@ json-stringify-safe@~5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/json-stringify-safe/-/json-stringify-safe-5.0.1.tgz#1296a2d58fd45f19a0f6ce01d65701e2c735b6eb"
 
-json5@^0.5.0, json5@^0.5.1:
+json5@^0.5.0:
   version "0.5.1"
-  resolved "https://registry.yarnpkg.com/json5/-/json5-0.5.1.tgz#1eade7acc012034ad84e2396767ead9fa5495821"
+  resolved "https://npm.chaosgroup.com/json5/-/json5-0.5.1.tgz#1eade7acc012034ad84e2396767ead9fa5495821"
+
+json5@^1.0.1:
+  version "1.0.1"
+  resolved "https://npm.chaosgroup.com/json5/-/json5-1.0.1.tgz#779fb0018604fa854eacbf6252180d83543e3dbe"
+  dependencies:
+    minimist "^1.2.0"
 
 jsonfile@^2.1.0:
   version "2.4.0"
@@ -3006,7 +3034,7 @@ kind-of@^4.0.0:
   dependencies:
     is-buffer "^1.1.5"
 
-kind-of@^5.0.0, kind-of@^5.0.2:
+kind-of@^5.0.0:
   version "5.1.0"
   resolved "https://npm.chaosgroup.com/kind-of/-/kind-of-5.1.0.tgz#729c91e2d857b7a419a1f9aa65685c4c33f5845d"
 
@@ -3029,12 +3057,6 @@ latest-version@^3.0.0:
 lazy-cache@^1.0.3:
   version "1.0.4"
   resolved "https://npm.chaosgroup.com/lazy-cache/-/lazy-cache-1.0.4.tgz#a1d78fc3a50474cb80845d3b3b6e1da49a446e8e"
-
-lazy-cache@^2.0.2:
-  version "2.0.2"
-  resolved "https://npm.chaosgroup.com/lazy-cache/-/lazy-cache-2.0.2.tgz#b9190a4f913354694840859f8a8f7084d8822264"
-  dependencies:
-    set-getter "^0.1.0"
 
 lcid@^1.0.0:
   version "1.0.0"
@@ -3114,10 +3136,6 @@ lodash.difference@^4.3.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.difference/-/lodash.difference-4.5.0.tgz#9ccb4e505d486b91651345772885a2df27fd017c"
 
-lodash.endswith@^4.2.1:
-  version "4.2.1"
-  resolved "https://npm.chaosgroup.com/lodash.endswith/-/lodash.endswith-4.2.1.tgz#fed59ac1738ed3e236edd7064ec456448b37bc09"
-
 lodash.flatten@^4.2.0:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/lodash.flatten/-/lodash.flatten-4.4.0.tgz#f31c22225a9632d2bbf8e4addbef240aa765a61f"
@@ -3134,33 +3152,29 @@ lodash.isequal@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
 
-lodash.isfunction@^3.0.8:
-  version "3.0.9"
-  resolved "https://npm.chaosgroup.com/lodash.isfunction/-/lodash.isfunction-3.0.9.tgz#06de25df4db327ac931981d1bdb067e5af68d051"
-
-lodash.isstring@^4.0.1:
-  version "4.0.1"
-  resolved "https://npm.chaosgroup.com/lodash.isstring/-/lodash.isstring-4.0.1.tgz#d527dfb5456eca7cc9bb95d5daeaf88ba54a5451"
-
 lodash.merge@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/lodash.merge/-/lodash.merge-4.6.0.tgz#69884ba144ac33fe699737a6086deffadd0f89c5"
+
+lodash.merge@^4.6.1:
+  version "4.6.1"
+  resolved "https://npm.chaosgroup.com/lodash.merge/-/lodash.merge-4.6.1.tgz#adc25d9cb99b9391c59624f379fbba60d7111d54"
 
 lodash.sortby@^4.7.0:
   version "4.7.0"
   resolved "https://registry.yarnpkg.com/lodash.sortby/-/lodash.sortby-4.7.0.tgz#edd14c824e2cc9c1e0b0a1b42bb5210516a42438"
 
-lodash.startswith@^4.2.1:
-  version "4.2.1"
-  resolved "https://npm.chaosgroup.com/lodash.startswith/-/lodash.startswith-4.2.1.tgz#c598c4adce188a27e53145731cdc6c0e7177600c"
-
-lodash@^4.13.1, lodash@^4.2.0:
+lodash@^4.13.1:
   version "4.17.5"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.5.tgz#99a92d65c0272debe8c96b6057bc8fbfa3bed511"
 
 lodash@^4.15.0, lodash@^4.17.4, lodash@^4.3.0:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
+
+lodash@^4.17.5, lodash@^4.2.0:
+  version "4.17.10"
+  resolved "https://npm.chaosgroup.com/lodash/-/lodash-4.17.10.tgz#1b7793cf7259ea38fb3661d4d38b3260af8ae4e7"
 
 lolex@^1.6.0:
   version "1.6.0"
@@ -3198,9 +3212,15 @@ lru-cache@^4.0.1:
     pseudomap "^1.0.2"
     yallist "^2.1.2"
 
-make-dir@^1.0.0, make-dir@^1.1.0:
+make-dir@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/make-dir/-/make-dir-1.1.0.tgz#19b4369fe48c116f53c2af95ad102c0e39e85d51"
+  dependencies:
+    pify "^3.0.0"
+
+make-dir@^1.2.0:
+  version "1.3.0"
+  resolved "https://npm.chaosgroup.com/make-dir/-/make-dir-1.3.0.tgz#79c1033b80515bd6d24ec9933e860ca75ee27f0c"
   dependencies:
     pify "^3.0.0"
 
@@ -3255,8 +3275,8 @@ mem@^1.1.0:
     mimic-fn "^1.0.0"
 
 meow@^4.0.0:
-  version "4.0.0"
-  resolved "https://npm.chaosgroup.com/meow/-/meow-4.0.0.tgz#fd5855dd008db5b92c552082db1c307cba20b29d"
+  version "4.0.1"
+  resolved "https://npm.chaosgroup.com/meow/-/meow-4.0.1.tgz#d48598f6f4b1472f35bf6317a95945ace347f975"
   dependencies:
     camelcase-keys "^4.0.0"
     decamelize-keys "^1.0.0"
@@ -3305,22 +3325,22 @@ micromatch@^2.1.5, micromatch@^2.3.11:
     regex-cache "^0.4.2"
 
 micromatch@^3.1.4:
-  version "3.1.5"
-  resolved "https://npm.chaosgroup.com/micromatch/-/micromatch-3.1.5.tgz#d05e168c206472dfbca985bfef4f57797b4cd4ba"
+  version "3.1.10"
+  resolved "https://npm.chaosgroup.com/micromatch/-/micromatch-3.1.10.tgz#70859bc95c9840952f359a068a3fc49f9ecfac23"
   dependencies:
     arr-diff "^4.0.0"
     array-unique "^0.3.2"
-    braces "^2.3.0"
-    define-property "^1.0.0"
-    extend-shallow "^2.0.1"
-    extglob "^2.0.2"
+    braces "^2.3.1"
+    define-property "^2.0.2"
+    extend-shallow "^3.0.2"
+    extglob "^2.0.4"
     fragment-cache "^0.2.1"
-    kind-of "^6.0.0"
-    nanomatch "^1.2.5"
+    kind-of "^6.0.2"
+    nanomatch "^1.2.9"
     object.pick "^1.3.0"
     regex-not "^1.0.0"
     snapdragon "^0.8.1"
-    to-regex "^3.0.1"
+    to-regex "^3.0.2"
 
 mime-db@~1.30.0:
   version "1.30.0"
@@ -3365,6 +3385,19 @@ minimist@~0.0.1:
   version "0.0.10"
   resolved "https://npm.chaosgroup.com/minimist/-/minimist-0.0.10.tgz#de3f98543dbf96082be48ad1a0c7cda836301dcf"
 
+minipass@^2.2.1, minipass@^2.2.4:
+  version "2.3.3"
+  resolved "https://npm.chaosgroup.com/minipass/-/minipass-2.3.3.tgz#a7dcc8b7b833f5d368759cce544dccb55f50f233"
+  dependencies:
+    safe-buffer "^5.1.2"
+    yallist "^3.0.0"
+
+minizlib@^1.1.0:
+  version "1.1.0"
+  resolved "https://npm.chaosgroup.com/minizlib/-/minizlib-1.1.0.tgz#11e13658ce46bc3a70a267aac58359d1e0c29ceb"
+  dependencies:
+    minipass "^2.2.1"
+
 mixin-deep@^1.2.0:
   version "1.3.1"
   resolved "https://npm.chaosgroup.com/mixin-deep/-/mixin-deep-1.3.1.tgz#a49e7268dce1a0d9698e45326c5626df3543d0fe"
@@ -3407,17 +3440,22 @@ nan@^2.3.0:
   version "2.8.0"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.8.0.tgz#ed715f3fe9de02b57a5e6252d90a96675e1f085a"
 
-nanomatch@^1.2.5:
-  version "1.2.7"
-  resolved "https://npm.chaosgroup.com/nanomatch/-/nanomatch-1.2.7.tgz#53cd4aa109ff68b7f869591fdc9d10daeeea3e79"
+nan@^2.9.2:
+  version "2.10.0"
+  resolved "https://npm.chaosgroup.com/nan/-/nan-2.10.0.tgz#96d0cd610ebd58d4b4de9cc0c6828cda99c7548f"
+
+nanomatch@^1.2.9:
+  version "1.2.9"
+  resolved "https://npm.chaosgroup.com/nanomatch/-/nanomatch-1.2.9.tgz#879f7150cb2dab7a471259066c104eee6e0fa7c2"
   dependencies:
     arr-diff "^4.0.0"
     array-unique "^0.3.2"
-    define-property "^1.0.0"
-    extend-shallow "^2.0.1"
+    define-property "^2.0.2"
+    extend-shallow "^3.0.2"
     fragment-cache "^0.2.1"
-    is-odd "^1.0.0"
-    kind-of "^5.0.2"
+    is-odd "^2.0.0"
+    is-windows "^1.0.2"
+    kind-of "^6.0.2"
     object.pick "^1.3.0"
     regex-not "^1.0.0"
     snapdragon "^0.8.1"
@@ -3434,6 +3472,14 @@ nearley@^2.7.10:
     nomnom "~1.6.2"
     railroad-diagrams "^1.0.0"
     randexp "^0.4.2"
+
+needle@^2.2.0:
+  version "2.2.1"
+  resolved "https://npm.chaosgroup.com/needle/-/needle-2.2.1.tgz#b5e325bd3aae8c2678902fa296f729455d1d3a7d"
+  dependencies:
+    debug "^2.1.2"
+    iconv-lite "^0.4.4"
+    sax "^1.2.4"
 
 negotiator@0.6.1:
   version "0.6.1"
@@ -3466,6 +3512,21 @@ node-fetch@^1.0.1:
 node-modules-regexp@^1.0.0:
   version "1.0.0"
   resolved "https://npm.chaosgroup.com/node-modules-regexp/-/node-modules-regexp-1.0.0.tgz#8d9dbe28964a4ac5712e9131642107c71e90ec40"
+
+node-pre-gyp@^0.10.0:
+  version "0.10.0"
+  resolved "https://npm.chaosgroup.com/node-pre-gyp/-/node-pre-gyp-0.10.0.tgz#6e4ef5bb5c5203c6552448828c852c40111aac46"
+  dependencies:
+    detect-libc "^1.0.2"
+    mkdirp "^0.5.1"
+    needle "^2.2.0"
+    nopt "^4.0.1"
+    npm-packlist "^1.1.6"
+    npmlog "^4.0.2"
+    rc "^1.1.7"
+    rimraf "^2.6.1"
+    semver "^5.3.0"
+    tar "^4"
 
 node-pre-gyp@^0.6.39:
   version "0.6.39"
@@ -3511,6 +3572,17 @@ normalize-path@^2.0.0, normalize-path@^2.0.1, normalize-path@^2.1.1:
   resolved "https://registry.yarnpkg.com/normalize-path/-/normalize-path-2.1.1.tgz#1ab28b556e198363a8c1a6f7e6fa20137fe6aed9"
   dependencies:
     remove-trailing-separator "^1.0.1"
+
+npm-bundled@^1.0.1:
+  version "1.0.3"
+  resolved "https://npm.chaosgroup.com/npm-bundled/-/npm-bundled-1.0.3.tgz#7e71703d973af3370a9591bafe3a63aca0be2308"
+
+npm-packlist@^1.1.6:
+  version "1.1.10"
+  resolved "https://npm.chaosgroup.com/npm-packlist/-/npm-packlist-1.1.10.tgz#1039db9e985727e464df066f4cf0ab6ef85c398a"
+  dependencies:
+    ignore-walk "^3.0.1"
+    npm-bundled "^1.0.1"
 
 npm-run-path@^2.0.0:
   version "2.0.2"
@@ -4210,15 +4282,15 @@ redent@^2.0.0:
     indent-string "^3.0.0"
     strip-indent "^2.0.0"
 
-regenerate-unicode-properties@^5.1.1:
-  version "5.1.3"
-  resolved "https://npm.chaosgroup.com/regenerate-unicode-properties/-/regenerate-unicode-properties-5.1.3.tgz#54f5891543468f36f2274b67c6bc4c033c27b308"
+regenerate-unicode-properties@^6.0.0:
+  version "6.0.0"
+  resolved "https://npm.chaosgroup.com/regenerate-unicode-properties/-/regenerate-unicode-properties-6.0.0.tgz#0fc26f9d5142289df4e177dec58f303d2d097c16"
   dependencies:
     regenerate "^1.3.3"
 
-regenerate@^1.3.3:
-  version "1.3.3"
-  resolved "https://npm.chaosgroup.com/regenerate/-/regenerate-1.3.3.tgz#0c336d3980553d755c39b586ae3b20aa49c82b7f"
+regenerate@^1.3.3, regenerate@^1.4.0:
+  version "1.4.0"
+  resolved "https://npm.chaosgroup.com/regenerate/-/regenerate-1.4.0.tgz#4a856ec4b56e4077c557589cae85e7a4c8869a11"
 
 regenerator-runtime@^0.10.0:
   version "0.10.5"
@@ -4234,20 +4306,21 @@ regex-cache@^0.4.2:
   dependencies:
     is-equal-shallow "^0.1.3"
 
-regex-not@^1.0.0:
-  version "1.0.0"
-  resolved "https://npm.chaosgroup.com/regex-not/-/regex-not-1.0.0.tgz#42f83e39771622df826b02af176525d6a5f157f9"
+regex-not@^1.0.0, regex-not@^1.0.2:
+  version "1.0.2"
+  resolved "https://npm.chaosgroup.com/regex-not/-/regex-not-1.0.2.tgz#1f4ece27e00b0b65e0247a6810e6a85d83a5752c"
   dependencies:
-    extend-shallow "^2.0.1"
+    extend-shallow "^3.0.2"
+    safe-regex "^1.1.0"
 
 regexpu-core@^4.1.3:
-  version "4.1.3"
-  resolved "https://npm.chaosgroup.com/regexpu-core/-/regexpu-core-4.1.3.tgz#fb81616dbbc2a917a7419b33f8379144f51eb8d0"
+  version "4.1.5"
+  resolved "https://npm.chaosgroup.com/regexpu-core/-/regexpu-core-4.1.5.tgz#57fdfe1148f8a7a069086228515130cf1820ddd0"
   dependencies:
-    regenerate "^1.3.3"
-    regenerate-unicode-properties "^5.1.1"
-    regjsgen "^0.3.0"
-    regjsparser "^0.2.1"
+    regenerate "^1.4.0"
+    regenerate-unicode-properties "^6.0.0"
+    regjsgen "^0.4.0"
+    regjsparser "^0.3.0"
     unicode-match-property-ecmascript "^1.0.3"
     unicode-match-property-value-ecmascript "^1.0.1"
 
@@ -4264,13 +4337,13 @@ registry-url@^3.0.3:
   dependencies:
     rc "^1.0.1"
 
-regjsgen@^0.3.0:
-  version "0.3.0"
-  resolved "https://npm.chaosgroup.com/regjsgen/-/regjsgen-0.3.0.tgz#0ee4a3e9276430cda25f1e789ea6c15b87b0cb43"
+regjsgen@^0.4.0:
+  version "0.4.0"
+  resolved "https://npm.chaosgroup.com/regjsgen/-/regjsgen-0.4.0.tgz#c1eb4c89a209263f8717c782591523913ede2561"
 
-regjsparser@^0.2.1:
-  version "0.2.1"
-  resolved "https://npm.chaosgroup.com/regjsparser/-/regjsparser-0.2.1.tgz#c3787553faf04e775c302102ef346d995000ec1c"
+regjsparser@^0.3.0:
+  version "0.3.0"
+  resolved "https://npm.chaosgroup.com/regjsparser/-/regjsparser-0.3.0.tgz#3c326da7fcfd69fa0d332575a41c8c0cdf588c96"
   dependencies:
     jsesc "~0.5.0"
 
@@ -4460,6 +4533,20 @@ safe-buffer@5.1.1, safe-buffer@^5.0.1, safe-buffer@^5.1.1, safe-buffer@~5.1.0, s
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.1.tgz#893312af69b2123def71f57889001671eeb2c853"
 
+safe-buffer@^5.1.2:
+  version "5.1.2"
+  resolved "https://npm.chaosgroup.com/safe-buffer/-/safe-buffer-5.1.2.tgz#991ec69d296e0313747d59bdfd2b745c35f8828d"
+
+safe-regex@^1.1.0:
+  version "1.1.0"
+  resolved "https://npm.chaosgroup.com/safe-regex/-/safe-regex-1.1.0.tgz#40a3669f3b077d1e943d44629e157dd48023bf2e"
+  dependencies:
+    ret "~0.1.10"
+
+"safer-buffer@>= 2.1.2 < 3":
+  version "2.1.2"
+  resolved "https://npm.chaosgroup.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
+
 samsam@1.x:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/samsam/-/samsam-1.3.0.tgz#8d1d9350e25622da30de3e44ba692b5221ab7c50"
@@ -4474,7 +4561,7 @@ semver-diff@^2.0.0:
   dependencies:
     semver "^5.0.3"
 
-"semver@2 || 3 || 4 || 5", semver@^5.0.3, semver@^5.1.0, semver@^5.3.0:
+"semver@2 || 3 || 4 || 5", semver@^5.0.3, semver@^5.1.0, semver@^5.3.0, semver@^5.4.1:
   version "5.5.0"
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.5.0.tgz#dc4bbc7a6ca9d916dee5d43516f0092b58f7b8ab"
 
@@ -4512,12 +4599,6 @@ serve-static@1.13.1:
 set-blocking@^2.0.0, set-blocking@~2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/set-blocking/-/set-blocking-2.0.0.tgz#045f9782d011ae9a6803ddd382b24392b3d890f7"
-
-set-getter@^0.1.0:
-  version "0.1.0"
-  resolved "https://npm.chaosgroup.com/set-getter/-/set-getter-0.1.0.tgz#d769c182c9d5a51f409145f2fba82e5e86e80376"
-  dependencies:
-    to-object-path "^0.3.0"
 
 set-immediate-shim@^1.0.1:
   version "1.0.1"
@@ -4587,6 +4668,10 @@ slash@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-1.0.0.tgz#c41f2f6c39fc16d1cd17ad4b5d896114ae470d55"
 
+slash@^2.0.0:
+  version "2.0.0"
+  resolved "https://npm.chaosgroup.com/slash/-/slash-2.0.0.tgz#de552851a1759df3a8f206535442f5ec4ddeab44"
+
 slice-ansi@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/slice-ansi/-/slice-ansi-1.0.0.tgz#044f1a49d8842ff307aad6b505ed178bd950134d"
@@ -4612,8 +4697,8 @@ snapdragon-util@^3.0.1:
     kind-of "^3.2.0"
 
 snapdragon@^0.8.1:
-  version "0.8.1"
-  resolved "https://npm.chaosgroup.com/snapdragon/-/snapdragon-0.8.1.tgz#e12b5487faded3e3dea0ac91e9400bf75b401370"
+  version "0.8.2"
+  resolved "https://npm.chaosgroup.com/snapdragon/-/snapdragon-0.8.2.tgz#64922e7c565b0e14204ba1aa7d6964278d25182d"
   dependencies:
     base "^0.11.1"
     debug "^2.2.0"
@@ -4622,7 +4707,7 @@ snapdragon@^0.8.1:
     map-cache "^0.2.2"
     source-map "^0.5.6"
     source-map-resolve "^0.5.0"
-    use "^2.0.0"
+    use "^3.1.0"
 
 sntp@1.x.x:
   version "1.0.9"
@@ -4636,26 +4721,21 @@ sntp@2.x.x:
   dependencies:
     hoek "4.x.x"
 
-sort-keys@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/sort-keys/-/sort-keys-2.0.0.tgz#658535584861ec97d730d6cf41822e1f56684128"
-  dependencies:
-    is-plain-obj "^1.0.0"
-
 source-map-resolve@^0.5.0:
-  version "0.5.1"
-  resolved "https://npm.chaosgroup.com/source-map-resolve/-/source-map-resolve-0.5.1.tgz#7ad0f593f2281598e854df80f19aae4b92d7a11a"
+  version "0.5.2"
+  resolved "https://npm.chaosgroup.com/source-map-resolve/-/source-map-resolve-0.5.2.tgz#72e2cc34095543e43b2c62b2c4c10d4a9054f259"
   dependencies:
-    atob "^2.0.0"
+    atob "^2.1.1"
     decode-uri-component "^0.2.0"
     resolve-url "^0.2.1"
     source-map-url "^0.4.0"
     urix "^0.1.0"
 
-source-map-support@^0.5.3:
-  version "0.5.3"
-  resolved "https://npm.chaosgroup.com/source-map-support/-/source-map-support-0.5.3.tgz#2b3d5fff298cfa4d1afd7d4352d569e9a0158e76"
+source-map-support@^0.5.4:
+  version "0.5.6"
+  resolved "https://npm.chaosgroup.com/source-map-support/-/source-map-support-0.5.6.tgz#4435cee46b1aab62b8e8610ce60f788091c51c13"
   dependencies:
+    buffer-from "^1.0.0"
     source-map "^0.6.0"
 
 source-map-url@^0.4.0:
@@ -4849,9 +4929,9 @@ supports-color@^5.1.0:
   dependencies:
     has-flag "^2.0.0"
 
-supports-color@^5.2.0:
-  version "5.2.0"
-  resolved "https://npm.chaosgroup.com/supports-color/-/supports-color-5.2.0.tgz#b0d5333b1184dd3666cbe5aa0b45c5ac7ac17a4a"
+supports-color@^5.3.0:
+  version "5.4.0"
+  resolved "https://npm.chaosgroup.com/supports-color/-/supports-color-5.4.0.tgz#1c6b337402c2137605efe19f10fec390f6faab54"
   dependencies:
     has-flag "^3.0.0"
 
@@ -4887,6 +4967,18 @@ tar@^2.2.1:
     block-stream "*"
     fstream "^1.0.2"
     inherits "2"
+
+tar@^4:
+  version "4.4.2"
+  resolved "https://npm.chaosgroup.com/tar/-/tar-4.4.2.tgz#60685211ba46b38847b1ae7ee1a24d744a2cd462"
+  dependencies:
+    chownr "^1.0.1"
+    fs-minipass "^1.2.5"
+    minipass "^2.2.4"
+    minizlib "^1.1.0"
+    mkdirp "^0.5.0"
+    safe-buffer "^5.1.2"
+    yallist "^3.0.2"
 
 term-size@^1.2.0:
   version "1.2.0"
@@ -4958,13 +5050,14 @@ to-regex-range@^2.1.0:
     is-number "^3.0.0"
     repeat-string "^1.6.1"
 
-to-regex@^3.0.1:
-  version "3.0.1"
-  resolved "https://npm.chaosgroup.com/to-regex/-/to-regex-3.0.1.tgz#15358bee4a2c83bd76377ba1dc049d0f18837aae"
+to-regex@^3.0.1, to-regex@^3.0.2:
+  version "3.0.2"
+  resolved "https://npm.chaosgroup.com/to-regex/-/to-regex-3.0.2.tgz#13cfdd9b336552f30b51f33a8ae1b42a7a7599ce"
   dependencies:
-    define-property "^0.2.5"
-    extend-shallow "^2.0.1"
-    regex-not "^1.0.0"
+    define-property "^2.0.2"
+    extend-shallow "^3.0.2"
+    regex-not "^1.0.2"
+    safe-regex "^1.1.0"
 
 tough-cookie@>=2.3.3, tough-cookie@^2.3.3, tough-cookie@~2.3.0, tough-cookie@~2.3.3:
   version "2.3.3"
@@ -5156,22 +5249,18 @@ unzip-response@^2.0.1:
   resolved "https://registry.yarnpkg.com/unzip-response/-/unzip-response-2.0.1.tgz#d2f0f737d16b0615e72a6935ed04214572d56f97"
 
 upath@^1.0.0:
-  version "1.0.2"
-  resolved "https://npm.chaosgroup.com/upath/-/upath-1.0.2.tgz#80aaae5395abc5fd402933ae2f58694f0860204c"
-  dependencies:
-    lodash.endswith "^4.2.1"
-    lodash.isfunction "^3.0.8"
-    lodash.isstring "^4.0.1"
-    lodash.startswith "^4.2.1"
+  version "1.1.0"
+  resolved "https://npm.chaosgroup.com/upath/-/upath-1.1.0.tgz#35256597e46a581db4793d0ce47fa9aebfc9fabd"
 
-update-notifier@^2.3.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/update-notifier/-/update-notifier-2.3.0.tgz#4e8827a6bb915140ab093559d7014e3ebb837451"
+update-notifier@^2.4.0:
+  version "2.5.0"
+  resolved "https://npm.chaosgroup.com/update-notifier/-/update-notifier-2.5.0.tgz#d0744593e13f161e406acb1d9408b72cad08aff6"
   dependencies:
     boxen "^1.2.1"
     chalk "^2.0.1"
     configstore "^3.0.0"
     import-lazy "^2.1.0"
+    is-ci "^1.0.10"
     is-installed-globally "^0.1.0"
     is-npm "^1.0.0"
     latest-version "^3.0.0"
@@ -5188,13 +5277,11 @@ url-parse-lax@^1.0.0:
   dependencies:
     prepend-http "^1.0.1"
 
-use@^2.0.0:
-  version "2.0.2"
-  resolved "https://npm.chaosgroup.com/use/-/use-2.0.2.tgz#ae28a0d72f93bf22422a18a2e379993112dec8e8"
+use@^3.1.0:
+  version "3.1.0"
+  resolved "https://npm.chaosgroup.com/use/-/use-3.1.0.tgz#14716bf03fdfefd03040aef58d8b4b85f3a7c544"
   dependencies:
-    define-property "^0.2.5"
-    isobject "^3.0.0"
-    lazy-cache "^2.0.2"
+    kind-of "^6.0.2"
 
 util-deprecate@~1.0.1:
   version "1.0.2"
@@ -5335,24 +5422,6 @@ write-file-atomic@^2.0.0:
     imurmurhash "^0.1.4"
     signal-exit "^3.0.2"
 
-write-json-file@^2.2.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/write-json-file/-/write-json-file-2.3.0.tgz#2b64c8a33004d54b8698c76d585a77ceb61da32f"
-  dependencies:
-    detect-indent "^5.0.0"
-    graceful-fs "^4.1.2"
-    make-dir "^1.0.0"
-    pify "^3.0.0"
-    sort-keys "^2.0.0"
-    write-file-atomic "^2.0.0"
-
-write-pkg@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/write-pkg/-/write-pkg-3.1.0.tgz#030a9994cc9993d25b4e75a9f1a1923607291ce9"
-  dependencies:
-    sort-keys "^2.0.0"
-    write-json-file "^2.2.0"
-
 ws@^1.1.1:
   version "1.1.5"
   resolved "https://registry.yarnpkg.com/ws/-/ws-1.1.5.tgz#cbd9e6e75e09fc5d2c90015f21f0c40875e0dd51"
@@ -5387,6 +5456,10 @@ y18n@^3.2.1:
 yallist@^2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/yallist/-/yallist-2.1.2.tgz#1c11f9218f076089a47dd512f93c6699a6a81d52"
+
+yallist@^3.0.0, yallist@^3.0.2:
+  version "3.0.2"
+  resolved "https://npm.chaosgroup.com/yallist/-/yallist-3.0.2.tgz#8452b4bb7e83c7c188d8041c1a837c773d6d8bb9"
 
 yargs-parser@^7.0.0:
   version "7.0.0"
