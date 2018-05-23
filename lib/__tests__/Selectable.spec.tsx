@@ -125,3 +125,38 @@ const propsProviders = [
 ];
 
 propsProviders.forEach(runTestsWithProps);
+
+test('clicking a disabled Selectable does not invoke props.onSelect', assert => {
+	const [getMinProps] = propsProviders;
+	const props = {
+		...getMinProps(),
+		disabled: true,
+		onSelect: spy()
+	};
+	const wrapper = shallow(<Selectable {...props}>gosho</Selectable>);
+
+	wrapper.simulate('click');
+	assert.false(props.onSelect.called);
+});
+
+test('disabled Selectable has tabIndex of -1', assert => {
+	const [getMinProps] = propsProviders;
+	const props = {
+		...getMinProps(),
+		disabled: true
+	};
+	const wrapper = shallow(<Selectable {...props}>gosho</Selectable>);
+
+	assert.is(-1, wrapper.getElement().props.tabIndex);
+});
+
+test('disabled Selectable has class disabled', assert => {
+	const [getMinProps] = propsProviders;
+	const props = {
+		...getMinProps(),
+		disabled: true
+	};
+	const instance = shallow(<Selectable {...props}>gosho</Selectable>).instance() as Selectable<string>;
+
+	assert.true(instance._className.includes('disabled'));
+});
