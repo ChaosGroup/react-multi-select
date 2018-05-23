@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Children } from 'react';
 import MultiSelect, { Selectable } from '../../../dist/es6';
 
 import './index.css';
@@ -16,25 +16,30 @@ export default class NestedLists extends React.Component {
 		console.log(selection);
 	}
 
-	_renderList(items) {
-		if (typeof items === 'string') {
-			return <Selectable key={items} data={items}>{items}</Selectable>;
+	_renderList({ name, entries = [] }, root = true) {
+		const selectable = <Selectable data={name} key={name}>{name}</Selectable>;
+		if (entries.length === 0) {
+			return selectable;
 		}
 
-		const selectables = items.map(this._renderList);
-		return (
+		const multiselect = (
 			<MultiSelect
-				selection={this.state.selection}
 				onSelectionChange={this.onSelectionChange}
-				children={selectables}
-			/>
+				selection={this.state.selection}
+				key={name}
+				manageFocus={root}
+			>
+				{entries.map(e => this._renderList(e, false))}
+			</MultiSelect>
 		);
+
+		return root ? multiselect : [
+			selectable,
+			<Selectable disabled>{multiselect}</Selectable>
+		];
 	}
 
 	render() {
-		const { selection } = this.state;
-		const { data } = this.props;
-
-		return this._renderList(data);
+		return this._renderList(this.props.data);
 	}
 };

@@ -12,14 +12,40 @@ storiesOf('Examples', {})
 			'pesho',
 			'shosho',
 			'tosho',
+			'uncle linus'
 		];
 		return <Paragraphs texts={paragraphs} />;
 	})
 	.add('Nested Lists', () => {
-		const data = [
-			['uno', 'dos', 'tres', ['gadno a', 'test']],
-			['languages', ['html', 'javascript', 'css'], ['build tools', ['webpack', 'fuse-box']]],
-			['bork', 'mew', 'hurrdurr', 'yawn']
-		];
-		return <NestedLists data={data} />;
+		const folder = {
+			name: 'docs',
+			entries: [
+				{ name: 'penka.js' },
+				{ name: 'CMakeList.txt' },
+				{
+					name: 'naked-photos',
+					entries: [
+						{ name: 'pic1.jpg' },
+						{ name: 'pic2.png' }
+					]
+				},
+				{
+					name: 'memes',
+					entries: [
+						{ name: 'it`s something.jpg' },
+						{ name: 'javascript-is-weird.bmp' }
+					]
+				},
+				{
+					name: 'Recycle Bin',
+					entries: [
+						{ name: 'system32' },
+						{ name: '.net', entries: [{ name: 'C#' }, { name: 'CLR' }] },
+						{ name: 'windows' },
+						{ name: 'crapple' }
+					]
+				}
+			]
+		};
+		return <NestedLists data={folder} />;
 	});
