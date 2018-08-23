@@ -59,10 +59,10 @@ export default class Selectable<DT> extends React.PureComponent<TSelectableProps
 	private _onKeyboardSelect = this._createOnSelect('keyboard');
 
 	public render() {
-		const { render } = this.props;
+		const { render, index, ...rest } = this.props;
 
 		return React.createElement(render, {
-			...this.props,
+			...rest,
 			className: this._className,
 			tabIndex: this._tabIndex,
 			onClick: this._onMouseSelect,
