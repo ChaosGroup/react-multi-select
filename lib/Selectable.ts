@@ -6,6 +6,7 @@ export interface TSelectableProps<DT> {
 	render?: keyof HTMLElementTagNameMap;
 	selected?: boolean;
 	data: DT;
+	className?: string;
 	onSelect?: ((event: TSelectionEvent<HTMLLIElement>, selectionInfo: TSelectionInfo) => any);
 	index?: number;
 	children: React.ReactNode;
@@ -24,9 +25,14 @@ export default class Selectable<DT> extends React.PureComponent<TSelectableProps
 	private _element: HTMLInputElement;
 
 	get _className() {
-		const { selected, disabled } = this.props;
+		const { selected, disabled, className } = this.props;
+		const names = [
+			selected && 'selected',
+			disabled && 'disabled',
+			className
+		].filter(Boolean).join(' ');
 
-		return `multiselect__entry${selected ? ' selected' : ''}${disabled ? ' disabled' : ''}`;
+		return `multiselect__entry${names.length ? ' ' + names : ''}`;
 	}
 
 	get _tabIndex() {
@@ -53,13 +59,14 @@ export default class Selectable<DT> extends React.PureComponent<TSelectableProps
 	private _onKeyboardSelect = this._createOnSelect('keyboard');
 
 	public render() {
-		return React.createElement(this.props.render, {
+		const { render } = this.props;
+
+		return React.createElement(render, {
+			...this.props,
 			className: this._className,
 			tabIndex: this._tabIndex,
 			onClick: this._onMouseSelect,
-			onKeyDown: this._onKeyboardSelect,
-			children: this.props.children,
-			disabled: this.props.disabled
+			onKeyDown: this._onKeyboardSelect
 		});
 	}
 }

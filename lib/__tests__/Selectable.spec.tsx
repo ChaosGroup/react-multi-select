@@ -160,3 +160,27 @@ test('disabled Selectable has class disabled', assert => {
 
 	assert.true(instance._className.includes('disabled'));
 });
+
+test('custom className is attached', assert => {
+	const [getMinProps] = propsProviders;
+	const props = {
+		...getMinProps(),
+		className: 'test1'
+	};
+	const wrapper = shallow(<Selectable {...props}>gosho</Selectable>);
+
+	assert.true(wrapper.props().className.includes(props.className));
+});
+
+test('additional props pass through to rendered element', assert => {
+	const [getMinProps] = propsProviders;
+	const props = {
+		...getMinProps(),
+		title: 'testtest2',
+		['data-something']: 5
+	};
+	const wrapper = shallow(<Selectable {...props}>gosho</Selectable>);
+
+	assert.is(wrapper.props().title, props.title);
+	assert.is(wrapper.props()['data-something'], props['data-something']);
+});
