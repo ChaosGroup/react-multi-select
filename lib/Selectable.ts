@@ -15,6 +15,26 @@ export interface TSelectableProps<DT> {
 	disabled?: boolean;
 }
 
+type UserEventHandler = (event: TSelectionEvent<HTMLLIElement>) => void;
+
+const _createOnSelect = <DT>(
+	instance: Selectable<DT>,
+	selectionType: SelectionType
+): UserEventHandler => event => {
+	if (instance.props.disabled) {
+		return;
+	}
+
+	const { onSelect, data, index } = instance.props;
+	const selectionInfo = {
+		data,
+		selectionType,
+		currentActionIndex: index
+	};
+
+	onSelect(event, selectionInfo);
+};
+
 export default class Selectable<DT> extends React.PureComponent<TSelectableProps<DT>, Readonly<{}>> {
 	public static defaultProps = {
 		render: 'li',
@@ -40,23 +60,8 @@ export default class Selectable<DT> extends React.PureComponent<TSelectableProps
 		return disabled ? -1 : tabIndex;
 	}
 
-	private _createOnSelect = (selectionType: SelectionType) => (event: TSelectionEvent<HTMLLIElement>) => {
-		if (this.props.disabled) {
-			return;
-		}
-
-		const { onSelect, data, index } = this.props;
-		const selectionInfo = {
-			data,
-			selectionType,
-			currentActionIndex: index
-		};
-
-		onSelect(event, selectionInfo);
-	}
-
-	private _onMouseSelect = this._createOnSelect('mouse');
-	private _onKeyboardSelect = this._createOnSelect('keyboard');
+	private _onMouseSelect: UserEventHandler = _createOnSelect(this, 'mouse');
+	private _onKeyboardSelect: UserEventHandler = _createOnSelect(this, 'keyboard');
 
 	public render() {
 		const { render, index, ...rest } = this.props;

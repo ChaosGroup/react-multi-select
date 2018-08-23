@@ -49,17 +49,6 @@ const runTestsWithProps = (getMinProps, i) => {
 		assert.is(instance._className, 'multiselect__entry');
 	});
 
-	test(`${i}. _createOnSelect() returns a function when called with string`, assert => {
-		const instance = shallow(<Selectable {...getMinProps()} />).instance() as Selectable<string>;
-		// tslint:disable-next-line no-string-literal
-		const onMouseSelect = (instance as any)._createOnSelect('mouse');
-		assert.is(typeof onMouseSelect, 'function');
-
-		// tslint:disable-next-line no-string-literal
-		const onKeyboardSelect = instance['_createOnSelect']('keyboard');
-		assert.is(typeof onKeyboardSelect, 'function');
-	});
-
 	test(`${i}. returned function passes event and selection info to props.onSelect`, assert => {
 		const data = 333;
 		const selectionType = 'mouse';
@@ -78,7 +67,7 @@ const runTestsWithProps = (getMinProps, i) => {
 		const instance = shallow(<Selectable {...minProps} />).instance() as Selectable<string>;
 
 		// tslint:disable-next-line no-string-literal
-		const onMouseSelect = (instance as any)._createOnSelect(selectionType);
+		const onMouseSelect = (instance as any)._onMouseSelect;
 		onMouseSelect(expectedEventObject as MouseEvent<HTMLElement>);
 
 		onSelectSpy.restore();
