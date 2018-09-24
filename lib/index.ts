@@ -20,6 +20,7 @@ export interface TMultiSelectState {
 
 export interface TMultiSelectProps<DT> {
 	render?: keyof HTMLElementTagNameMap;
+	style?: { [style: string]: string };
 	className?: string;
 	selection: Set<DT>;
 	children?: React.ReactNode;
@@ -32,7 +33,8 @@ export default class MultiSelect<DT> extends React.PureComponent<TMultiSelectPro
 		children: [],
 		render: 'ul',
 		manageFocus: true,
-		className: ''
+		className: '',
+		style: {}
 	};
 	public static getOsName: () => OSName = getOsName;
 
@@ -150,7 +152,7 @@ export default class MultiSelect<DT> extends React.PureComponent<TMultiSelectPro
 	private _onClick = () => this._walker.currentNode = document.activeElement;
 
 	public render() {
-		const { render, children, selection, manageFocus } = this.props;
+		const { render, children, selection, manageFocus, ...rest } = this.props;
 		const childrenWithPassedProps = React.Children.map(
 			children,
 			(childElement: React.ReactElement<TSelectableProps<DT>>, index: number) => {
@@ -169,6 +171,7 @@ export default class MultiSelect<DT> extends React.PureComponent<TMultiSelectPro
 			});
 
 		return React.createElement(render, {
+			...rest,
 			ref: (ref: Element) => this._multiselect = ref,
 			tabIndex: -1,
 			className: this._className,
