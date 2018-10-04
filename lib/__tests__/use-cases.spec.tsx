@@ -8,6 +8,7 @@ import './helpers/browser';
 import { simulateFocus } from './helpers';
 
 import MultiSelect, { TMultiSelectProps } from '../index';
+import { TSelectionContext, TSelectionStrategy } from '../handle-selection/index';
 import Selectable from '../Selectable';
 import { OSName } from '../constants';
 

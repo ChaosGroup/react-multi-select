@@ -20,7 +20,7 @@ const pickSelectors = (selectionContext: { [id: string]: any }) => JSON.stringif
 );
 
 export const testIsMatching = <DT>(
-	strategy: TSelectionStrategy,
+	strategy: TSelectionStrategy<DT>,
 	shouldMatch: Iterable<TSelectionContext<DT>>,
 	shouldNotMatch: Iterable<TSelectionContext<DT>>,
 	name: string
@@ -68,3 +68,17 @@ export const simulateFocus = (
 };
 
 export const repeat = (n: number, action: (i: number) => any): void => Array.from({ length: n }).forEach(action);
+
+export const areSetsEqual = <T>(s1: Set<T>, s2: Set<T>): boolean => {
+	if (s1.size !== s2.size) {
+		return false;
+	}
+
+	for (const v1 of s1) {
+		if (!s2.has(v1)) {
+			return false;
+		}
+	}
+
+	return true;
+};
