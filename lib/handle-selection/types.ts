@@ -67,6 +67,7 @@ export interface TStateUpdate {
 	lastAction?: SelectionAction;
 	lastActionIndex?: number;
 	focusedIndex?: number;
+	[key: string]: any;
 }
 
 /**

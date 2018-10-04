@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { getOsName } from './utils';
 
-import handleSelection, { defaultStrats } from './handle-selection/index';
+import handleSelection, { strategies as defaultStrategies } from './handle-selection/index';
 import { TSelectableProps } from './Selectable';
 
 import {
@@ -17,6 +17,7 @@ import { OSName } from './constants';
 export interface TMultiSelectState {
 	lastAction: SelectionAction;
 	lastActionIndex: number;
+	[key: string]: any;
 }
 
 export interface TMultiSelectProps<DT> {
@@ -30,7 +31,7 @@ export interface TMultiSelectProps<DT> {
 	strategies?: Array<TSelectionStrategy<DT> | STRATEGY_NAME>;
 }
 
-export { STRATEGY_NAME };
+export * from './handle-selection';
 export { default as Selectable } from './Selectable';
 
 export default class MultiSelect<DT> extends React.PureComponent<TMultiSelectProps<DT>, Partial<TMultiSelectState>> {
@@ -40,7 +41,7 @@ export default class MultiSelect<DT> extends React.PureComponent<TMultiSelectPro
 		manageFocus: true,
 		className: '',
 		style: {},
-		strategies: defaultStrats
+		strategies: Object.values(defaultStrategies)
 	};
 	public static getOsName: () => OSName = getOsName;
 
@@ -124,6 +125,7 @@ export default class MultiSelect<DT> extends React.PureComponent<TMultiSelectPro
 		);
 		const selectionContext: TSelectionContext<DT> = {
 			...selectionInfo,
+			...this.state,
 			selection: this.props.selection,
 			lastAction: this.state.lastAction,
 			lastActionIndex: this.state.lastActionIndex,
