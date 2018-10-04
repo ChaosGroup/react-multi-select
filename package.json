@@ -12,7 +12,7 @@
 		"build": "node fuse.js",
 		"test": "tsc --p ./tsconfig.test.json && ava",
 		"test-with-coverage": "tsc --p ./tsconfig.test.json && nyc ava",
-		"lint": "tslint lib/*.ts lib/**/*.ts",
+		"lint": "tslint lib/*.ts lib/**/*.ts -p . --config tslint.json",
 		"coverage": "nyc report --reporter=html",
 		"clean": "rm -rf ./dump ./dist",
 		"examples": "yarn && yarn build && cd ./examples && yarn && yarn storybook"
