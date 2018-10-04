@@ -1,18 +1,11 @@
 import './helpers/browser';
 import test from 'ava';
 import * as React from 'react';
-import { spy } from 'sinon';
 import * as enzyme from 'enzyme';
-import * as Adapter from 'enzyme-adapter-react-16';
-import './helpers/browser';
 import { simulateFocus } from './helpers';
 
-import MultiSelect, { TMultiSelectProps } from '../index';
-import { TSelectionContext, TSelectionStrategy } from '../handle-selection/index';
-import Selectable from '../Selectable';
+import MultiSelect, { Selectable } from '../index';
 import { OSName } from '../constants';
-
-enzyme.configure({ adapter: new Adapter() });
 
 type Point = {
 	id: number;

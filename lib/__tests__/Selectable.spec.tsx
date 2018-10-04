@@ -2,15 +2,11 @@ import './helpers/browser';
 import test from 'ava';
 import * as React from 'react';
 import { spy } from 'sinon';
-import * as enzyme from 'enzyme';
-import * as Adapter from 'enzyme-adapter-react-16';
+import { shallow } from 'enzyme';
 
 import { MouseEvent } from 'react';
 import Selectable, { TSelectableProps } from '../Selectable';
 import { noop } from './helpers';
-
-enzyme.configure({ adapter: new Adapter() });
-const { shallow } = enzyme;
 
 const runTestsWithProps = (getMinProps, i) => {
 	test(`${i}. renders without crashing with valid minimal props`, assert => {

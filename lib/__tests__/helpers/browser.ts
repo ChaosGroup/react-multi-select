@@ -1,4 +1,6 @@
 import { JSDOM } from 'jsdom';
+import * as enzyme from 'enzyme';
+import * as Adapter from 'enzyme-adapter-react-16';
 
 const { window } = new JSDOM(`
 	<!DOCTYPE html>
@@ -26,3 +28,5 @@ Object.assign(global, {
 });
 
 copyProperties(window, global);
+
+enzyme.configure({ adapter: new Adapter });

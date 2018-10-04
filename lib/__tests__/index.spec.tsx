@@ -1,17 +1,12 @@
 import './helpers/browser';
 import test from 'ava';
 import * as React from 'react';
-import * as enzyme from 'enzyme';
-import * as Adapter from 'enzyme-adapter-react-16';
+import { mount } from 'enzyme';
 import { spy } from 'sinon';
 import { simulateFocus } from './helpers';
 
-import MultiSelect, { TMultiSelectProps } from '../index';
-import Selectable from '../Selectable';
+import MultiSelect, { Selectable, TMultiSelectProps } from '../index';
 import { minSelectionContext, selectionCtx, noop, repeat } from './helpers';
-
-enzyme.configure({ adapter: new Adapter() });
-const { mount } = enzyme;
 
 const getSelectableProps = () => [
 	'pesho',
