@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { TSelectionInfo, TSelectionEvent, SelectionType, TFocusable } from './handle-selection/types';
-import { MouseEvent, KeyboardEvent } from 'react';
+import { TSelectionInfo, TSelectionEvent, SelectionType } from './handle-selection/types';
 
 export interface TSelectableProps<DT> {
 	render?: keyof HTMLElementTagNameMap;
@@ -41,8 +40,6 @@ export default class Selectable<DT> extends React.PureComponent<TSelectableProps
 		tabIndex: 0,
 		disabled: false
 	};
-
-	private _element: HTMLInputElement;
 
 	get _className() {
 		const { selected, disabled, className } = this.props;

@@ -1,4 +1,4 @@
-import { TSelectionStrategy, TStateUpdate, TSelectionContext, STRATEGY_NAME } from './types';
+import { TStateUpdate, TSelectionContext, STRATEGY_NAME } from './types';
 
 export const name = STRATEGY_NAME.SELECT_ALL;
 

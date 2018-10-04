@@ -1,5 +1,5 @@
 import { ensureRange } from '../utils';
-import { TSelectionStrategy, TStateUpdate, TSelectionContext, STRATEGY_NAME } from './types';
+import { TStateUpdate, TSelectionContext, STRATEGY_NAME } from './types';
 
 /**
  * Repeats the last action (addition or deletion) from the last modified selection to the

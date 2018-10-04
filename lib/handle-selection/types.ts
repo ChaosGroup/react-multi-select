@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Selectable, { TSelectableProps } from '../Selectable';
 
 export enum STRATEGY_NAME {
 	REPEAT_RANGE = 0,

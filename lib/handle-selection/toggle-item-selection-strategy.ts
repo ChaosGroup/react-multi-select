@@ -1,11 +1,4 @@
-// @flow
-
-import {
-	TSelectionStrategy,
-	TStateUpdate,
-	TSelectionContext,
-	STRATEGY_NAME
-} from './types';
+import { TStateUpdate, TSelectionContext, STRATEGY_NAME } from './types';
 
 /**
  * Toggles the selection status of for the passed data in the set of the selection context.

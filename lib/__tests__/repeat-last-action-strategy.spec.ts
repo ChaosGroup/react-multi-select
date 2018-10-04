@@ -1,7 +1,7 @@
 import './helpers/browser';
 import test from 'ava';
-import { SelectionAction, TSelectionContext } from '../handle-selection/types';
-import { testIsMatching, minSelectionContext,  selectionCtx } from './helpers/index';
+import { SelectionAction } from '../handle-selection/types';
+import { testIsMatching, minSelectionContext, selectionCtx } from './helpers/index';
 import * as repeatLastSelectionAction from '../handle-selection/repeat-last-action-strategy';
 
 {

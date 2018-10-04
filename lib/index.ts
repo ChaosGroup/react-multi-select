@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ensureRange, getOsName } from './utils';
+import { getOsName } from './utils';
 
 import handleSelection, { defaultStrats } from './handle-selection/index';
 import { TSelectableProps } from './Selectable';
@@ -10,7 +10,6 @@ import {
 	SelectionAction,
 	TSelectionInfo,
 	TSelectionEvent,
-	TFocusable,
 	STRATEGY_NAME
 } from './handle-selection';
 import { OSName } from './constants';

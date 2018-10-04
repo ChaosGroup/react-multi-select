@@ -1,4 +1,4 @@
-import { TSelectionStrategy, TStateUpdate, TSelectionContext, STRATEGY_NAME } from './types';
+import { TStateUpdate, TSelectionContext, STRATEGY_NAME } from './types';
 
 /**
  * Clear all previous selections and return a set with only one selection - the value of the 'data' field.
