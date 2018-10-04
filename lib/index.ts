@@ -1,16 +1,18 @@
 import * as React from 'react';
 import { ensureRange, getOsName } from './utils';
 
-import handleSelection from './handle-selection/index';
+import handleSelection, { defaultStrats } from './handle-selection/index';
 import { TSelectableProps } from './Selectable';
 
 import {
+	TSelectionStrategy,
 	TSelectionContext,
 	SelectionAction,
 	TSelectionInfo,
 	TSelectionEvent,
-	TFocusable
-} from './handle-selection/types';
+	TFocusable,
+	STRATEGY_NAME
+} from './handle-selection';
 import { OSName } from './constants';
 
 export interface TMultiSelectState {
@@ -26,7 +28,11 @@ export interface TMultiSelectProps<DT> {
 	children?: React.ReactNode;
 	onSelectionChange: (selected: Set<DT>) => any;
 	manageFocus?: boolean;
+	strategies?: Array<TSelectionStrategy<DT> | STRATEGY_NAME>;
 }
+
+export { STRATEGY_NAME };
+export { default as Selectable } from './Selectable';
 
 export default class MultiSelect<DT> extends React.PureComponent<TMultiSelectProps<DT>, Partial<TMultiSelectState>> {
 	public static defaultProps: Partial<TMultiSelectProps<any>> = {
@@ -34,7 +40,8 @@ export default class MultiSelect<DT> extends React.PureComponent<TMultiSelectPro
 		render: 'ul',
 		manageFocus: true,
 		className: '',
-		style: {}
+		style: {},
+		strategies: defaultStrats
 	};
 	public static getOsName: () => OSName = getOsName;
 
@@ -112,17 +119,15 @@ export default class MultiSelect<DT> extends React.PureComponent<TMultiSelectPro
 	private _onSelectionChange = (event: TSelectionEvent<HTMLLIElement>, selectionInfo: TSelectionInfo): void => {
 		const { target, ctrlKey: ctrl, shiftKey, altKey, metaKey, key = '' } = event;
 		const ctrlKey = this._isMacOs ? metaKey : ctrl;
-		const { selection, onSelectionChange } = this.props;
-		const { lastAction, lastActionIndex } = this.state;
 		const childrenData = React.Children.map(
 			this.props.children,
 			(child: React.ReactElement<TSelectableProps<DT>>) => child.props.data
 		);
 		const selectionContext: TSelectionContext<DT> = {
 			...selectionInfo,
-			selection,
-			lastAction,
-			lastActionIndex,
+			selection: this.props.selection,
+			lastAction: this.state.lastAction,
+			lastActionIndex: this.state.lastActionIndex,
 			childrenData,
 			ctrlKey,
 			shiftKey,
@@ -130,9 +135,9 @@ export default class MultiSelect<DT> extends React.PureComponent<TMultiSelectPro
 			key
 		};
 
-		const { newSelection, stateUpdates } = handleSelection(selectionContext);
+		const { newSelection, stateUpdates } = handleSelection(selectionContext, this.props.strategies);
 		if (newSelection) {
-			onSelectionChange(newSelection);
+			this.props.onSelectionChange(newSelection);
 		}
 
 		if (stateUpdates) {
@@ -181,5 +186,3 @@ export default class MultiSelect<DT> extends React.PureComponent<TMultiSelectPro
 		});
 	}
 }
-
-export { default as Selectable } from './Selectable';

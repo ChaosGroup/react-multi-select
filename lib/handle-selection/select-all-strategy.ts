@@ -1,4 +1,6 @@
-import { TSelectionStrategy, TStateUpdate, TSelectionContext } from './types';
+import { TSelectionStrategy, TStateUpdate, TSelectionContext, STRATEGY_NAME } from './types';
+
+export const name = STRATEGY_NAME.SELECT_ALL;
 
 export const getNewSelection = <DT>(selectionContext: TSelectionContext<DT>): Set<DT> => {
 	const { selection, childrenData } = selectionContext;

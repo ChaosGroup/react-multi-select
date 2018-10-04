@@ -3,7 +3,8 @@
 import {
 	TSelectionStrategy,
 	TStateUpdate,
-	TSelectionContext
+	TSelectionContext,
+	STRATEGY_NAME
 } from './types';
 
 /**
@@ -11,6 +12,9 @@ import {
  * If the value of the 'data' field is present in the set, it is removed from the set (the item is unselected).
  * If the value wasn't present in the set, it is added to the set (the item is selected).
  */
+
+export const name = STRATEGY_NAME.TOGGLE_SINGLE;
+
 export const getNewSelection = <DT>(selectionContext: TSelectionContext<DT>): Set<DT> => {
 	const { selection, data } = selectionContext;
 

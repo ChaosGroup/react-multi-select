@@ -1,10 +1,13 @@
 import { ensureRange } from '../utils';
-import { TSelectionStrategy, TStateUpdate, TSelectionContext } from './types';
+import { TSelectionStrategy, TStateUpdate, TSelectionContext, STRATEGY_NAME } from './types';
 
 /**
  * Repeats the last action (addition or deletion) from the last modified selection to the
  * current selection, inclusive.
  */
+
+export const name = STRATEGY_NAME.REPEAT_RANGE;
+
 export const getNewSelection = <DT>(selectionContext: TSelectionContext<DT>): Set<DT> => {
 	const {
 			selection,

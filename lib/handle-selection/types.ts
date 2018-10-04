@@ -1,6 +1,13 @@
 import * as React from 'react';
 import Selectable, { TSelectableProps } from '../Selectable';
 
+export enum STRATEGY_NAME {
+	REPEAT_RANGE = 0,
+	SELECT_ALL = 1,
+	SELECT_SINGLE = 2,
+	TOGGLE_SINGLE = 3
+}
+
 export type TFocusable = { focus: () => void };
 
 export type SelectionType = 'mouse' | 'keyboard';
@@ -66,19 +73,20 @@ export interface TStateUpdate {
 /**
  * Interface which selection strategies should provide.
  */
-export interface TSelectionStrategy {
+export interface TSelectionStrategy<DT> {
+	name?: STRATEGY_NAME;
 	matches: {
-		[id in SelectionType]?: <DT>(selectionContext: TSelectionContext<DT>) => boolean;
+		[id in SelectionType]?: (selectionContext: TSelectionContext<DT>) => boolean;
 	};
 	/**
 	 * Calculates and returns a new Set of data keys based on the selectionContext,
 	 * which can be mapped to the currently selected items.
 	 */
-	getNewSelection<DT>(selectionContext: TSelectionContext<DT>): Set<DT>;
+	getNewSelection(selectionContext: TSelectionContext<DT>): Set<DT>;
 	/**
 	 * Calculate state updates based on the passed selectionContext.
 	 */
-	getStateUpdates<DT>(selectionContext: TSelectionContext<DT>): TStateUpdate;
+	getStateUpdates(selectionContext: TSelectionContext<DT>): TStateUpdate;
 }
 
 export interface TSelectionResult<DT> {
