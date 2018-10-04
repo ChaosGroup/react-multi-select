@@ -156,7 +156,7 @@ export default class MultiSelect<DT> extends React.PureComponent<TMultiSelectPro
 	private _onClick = () => this._walker.currentNode = document.activeElement;
 
 	public render() {
-		const { render, children, selection, manageFocus, onSelectionChange, ...rest } = this.props;
+		const { render, children, selection, manageFocus, onSelectionChange, strategies, ...rest } = this.props;
 		const childrenWithPassedProps = React.Children.map(
 			children,
 			(childElement: React.ReactElement<TSelectableProps<DT>>, index: number) => {
