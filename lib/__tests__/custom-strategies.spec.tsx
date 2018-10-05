@@ -2,7 +2,7 @@ import './helpers/browser';
 import test from 'ava';
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { areSetsEqual } from './helpers';
+import { areSetsEqual, json } from './helpers';
 
 import MultiSelect, { Selectable, STRATEGY_NAME } from '../index';
 import { TSelectionStrategy } from '../handle-selection/index';
@@ -11,7 +11,7 @@ const subcharStart: TSelectionStrategy<number> = {
 	getNewSelection: ({ selection, childrenData, key }) => new Set(
 		childrenData.filter(n => String(n).startsWith(key))
 	),
-	getStateUpdates: ctx => null,
+	getStateUpdates: ctx => ({ $lastKey: ctx.key }),
 	matches: {
 		keyboard: ({ ctrlKey, key }) => ctrlKey && String(Number(key)) === key
 	}
@@ -52,7 +52,7 @@ const customStrategyTestCases = [
 		numbers: [1, 2, 3],
 		selection: [1, 2, 3],
 		expectedSelection: [],
-		key: '5'
+		key: '6'
 	},
 	{
 		numbers: [5, 55, 555, 66],
@@ -63,19 +63,26 @@ const customStrategyTestCases = [
 ];
 
 for (const { numbers, selection, key, expectedSelection } of customStrategyTestCases ) {
-	test(`ctrl + ${key} with data of ${numbers} propagates ${expectedSelection}`, assert => {
-		let result;
-		const onSelectionChange = newSelection => result = newSelection;
-		const wrapper = mount(
-			<NumberList
-				numbers={numbers}
-				selection={new Set(selection)}
-				onSelectionChange={onSelectionChange}
-			/>
-		);
+	let result;
+	const onSelectionChange = newSelection => result = newSelection;
+	const wrapper = mount(
+		<NumberList
+			numbers={numbers}
+			selection={new Set(selection)}
+			onSelectionChange={onSelectionChange}
+		/>
+	);
+	wrapper.find(Selectable).first().simulate('keydown', { ctrlKey: true, key });
 
-		wrapper.find(Selectable).first().simulate('keydown', { ctrlKey: true, key });
+	test(`ctrl + ${key} with data of ${json(numbers)} propagates ${json(expectedSelection)}`, assert => {
 		assert.true(areSetsEqual(result, new Set(expectedSelection)));
+	});
+
+	test(`persists custom state of ${JSON.stringify({ $lastKey: key })}`, assert => {
+		assert.is(
+			wrapper.find(MultiSelect).first().instance().state.$lastKey,
+			key
+		);
 	});
 }
 
@@ -114,8 +121,8 @@ const mixedStrategiesCases = [
 
 for (const { numbers, selection, strategies, inputs } of mixedStrategiesCases) {
 	for (const { args, expectedSelection } of inputs) {
-		test.only(
-			`propagates selection ${expectedSelection} for input ${JSON.stringify(args)}`,
+		test(
+			`propagates selection ${json(expectedSelection)} for input ${json(args)}`,
 			assert => {
 				let result;
 				const spy = newSelection => result = newSelection;

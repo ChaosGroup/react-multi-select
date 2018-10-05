@@ -59,6 +59,8 @@ export const selectionCtx = <DT>(overrides: object): TSelectionContext<DT> => {
 
 export const noop = () => undefined;
 
+export const json = JSON.stringify;
+
 export const simulateFocus = (
 	wrapper: enzyme.ReactWrapper<any, any>,
 	selectableWrapper: enzyme.ReactWrapper<any, any>
