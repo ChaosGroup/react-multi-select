@@ -76,14 +76,14 @@ const runTestsWithProps = (getMinProps, i) => {
 };
 
 const propsProviders = [
-	(): TSelectableProps<string> => ({
+	(): TSelectableProps<any> => ({
 		selected: false,
 		data: 'hello',
 		onSelect: noop,
 		index: 0,
 		children: <h1>Hello</h1>
 	}),
-	(): TSelectableProps<string> => ({
+	(): TSelectableProps<any> => ({
 		selected: false,
 		data: 'hello',
 		render: 'p',
@@ -91,7 +91,7 @@ const propsProviders = [
 		index: 0,
 		children: <a href="https://www.haskell.org/hoogle/">haha</a>
 	}),
-	(): TSelectableProps<number> => ({
+	(): TSelectableProps<any> => ({
 		selected: false,
 		data: 3,
 		render: 'a',
@@ -99,7 +99,7 @@ const propsProviders = [
 		index: 0,
 		children: <pre>5</pre>
 	}),
-	(): TSelectableProps<object> => ({
+	(): TSelectableProps<any> => ({
 		selected: false,
 		data: {},
 		render: 'div',
