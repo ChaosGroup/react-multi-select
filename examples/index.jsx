@@ -8,10 +8,10 @@ import NestedLists from './stories/nested-lists/';
 storiesOf('Examples', {})
 	.add('Paragraphs', () => {
 		const paragraphs = [
-			'gosho',
-			'pesho',
-			'shosho',
-			'tosho',
+			'steevy j',
+			'pete',
+			'clair',
+			'billy g',
 			'uncle linus'
 		];
 		return <Paragraphs texts={paragraphs} />;
@@ -23,7 +23,7 @@ storiesOf('Examples', {})
 				{ name: 'penka.js' },
 				{ name: 'CMakeList.txt' },
 				{
-					name: 'naked-photos',
+					name: 'photos',
 					entries: [
 						{ name: 'pic1.jpg' },
 						{ name: 'pic2.png' }
@@ -42,7 +42,7 @@ storiesOf('Examples', {})
 						{ name: 'system32' },
 						{ name: '.net', entries: [{ name: 'C#' }, { name: 'CLR' }] },
 						{ name: 'windows' },
-						{ name: 'crapple' }
+						{ name: 'craple' }
 					]
 				}
 			]

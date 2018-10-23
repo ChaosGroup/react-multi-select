@@ -5,20 +5,23 @@
 
 React components that provide multiple selection logic. Features mouse and keyboard selections. Can render arbitary tags as selectable items.
 
+![quick example](./examples.gif)
+
 ```shell
 # install dependencies
 yarn
+
 # build production bundle
 yarn build
+
 # run the tests
 yarn test
+
+# examples
+yarn examples
 ```
 
 ### Examples
-1. [selectable paragraphs](./examples/selectable-paragraphs/src/App.js)
+1. [selectable paragraphs](./examples/stories/selectable-paragraphs/index.jsx)
+2. [tree view](./examples/stories/nested-lists/index.jsx)
 
-### TODOS
-- ~Abstract element creation using `React.createElement` so any element can be rendered as selectable - `a`, `li`, `tr`, `td`, etc~
-- Construct examples and sample use cases
-- Look into performance and re-renders
-- Implement es5 bundle output
