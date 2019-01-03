@@ -56,7 +56,7 @@ const runTestsWithProps = (getMinProps, i) => {
 			currentActionIndex: index
 		};
 
-		const expectedEventObject = {};
+		const expectedEventObject = { stopPropagation: () => {} };
 
 		const minProps = { ...getMinProps(), data, index };
 		const onSelectSpy = spy(minProps, 'onSelect');
@@ -111,6 +111,17 @@ const propsProviders = [
 
 propsProviders.forEach(runTestsWithProps);
 
+for (const eventName of ['click', 'keydown']) {
+	test(`selection event does not propagate ${eventName} event`, assert => {
+		const stopPropagation = spy();
+		const [getMinProps] = propsProviders;
+		const wrapper = shallow(<Selectable {...getMinProps()}>gosho</Selectable>);
+
+		wrapper.simulate(eventName, { stopPropagation });
+		assert.true(stopPropagation.calledOnce);
+	});
+}
+
 test('clicking a disabled Selectable does not invoke props.onSelect', assert => {
 	const [getMinProps] = propsProviders;
 	const props = {
@@ -120,7 +131,7 @@ test('clicking a disabled Selectable does not invoke props.onSelect', assert => 
 	};
 	const wrapper = shallow(<Selectable {...props}>gosho</Selectable>);
 
-	wrapper.simulate('click');
+	wrapper.simulate('click', { stopPropagation: () => {} });
 	assert.false(props.onSelect.called);
 });
 

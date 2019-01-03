@@ -20,6 +20,7 @@ const _createOnSelect = <DT>(
 	instance: Selectable<DT>,
 	selectionType: SelectionType
 ): UserEventHandler => event => {
+	event.stopPropagation();
 	if (instance.props.disabled) {
 		return;
 	}
