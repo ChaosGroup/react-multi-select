@@ -26,7 +26,7 @@ export interface TMultiSelectProps<DT> {
 	className?: string;
 	selection: Set<DT>;
 	children?: React.ReactNode;
-	onSelectionChange: (selected: Set<DT>) => any;
+	onSelectionChange: (selected: Set<DT>, context: TSelectionContext<DT>) => any;
 	manageFocus?: boolean;
 	strategies?: Array<TSelectionStrategy<DT> | STRATEGY_NAME>;
 }
@@ -138,7 +138,7 @@ export default class MultiSelect<DT> extends React.PureComponent<TMultiSelectPro
 
 		const { newSelection, stateUpdates } = handleSelection(selectionContext, this.props.strategies);
 		if (newSelection) {
-			this.props.onSelectionChange(newSelection);
+			this.props.onSelectionChange(newSelection, selectionContext);
 		}
 
 		if (stateUpdates) {
