@@ -1,34 +1,39 @@
 import './helpers/browser';
 import test from 'ava';
-import { testIsMatching, minSelectionContext, selectionCtx } from './helpers/index';
+import * as fc from 'fast-check';
+
+import { minSelectionContext, selectionCtx } from './helpers/index';
+import { SelectionAction, SelectionType } from '../handle-selection/types';
 import * as selectAll from '../handle-selection/select-all-strategy';
 
 {
-	const shouldMatch = [
-		selectionCtx({
-			...minSelectionContext,
-			selectionType: 'keyboard',
-			ctrlKey: true,
-			key: 'a'
-		})
-	];
+	test('matches ctrl+a and nothing else', assert => {
+		const arbitrarySelectionContext = fc.array(fc.integer(), 1, 1000)
+			.chain(childrenData => fc.tuple(fc.constant(childrenData), fc.shuffledSubarray(childrenData)))
+			.chain(([data, selection]) => fc.record({
+				selection: fc.constant(new Set(selection)),
+				data: fc.constantFrom(...data),
+				lastAction: fc.constantFrom('add' as SelectionAction, 'remove' as SelectionAction),
+				lastActionIndex: fc.integer(0, data.length),
+				currentActionIndex: fc.integer(0, data.length),
+				childrenData: fc.constant(data),
+				selectionType: fc.constant('keyboard' as SelectionType),
+				altKey: fc.boolean(),
+				ctrlKey: fc.boolean(),
+				shiftKey: fc.boolean(),
+				key: fc.constantFrom(
+					...Array.from({ length: 26 }, (_, i) => String.fromCharCode(i + 97))
+				)
+			}));
 
-	const shouldNotMatch = [
-		selectionCtx({
-			...minSelectionContext,
-			selectionType: 'keyboard',
-			ctrlKey: true,
-			key: 'b'
-		}),
-		selectionCtx({
-			...minSelectionContext,
-			selectionType: 'keyboard',
-			ctrlKey: false,
-			key: 'a'
-		})
-	];
-
-	testIsMatching(selectAll, shouldMatch, shouldNotMatch, 'select all');
+		fc.assert(
+			fc.property(
+				arbitrarySelectionContext,
+				ctx => selectAll.matches.keyboard(ctx) === (ctx.ctrlKey && ctx.key === 'a')
+			)
+		);
+		assert.pass();
+	});
 }
 
 test(`doesn't have "mouse" property`, assert => {

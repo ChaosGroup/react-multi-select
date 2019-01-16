@@ -26,6 +26,7 @@
 		"ava": "1.0.0-beta.4",
 		"enzyme": "^3.3.0",
 		"enzyme-adapter-react-16": "^1.1.1",
+		"fast-check": "^1.10.0",
 		"fuse-box": "^3.0.2",
 		"jsdom": "^11.10.0",
 		"nyc": "^11.8.0",
