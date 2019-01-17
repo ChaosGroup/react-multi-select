@@ -10,12 +10,12 @@ export const name = STRATEGY_NAME.REPEAT_RANGE;
 
 export const getNewSelection = <DT>(selectionContext: TSelectionContext<DT>): Set<DT> => {
 	const {
-			selection,
+		selection,
 		lastAction,
 		lastActionIndex,
 		currentActionIndex,
 		childrenData
-		} = selectionContext;
+	} = selectionContext;
 
 	const newSelected = new Set(selection);
 
