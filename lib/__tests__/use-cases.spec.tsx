@@ -75,24 +75,24 @@ const runTestsWithTags = (multiselectTag: Tag, selectableTag: Tag) => test(
 		const selection = () => wrapper.state().selection;
 
 		// select first element to focus the list
-		wrapper.find('Selectable').first().simulate('click');
+		wrapper.find(Selectable).first().simulate('click');
 		assert.deepEqual([...selection()], [points[0].id]);
 
 		// select all elements
-		wrapper.find('Selectable').first().simulate('keydown', { key: 'a', ctrlKey: true });
+		wrapper.find(Selectable).first().simulate('keydown', { key: 'a', ctrlKey: true });
 		assert.deepEqual(points.map(p => p.id), [...selection()].sort());
 
 		// toggle some of the selections off
 		for (const i of [1, 3, 4]) {
 			assert.true(selection().has(i));
-			wrapper.find('Selectable').at(i).simulate('click', { ctrlKey: true });
+			wrapper.find(Selectable).at(i).simulate('click', { ctrlKey: true });
 			assert.false(selection().has(i));
 		}
 
 		// toggle one selection on and off a few times
 		// selection is preserved because of even amount of repetitions
 		for (const i of [2, 3, 0, points.length - 1]) {
-			const victim /* :D */ = wrapper.find('Selectable').at(i);
+			const victim /* :D */ = wrapper.find(Selectable).at(i);
 			for (let j = 0; j < 4; ++j) {
 				const isInSelection = selection().has(i);
 				victim.simulate('click', { ctrlKey: true });
@@ -101,30 +101,30 @@ const runTestsWithTags = (multiselectTag: Tag, selectableTag: Tag) => test(
 		}
 
 		// selecta all again
-		wrapper.find('Selectable').first().simulate('keydown', { key: 'a', ctrlKey: true });
+		wrapper.find(Selectable).first().simulate('keydown', { key: 'a', ctrlKey: true });
 		assert.deepEqual(points.map(p => p.id), [...selection()].sort());
 
 		// unselect 3
-		wrapper.find('Selectable').at(3).simulate('click', { ctrlKey: true });
+		wrapper.find(Selectable).at(3).simulate('click', { ctrlKey: true });
 		assert.false(selection().has(3));
 
 		// unselect from 3 to 6 inclusive
-		wrapper.find('Selectable').at(6).simulate('click', { shiftKey: true });
+		wrapper.find(Selectable).at(6).simulate('click', { shiftKey: true });
 		[3, 4, 5, 6].forEach(id => assert.false(selection().has(id)));
 		[0, 1, 2].forEach(id => assert.true(selection().has(id)));
 
 		// toggle 5
-		wrapper.find('Selectable').at(5).simulate('click', { ctrlKey: true });
+		wrapper.find(Selectable).at(5).simulate('click', { ctrlKey: true });
 		assert.true(selection().has(5));
 
 		// select all from 5 to 1 inclusive
-		wrapper.find('Selectable').at(1).simulate('click', { shiftKey: true });
+		wrapper.find(Selectable).at(1).simulate('click', { shiftKey: true });
 		[0, 1, 2, 3, 4, 5].forEach(id => assert.true(selection().has(id)));
 		assert.false(selection().has(6));
 
 		// do some clicking
 		for (const i of [0, 1, 2, 3, 6, 6, 4, 0]) {
-			const ithSelectable = wrapper.find('Selectable').at(i);
+			const ithSelectable = wrapper.find(Selectable).at(i);
 			ithSelectable.simulate('click');
 			simulateFocus(wrapper, ithSelectable);
 			// check if selection works
@@ -132,15 +132,15 @@ const runTestsWithTags = (multiselectTag: Tag, selectableTag: Tag) => test(
 			// check if focus works
 			assert.true(ithSelectable.getDOMNode() === document.activeElement);
 		}
-		wrapper.find('Selectable').first().simulate('click');
+		wrapper.find(Selectable).first().simulate('click');
 		const moveDownCount = 3;
 		Array.from({ length: moveDownCount })
 			.forEach(() => wrapper.simulate('keydown', { key: 'ArrowDown' }));
 
-		assert.true(wrapper.find('Selectable').at(moveDownCount).getDOMNode() === document.activeElement);
+		assert.true(wrapper.find(Selectable).at(moveDownCount).getDOMNode() === document.activeElement);
 
 		wrapper.simulate('keydown', { key: 'ArrowUp' });
-		assert.true(wrapper.find('Selectable').at(moveDownCount - 1).getDOMNode() === document.activeElement);
+		assert.true(wrapper.find(Selectable).at(moveDownCount - 1).getDOMNode() === document.activeElement);
 	}
 );
 
@@ -173,7 +173,7 @@ const testToggleOnPlatform = (options: ToggleTestOptions) => test(options.title,
 		const { toggle, plainClick } = options;
 
 		assert.is(selection().size, 0);
-		const selectable = wrapper.find('Selectable').first();
+		const selectable = wrapper.find(Selectable).first();
 		toggle(selectable);
 		assert.is(selection().size, 1);
 		toggle(selectable);
@@ -181,11 +181,11 @@ const testToggleOnPlatform = (options: ToggleTestOptions) => test(options.title,
 
 		const start = 1;
 		const end = 3;
-		wrapper.find('Selectable').slice(start, end).forEach(toggle);
+		wrapper.find(Selectable).slice(start, end).forEach(toggle);
 		assert.is(selection().size, end - start);
 
 		wrapper
-			.find('Selectable')
+			.find(Selectable)
 			.slice(start, end)
 			.forEach(s => {
 				plainClick(s);

@@ -44,7 +44,7 @@ test('non-empty multiselect focuses the first selectable element on focus', asse
 	);
 
 	wrapper.simulate('focus');
-	const firstSelectable = wrapper.find('Selectable').first().getDOMNode();
+	const firstSelectable = wrapper.find(Selectable).first().getDOMNode();
 	assert.is(firstSelectable, document.activeElement);
 });
 
@@ -58,7 +58,7 @@ test('propagates index, selected and focused properties to children', assert => 
 	const selectables = selectableProps.map((props, key) => <Selectable key={key} {...props}>{props.data}</Selectable>);
 
 	const wrapper = mount(<MultiSelect {...multiSelectProps} children={selectables} />);
-	const renderedSelectables = wrapper.find('Selectable').getElements();
+	const renderedSelectables = wrapper.find(Selectable).getElements();
 
 	for (const { props } of renderedSelectables) {
 		const matchingProp = selectableProps.find(p => cmpKeys.every(k => p[k] === props[k]));
@@ -76,7 +76,7 @@ test('passes _onSelectionChange as onSelect to children', assert => {
 	const selectables = selectableProps.map((props, key) => <Selectable key={key} {...props}>{props.data}</Selectable>);
 
 	const wrapper = mount(<MultiSelect {...multiSelectProps} children={selectables} />);
-	const renderedSelectables = wrapper.find('Selectable').getElements();
+	const renderedSelectables = wrapper.find(Selectable).getElements();
 
 	for (const { props } of renderedSelectables) {
 		assert.is(typeof props.onSelect, 'function');
@@ -106,7 +106,7 @@ test(`doesn't focus another element when event.key is different from up/down arr
 	const selectables = selectableProps.map((props, key) => <Selectable key={key} {...props}>{props.data}</Selectable>);
 
 	const wrapper = mount(<MultiSelect {...multiSelectProps} children={selectables} />);
-	const firstSelectable = wrapper.find('Selectable').first();
+	const firstSelectable = wrapper.find(Selectable).first();
 	firstSelectable.simulate('click');
 
 	for (const key of ['1', 'a', 'ArrowLeft', 'ArrowRight', 'Home', 'End']) {
@@ -123,9 +123,9 @@ test(`keeps the first element focused when pressing up`, assert => {
 	const selectables = selectableProps.map((props, key) => <Selectable key={key} {...props}>{props.data}</Selectable>);
 
 	const wrapper = mount(<MultiSelect {...multiSelectProps} children={selectables} />);
-	wrapper.find('Selectable').first().simulate('click');
+	wrapper.find(Selectable).first().simulate('click');
 	wrapper.simulate('keydown', { key: 'ArrowUp' });
-	const firstSelectable = wrapper.find('Selectable').first().getDOMNode();
+	const firstSelectable = wrapper.find(Selectable).first().getDOMNode();
 	assert.true(firstSelectable === document.activeElement);
 });
 
@@ -139,11 +139,11 @@ test(`focuses the previous item when current item is not the first`, assert => {
 	const selectables = selectableProps.map((props, key) => <Selectable key={key} {...props}>{props.data}</Selectable>);
 
 	const wrapper = mount(<MultiSelect {...multiSelectProps} children={selectables} />);
-	const initial = wrapper.find('Selectable').at(focusAt);
+	const initial = wrapper.find(Selectable).at(focusAt);
 	simulateFocus(wrapper, initial);
 	wrapper.simulate('keydown', { key: 'ArrowUp' });
 
-	const expectedFocused = wrapper.find('Selectable').at(focusAt - 1).getDOMNode();
+	const expectedFocused = wrapper.find(Selectable).at(focusAt - 1).getDOMNode();
 	assert.true(expectedFocused === document.activeElement);
 });
 
@@ -156,7 +156,7 @@ test(`keeps the last element focused when the down arrow is pressed`, assert => 
 	const selectables = selectableProps.map((props, key) => <Selectable key={key} {...props}>{props.data}</Selectable>);
 
 	const wrapper = mount(<MultiSelect {...multiSelectProps} children={selectables} />);
-	const last = wrapper.find('Selectable').last();
+	const last = wrapper.find(Selectable).last();
 	simulateFocus(wrapper, last);
 	wrapper.simulate('keydown', { key: 'ArrowDown' });
 
@@ -172,10 +172,10 @@ test(`focuses next item when event.key is down arrow and current item is not the
 	const selectables = selectableProps.map((props, key) => <Selectable key={key} {...props}>{props.data}</Selectable>);
 
 	const wrapper = mount(<MultiSelect {...multiSelectProps} children={selectables} />);
-	wrapper.find('Selectable').first().simulate('click');
+	wrapper.find(Selectable).first().simulate('click');
 	wrapper.simulate('keydown', { key: 'ArrowDown' });
 
-	assert.true(wrapper.find('Selectable').at(1).getDOMNode() === document.activeElement);
+	assert.true(wrapper.find(Selectable).at(1).getDOMNode() === document.activeElement);
 });
 
 test(`allows to provide custom classes`, assert => {
@@ -220,8 +220,8 @@ test('starts managing focus when props.manageFocus changes to true', assert => {
 	}
 
 	const wrapper = mount(<ToggleManageFocus />);
-	const multiselectWrapper = wrapper.find('MultiSelect');
-	const selectables = () => multiselectWrapper.find('Selectable');
+	const multiselectWrapper = wrapper.find(MultiSelect);
+	const selectables = () => multiselectWrapper.find(Selectable);
 	const focusAt = 4;
 	assert.true(selectables().length > focusAt);
 
