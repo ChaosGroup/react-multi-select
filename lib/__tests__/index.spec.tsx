@@ -1,12 +1,75 @@
 import './helpers/browser';
 import test from 'ava';
+import * as fc from 'fast-check';
 import * as React from 'react';
 import { mount } from 'enzyme';
 import { spy } from 'sinon';
-import { simulateFocus } from './helpers';
 
 import MultiSelect, { Selectable, TMultiSelectProps } from '../index';
-import { minSelectionContext, selectionCtx, noop, repeat } from './helpers';
+import {
+	simulateFocus,
+	minSelectionContext,
+	selectionCtx,
+	noop,
+	repeat,
+	prop,
+	arbitrarySelectionContext
+} from './helpers';
+
+const nonListTags: Array<keyof HTMLElementTagNameMap> = ['div', 'span', 'p', 'strong'];
+const listTags: Array<keyof HTMLElementTagNameMap> = ['ul', 'ol'];
+
+const arbitraryMultiSelectProps = fc.constantFrom(nonListTags, listTags)
+	.chain(tags => fc.tuple(
+		fc.constantFrom(...tags),
+		tags === listTags
+			? fc.constant('li' as keyof HTMLElementTagNameMap)
+			: fc.constantFrom(...nonListTags),
+		fc.set(fc.integer(), 1, 100).map(set => [...set])
+	))
+	.chain(([render, selectableRender, data]) => fc.record({
+		selection: fc.shuffledSubarray(data).map(sa => new Set(sa)),
+		onSelectionChange: fc.constant(noop),
+		children: fc.constant(
+			data.map(d => <Selectable key={d} data={d} render={selectableRender}>{d}</Selectable>)
+		),
+		render: fc.constant(render)
+	}));
+
+prop(
+	'does not crash when rendering with valid props',
+	arbitraryMultiSelectProps,
+	props => {
+		mount(<MultiSelect {...props} />);
+		return true;
+	}
+);
+prop(
+	'non-empty multiselect focuses the first selectable element on focus',
+	arbitraryMultiSelectProps,
+	props => {
+		const wrapper = mount(<MultiSelect {...props} />);
+		wrapper.simulate('focus');
+		const firstSelectable = wrapper.find(Selectable).first().getDOMNode();
+		return firstSelectable === document.activeElement;
+	}
+);
+
+prop(
+	'propagates index, selected and onSelect properties to child elements',
+	arbitraryMultiSelectProps,
+	multiSelectProps => {
+		const wrapper = mount(<MultiSelect {...multiSelectProps} />);
+		const renderedSelectables = wrapper.find(Selectable).getElements();
+
+		return renderedSelectables.every(({ props }, i) => {
+			const correctSelected = props.selected === multiSelectProps.selection.has(props.data);
+			const hasCorrectIndex = props.index === i;
+			const hasCorrectOnSelect = typeof props.onSelect === 'function';
+			return correctSelected && hasCorrectIndex && hasCorrectOnSelect;
+		});
+	}
+);
 
 const getSelectableProps = () => [
 	'pesho',
@@ -20,80 +83,9 @@ const getSelectableProps = () => [
 	data
 }));
 
-const getMinMultiSelectProps =
-	<T extends {}>(selection: Set<T> = new Set): TMultiSelectProps<T> => ({
+const getMinMultiSelectProps = <T extends {}>(selection: Set<T> = new Set): TMultiSelectProps<T> => ({
 		selection,
 		onSelectionChange: noop
-	});
-
-test('renders without crashing with valid minimal props', assert => {
-	mount(
-		<MultiSelect {...getMinMultiSelectProps<number>()}>
-			<Selectable selected data={5}>5</Selectable>
-		</MultiSelect>
-	);
-
-	assert.pass();
-});
-
-test('non-empty multiselect focuses the first selectable element on focus', assert => {
-	const wrapper = mount(
-		<MultiSelect selection={new Set} onSelectionChange={noop}>
-			<Selectable data={5}>5</Selectable>
-		</MultiSelect>
-	);
-
-	wrapper.simulate('focus');
-	const firstSelectable = wrapper.find(Selectable).first().getDOMNode();
-	assert.is(firstSelectable, document.activeElement);
-});
-
-test('propagates index, selected and focused properties to children', assert => {
-	const selectableProps = getSelectableProps();
-	const selection = new Set(selectableProps.filter(p => p.selected).map(p => p.data));
-
-	const multiSelectProps = getMinMultiSelectProps(selection);
-
-	const cmpKeys = ['selected', 'data'];
-	const selectables = selectableProps.map((props, key) => <Selectable key={key} {...props}>{props.data}</Selectable>);
-
-	const wrapper = mount(<MultiSelect {...multiSelectProps} children={selectables} />);
-	const renderedSelectables = wrapper.find(Selectable).getElements();
-
-	for (const { props } of renderedSelectables) {
-		const matchingProp = selectableProps.find(p => cmpKeys.every(k => p[k] === props[k]));
-		const failMessage = `could not find matching prop for ${JSON.stringify(props)}`;
-		assert.is(typeof matchingProp, 'object', failMessage);
-	}
-});
-
-test('passes _onSelectionChange as onSelect to children', assert => {
-	const selectableProps = getSelectableProps();
-	const selection = new Set(selectableProps.filter(p => p.selected).map(p => p.data));
-	const multiSelectProps = getMinMultiSelectProps(selection);
-
-	const cmpKeys = ['selected', 'data'];
-	const selectables = selectableProps.map((props, key) => <Selectable key={key} {...props}>{props.data}</Selectable>);
-
-	const wrapper = mount(<MultiSelect {...multiSelectProps} children={selectables} />);
-	const renderedSelectables = wrapper.find(Selectable).getElements();
-
-	for (const { props } of renderedSelectables) {
-		assert.is(typeof props.onSelect, 'function');
-	}
-});
-
-test('_onSelectionChange does not call props.onSelectionChange when no selection new selection', assert => {
-	const props = { selection: new Set, onSelectionChange: spy() };
-	const instance = mount(<MultiSelect {...props} />).instance();
-	const noMatch = selectionCtx({
-		altKey: true,
-		selectionType: 'keyboard'
-	});
-
-	// tslint:disable-next-line no-string-literal
-	instance['_onSelectionChange']({ altKey: true }, { selectionType: 'keyboard' });
-	assert.false(props.onSelectionChange.called);
 });
 
 test(`doesn't focus another element when event.key is different from up/down arrow`, assert => {
@@ -201,7 +193,7 @@ test('starts managing focus when props.manageFocus changes to true', assert => {
 	type TState = { manageFocus: boolean; };
 	type TProps = {};
 	class ToggleManageFocus extends React.Component<TProps, TState> {
-		constructor(props) {
+		constructor(props: TProps) {
 			super(props);
 			this.state = { manageFocus: false };
 		}

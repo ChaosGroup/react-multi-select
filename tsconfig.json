@@ -1,18 +1,19 @@
 {
-    "compilerOptions": {
-        "outDir": "./dump",
-	"lib": ["es2015", "es2016", "es2017"],
-        "sourceMap": true,
-        "noImplicitAny": true,
-        "declaration": true,
-        "declarationDir": "./dist",
+	"compilerOptions": {
+		"outDir": "./dump",
+		"lib": ["es2015", "es2016", "es2017", "DOM"],
+		"sourceMap": true,
+		"noImplicitAny": true,
+		"declaration": true,
+		"declarationDir": "./dist",
 		"alwaysStrict": true,
 		"target": "es6",
 		"module": "commonjs",
 		"moduleResolution": "node",
-		"isolatedModules": false
-    },
-    "include": [
-        "./lib/**/*"
+		"isolatedModules": false,
+		"jsx": "react"
+	},
+	"include": [
+		"./lib/**/*"
 	]
 }
