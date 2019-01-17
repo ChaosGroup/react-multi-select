@@ -76,27 +76,6 @@ export const arbitrarySelectionContext = <T>(options: Opts<T>) => {
 		}));
 };
 
-export const testIsMatching = <DT>(
-	strategy: TSelectionStrategy<DT>,
-	shouldMatch: Iterable<TSelectionContext<DT>>,
-	shouldNotMatch: Iterable<TSelectionContext<DT>>,
-	name: string
-) => {
-	for (const selectionContext of shouldMatch) {
-		const { selectionType } = selectionContext;
-		test(`${name} matches for ${pickSelectors(selectionContext)}`, assert => {
-			assert.true(strategy.matches[selectionType](selectionContext));
-		});
-	}
-
-	for (const selectionContext of shouldNotMatch) {
-		const { selectionType } = selectionContext;
-		test(`${name} doesn't match for ${pickSelectors(selectionContext)}`, assert => {
-			assert.false(strategy.matches[selectionType](selectionContext));
-		});
-	}
-};
-
 export const minSelectionContext = Object.freeze({
 	selection: new Set([1, 5, 10, 42]),
 	data: 8,

@@ -1,97 +1,89 @@
 import './helpers/browser';
-import test from 'ava';
-import { testIsMatching, selectionCtx } from './helpers/index';
+import * as fc from 'fast-check';
+
+import { prop, arbitrarySelectionContext, areSetsEqual } from './helpers';
 import * as toggleSelectedItem from '../handle-selection/toggle-item-selection-strategy';
 
-{
-	const selectionType = 'mouse';
+prop(
+	'always matches mouse or keyboard when only modifier is control key',
+	arbitrarySelectionContext({
+		data: fc.string(),
+		maxE: 150,
+		ctrlKey: fc.constant(true),
+		shiftKey: fc.constant(false),
+		altKey: fc.constant(false)
+	}).map(ctx => ({
+		...ctx,
+		key: ctx.selectionType === 'keyboard' ? ' ' : ctx.key
+	})),
+	ctx => toggleSelectedItem.matches[ctx.selectionType](ctx)
+);
 
-	const shouldMatch = [
-		selectionCtx({ selectionType, ctrlKey: true, shiftKey: false })
-	];
-	const shouldNotMatch = [
-		selectionCtx({ selectionType, ctrlKey: true, shiftKey: true }),
-		selectionCtx({ selectionType, ctrlKey: false, shiftKey: true }),
-		selectionCtx({ selectionType, ctrlKey: false, shiftKey: false })
-	];
+prop(
+	'never matches when ctrl is not pressed',
+	arbitrarySelectionContext({
+		data: fc.integer(),
+		maxE: 150,
+		ctrlKey: fc.constant(false)
+	}),
+	ctx => !toggleSelectedItem.matches[ctx.selectionType](ctx)
+);
 
-	testIsMatching(toggleSelectedItem, shouldMatch, shouldNotMatch, 'toggle-selection');
-}
+prop(
+	'never matches when shift or alt are pressed',
+	arbitrarySelectionContext({
+		data: fc.integer(),
+		maxE: 150
+	}).filter(ctx => ctx.shiftKey || ctx.altKey),
+	ctx => !toggleSelectedItem.matches[ctx.selectionType](ctx)
+);
 
-{
-	const selectionType = 'keyboard';
-	const key = ' ';
+prop(
+	'new selection contains the data item if it was not present in the selection',
+	arbitrarySelectionContext({ data: fc.integer() })
+		.map(ctx => {
+			const selection = new Set(ctx.selection);
+			selection.delete(ctx.data);
+			return { ...ctx, selection };
+		}),
+	ctx => {
+		const expectedSelection = new Set([...ctx.selection, ctx.data]);
+		const newSelection = toggleSelectedItem.getNewSelection(ctx);
+		return areSetsEqual(expectedSelection, newSelection);
+	}
+);
 
-	const shouldMatch = [
-		selectionCtx({ selectionType, key, ctrlKey: true, shiftKey: false })
-	];
-	const shouldNotMatch = [
-		selectionCtx({ selectionType, key, ctrlKey: true, shiftKey: true }),
-		selectionCtx({ selectionType, key, ctrlKey: false, shiftKey: true }),
-		selectionCtx({ selectionType, key, ctrlKey: false, shiftKey: false })
-	];
+prop(
+	'new selection does not contain the data item if it is present in the selection',
+	arbitrarySelectionContext({ data: fc.integer() })
+		.map(ctx => ({ ...ctx, selection: new Set([...ctx.selection, ctx.data]) })),
+	ctx => {
+		const expectedSelection = new Set([...ctx.selection].filter(data => data !== ctx.data));
+		const newSelection = toggleSelectedItem.getNewSelection(ctx);
+		return areSetsEqual(expectedSelection, newSelection);
+	}
+);
 
-	testIsMatching(toggleSelectedItem, shouldMatch, shouldNotMatch, 'toggle-selection');
-}
+prop(
+	'sets the lastActionIndex to the currentActionIndex from input context',
+	arbitrarySelectionContext({ data: fc.integer() }),
+	ctx => toggleSelectedItem.getStateUpdates(ctx).lastActionIndex === ctx.currentActionIndex
+);
 
-test(`adds the passed data to the resulting Set if it wasn't present in the input Set`, assert => {
-	const initialSelection = [1, 5, 8, -5];
-	const data = 42;
-	const selectionContext = selectionCtx({
-		selection: new Set(initialSelection),
-		data
-	});
+prop(
+	'stateUpdates.lastAction is always delete if the previous selection contains the data',
+	arbitrarySelectionContext({ data: fc.char() })
+		.map(ctx => ({ ...ctx, selection: new Set([...ctx.selection, ctx.data]) })),
+	ctx => toggleSelectedItem.getStateUpdates(ctx).lastAction === 'delete'
+);
 
-	const newSelection = toggleSelectedItem.getNewSelection(selectionContext);
-	assert.is(newSelection.size, initialSelection.length + 1);
-	assert.deepEqual([...newSelection].sort(), [data, ...initialSelection].sort());
-});
-
-test('removes the passed data from the Set if it was present in the input Set', assert => {
-	const initialSelection = [1, 5, 8, -5];
-	const data = initialSelection[0];
-	const selectionContext = selectionCtx({
-		selection: new Set(initialSelection),
-		data
-	});
-
-	const newSelection = toggleSelectedItem.getNewSelection(selectionContext);
-	assert.is(newSelection.size, initialSelection.length - 1);
-	assert.deepEqual([...newSelection], initialSelection.slice(1));
-});
-
-test('sets the lastActionIndex to the currentActionIndex from input context', assert => {
-	const currentActionIndex = 5;
-	const childrenData = Array.from({ length: currentActionIndex * 2 }).map((_, i) => i);
-	const selectionContext = selectionCtx({
-		childrenData,
-		currentActionIndex
-	});
-
-	const { lastActionIndex } = toggleSelectedItem.getStateUpdates(selectionContext);
-	assert.is(lastActionIndex, currentActionIndex);
-});
-
-test(`sets the lastAction to 'add' when the data was't present in the input Set`, assert => {
-	const data = 5;
-	const selection = new Set([1, 3, 8]);
-	const selectionContext = selectionCtx({
-		selection,
-		data
-	});
-
-	const { lastAction } = toggleSelectedItem.getStateUpdates(selectionContext);
-	assert.is(lastAction, 'add');
-});
-
-test(`sets the lastAction to 'delete' when the data was present in the input Set`, assert => {
-	const data = 5;
-	const selection = new Set([1, 3, 5, 8]);
-	const selectionContext = selectionCtx({
-		selection,
-		data
-	});
-
-	const { lastAction } = toggleSelectedItem.getStateUpdates(selectionContext);
-	assert.is(lastAction, 'delete');
-});
+prop(
+	'stateUpdates.lastAction is always add if the previous selection does not contain the data',
+	arbitrarySelectionContext({ data: fc.char() })
+		.map(ctx => {
+			const selection = new Set(ctx.selection);
+			selection.delete(ctx.data);
+			return { ...ctx, selection };
+		}),
+	ctx => toggleSelectedItem.getStateUpdates(ctx).lastAction === 'add'
+);
