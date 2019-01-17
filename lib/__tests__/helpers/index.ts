@@ -1,7 +1,5 @@
 import test from 'ava';
 import * as enzyme from 'enzyme';
-import * as React from 'react';
-import { TSelectableProps } from '../../Selectable';
 import {
 	SelectionAction,
 	SelectionType,
@@ -32,6 +30,7 @@ export type Opts<T> = {
 	data: fc.Arbitrary<T>;
 	minE?: number;
 	maxE?: number;
+	selection?: fc.Arbitrary<Set<T>>;
 	selectionType?: fc.Arbitrary<SelectionType>;
 	lastAction?: fc.Arbitrary<SelectionAction>;
 	lastActionIndex?: fc.Arbitrary<number>;
@@ -49,6 +48,7 @@ export const arbitrarySelectionContext = <T>(options: Opts<T>) => {
 		data,
 		minE = 1,
 		maxE = 1000,
+		selection,
 		selectionType = fc.constantFrom('mouse' as SelectionType, 'keyboard' as SelectionType),
 		lastAction = fc.constantFrom('add' as SelectionAction, 'remove' as SelectionAction),
 		lastActionIndex,
@@ -61,8 +61,8 @@ export const arbitrarySelectionContext = <T>(options: Opts<T>) => {
 
 	return fc.array(data, minE, maxE)
 		.chain(childrenData => fc.tuple(fc.constant(childrenData), fc.shuffledSubarray(childrenData)))
-		.chain(([dataArray, selection]) => fc.record({
-			selection: fc.constant(new Set(selection)),
+		.chain(([dataArray, dataSelection]) => fc.record({
+			selection: selection || fc.constant(new Set(dataSelection)),
 			data: fc.constantFrom(...dataArray),
 			lastAction,
 			lastActionIndex: lastActionIndex || fc.integer(0, dataArray.length),

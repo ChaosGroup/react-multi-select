@@ -1,77 +1,43 @@
 import './helpers/browser';
-import test from 'ava';
-import { testIsMatching, minSelectionContext, selectionCtx } from './helpers/index';
+import * as fc from 'fast-check';
+
+import { prop, arbitrarySelectionContext } from './helpers';
 import * as selectNewEntry from '../handle-selection/select-new-entry-strategy';
 
-{
-	const shouldMatch = [
-		selectionCtx({ selectionType: 'mouse', ctrlKey: false, shiftKey: false })
-	];
-	const shouldNotMatch = [
-		selectionCtx({ selectionType: 'mouse', ctrlKey: false, shiftKey: true }),
-		selectionCtx({ selectionType: 'mouse', ctrlKey: true, shiftKey: false }),
-		selectionCtx({ selectionType: 'mouse', ctrlKey: true, shiftKey: true })
-	];
+prop(
+	'always matches mouse or keyboard with no ctrl or shift',
+	arbitrarySelectionContext({
+		data: fc.integer(),
+		ctrlKey: fc.constant(false),
+		shiftKey: fc.constant(false)
+	}),
+	ctx => selectNewEntry.matches.mouse(ctx)
+);
 
-	testIsMatching(selectNewEntry, shouldMatch, shouldNotMatch, 'select-new');
-}
+prop(
+	'never matches when control or shift are pressed',
+	arbitrarySelectionContext({ data: fc.char() })
+		.filter(ctx => ctx.ctrlKey || ctx.shiftKey),
+	ctx => !selectNewEntry.matches.mouse(ctx)
+);
 
-{
+prop(
+	'always returns a set with only the data element',
+	fc.nat(100).chain(diceroll => {
+		const overrides = diceroll > 75 ? { selection: fc.constant(new Set) } : {};
+		return arbitrarySelectionContext({ data: fc.integer(), ...overrides });
+	}),
+	ctx => selectNewEntry.getNewSelection(ctx).size === 1
+);
 
-	const shouldMatch = [
-		selectionCtx({ selectionType: 'keyboard', ctrlKey: false, shiftKey: false, key: ' ' })
-	];
-	const shouldNotMatch = [
-		selectionCtx({ selectionType: 'keyboard', ctrlKey: false, shiftKey: true }),
-		selectionCtx({ selectionType: 'keyboard', ctrlKey: true, shiftKey: false }),
-		selectionCtx({ selectionType: 'keyboard', ctrlKey: true, shiftKey: true })
-	];
+prop(
+	'stateUpdates.lastActionIndex is selectionContext.currentActionIndex',
+	arbitrarySelectionContext({ data: fc.integer() }),
+	ctx => selectNewEntry.getStateUpdates(ctx).lastActionIndex === ctx.currentActionIndex
+);
 
-	testIsMatching(selectNewEntry, shouldMatch, shouldNotMatch, 'select-new');
-}
-
-test('returns a new Set containing only the data that has been passed in', assert => {
-	const newSelectionData = 42;
-
-	const selectionContext = selectionCtx({
-		data: newSelectionData,
-		selection: new Set([1, 2, 3, 50, 60])
-	});
-
-	const newSelection = selectNewEntry.getNewSelection(selectionContext);
-
-	assert.is(newSelection.size, 1);
-	assert.true(newSelection.has(newSelectionData));
-});
-
-test('returns a new Set with only the data element when current selection is empty', assert => {
-	const newSelectionData = 33;
-
-	const selectionContext = selectionCtx({
-		...minSelectionContext,
-		data: newSelectionData,
-		selection: new Set
-	});
-
-	const newSelection = selectNewEntry.getNewSelection(selectionContext);
-
-	assert.is(newSelection.size, 1);
-	assert.true(newSelection.has(newSelectionData));
-});
-
-{
-
-	const selectionContext = selectionCtx({ currentActionIndex: 3 });
-
-	test(`sets lastActionIndex to currentActionIndex from passed context`, assert => {
-		const { lastActionIndex } = selectNewEntry.getStateUpdates(selectionContext);
-
-		assert.is(lastActionIndex, selectionContext.currentActionIndex);
-	});
-
-	test(`sets lastAction to 'add'`, assert => {
-		const { lastAction } = selectNewEntry.getStateUpdates(selectionContext);
-
-		assert.is(lastAction, 'add');
-	});
-}
+prop(
+	`stateUpdates.lastAction is set to 'add'`,
+	arbitrarySelectionContext({ data: fc.char() }),
+	ctx => selectNewEntry.getStateUpdates(ctx).lastAction === 'add'
+);
