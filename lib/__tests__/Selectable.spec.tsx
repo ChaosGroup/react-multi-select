@@ -1,182 +1,157 @@
 import './helpers/browser';
-import test from 'ava';
+import * as fc from 'fast-check';
+import * as nassert from 'assert';
+
 import * as React from 'react';
+
 import { spy } from 'sinon';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 
-import { MouseEvent } from 'react';
-import Selectable, { TSelectableProps } from '../Selectable';
-import { noop } from './helpers';
+import Selectable from '../Selectable';
+import { SelectionType } from '../handle-selection/types';
+import { noop, prop } from './helpers';
 
-const runTestsWithProps = (getMinProps, i) => {
-	test(`${i}. renders without crashing with valid minimal props`, assert => {
-		shallow(<Selectable {...getMinProps()} />);
-		assert.pass();
-	});
+const arbitrarySelectableProps = () => fc.string(0, 10).chain(name => fc.record({
+	selected: fc.boolean(),
+	data: fc.constant(name),
+	render: fc.constantFrom(...['li', 'a', 'div', 'span', 'abbr', 'strong', 'em'] as Array<keyof HTMLElementTagNameMap>),
+	index: fc.nat(),
+	onSelect: fc.constant(spy()),
+	children: fc.constant([
+		<h1 key="u no delete">{name}</h1>,
+		...name.split('').map((char, i) => <span key={i}>{i}.{char}</span>)
+	]),
+	disabled: fc.option(fc.boolean())
+}));
 
-	{
-		const minProps = getMinProps();
-		if (minProps.render) {
-			test(`${i}. renders element with tag from props.render`, assert => {
-				const wrapper = shallow(<Selectable {...minProps} />);
-				const element = wrapper.find(minProps.render).getElement();
-				assert.is(element.type, minProps.render);
-			});
-		}
+prop(
+	'renders without crashing with valid props',
+	arbitrarySelectableProps(),
+	props => {
+		shallow(<Selectable {...props} />);
+		return true;
 	}
+);
 
-	test(`${i}. renders renders children inside wrapper`, assert => {
-		const minProps = getMinProps();
-		const wrapper = shallow(<Selectable {...minProps} />);
-		assert.deepEqual(wrapper.children().getElement(), minProps.children);
-	});
+prop(
+	'renders html tag from render property',
+	arbitrarySelectableProps(),
+	props => {
+		const wrapper = mount(<Selectable {...props} />);
+		const element = wrapper.getDOMNode();
+		return element.tagName.toLocaleLowerCase() === props.render;
+	}
+);
 
-	test(`${i}. _classname returns "multiselect__entry selected" when props.selected is true`, assert => {
-		const minProps = { ...getMinProps(), selected: true };
-		const instance = shallow(<Selectable {...minProps} />).instance() as Selectable<string>;
+prop(
+	'rendered children inside wrapper equal props.children',
+	arbitrarySelectableProps(),
+	props => {
+		const wrapper = shallow(<Selectable {...props} />);
+		nassert.deepEqual(
+			wrapper.children().getElements(),
+			props.children
+		);
+		return true;
+	}
+);
 
-		assert.is(instance._className, 'multiselect__entry selected');
-	});
+prop(
+	'rendered element has multiselect__entry className',
+	arbitrarySelectableProps(),
+	props => shallow(<Selectable {...props} />)
+		.getElement()
+		.props.className.includes('multiselect__entry')
+);
 
-	test(`${i}. _classname returns "multiselect__entry" when props.selected`, assert => {
-		const wrapper = shallow(<Selectable {...getMinProps()} />);
-		const instance = wrapper.instance() as Selectable<string>;
+prop(
+	'presence of .selected class is based on whether props.selected is true or not',
+	arbitrarySelectableProps(),
+	props => shallow(<Selectable {...props} />)
+		.getElement()
+		.props.className.includes('selected') === props.selected
+);
 
-		assert.is(instance._className, 'multiselect__entry');
-	});
+prop(
+	'onClick and onKeyDown pass event and selection info to props.onSelect',
+	arbitrarySelectableProps().chain(props => fc.tuple(
+		fc.constant({ ...props, disabled: false }),
+		fc.constantFrom(
+			['mouse' as SelectionType, 'click'],
+			['keyboard' as SelectionType, 'keydown']
+		)
+	)),
+	([props, [type, eventName]]) => {
+		const wrapper = mount(<Selectable {...props} />);
+		wrapper.simulate(eventName);
+		const [eventArg, { data, selectionType, currentActionIndex }] = props.onSelect.getCall(0).args;
+		return typeof eventArg === 'object'
+			&& data === props.data
+			&& selectionType === type
+			&& currentActionIndex === props.index;
+	}
+);
 
-	test(`${i}. returned function passes event and selection info to props.onSelect`, assert => {
-		const data = 333;
-		const selectionType = 'mouse';
-		const index = 5;
+prop(
+	'onClick and onKeyDown always call event.stopPropagation',
+	arbitrarySelectableProps().chain(props => fc.tuple(
+		fc.constant(props),
+		fc.constantFrom('click', 'keydown')
+	)),
+	([props, eventName]) => {
+		const wrapper = mount(<Selectable {...props} />);
+		const event = { stopPropagation: spy() };
+		wrapper.simulate(eventName, event);
+		return event.stopPropagation.calledOnce;
+	}
+);
 
-		const expectedSelectionInfo = {
-			data,
-			selectionType,
-			currentActionIndex: index
-		};
+prop(
+	'click on a disabled Selectable never invokes props.onSelect',
+	arbitrarySelectableProps().map(props => ({ ...props, disabled: true })),
+	props => {
+		const wrapper = shallow(<Selectable {...props} />);
+		wrapper.simulate('click', { stopPropagation: noop });
+		return !props.onSelect.called;
+	}
+);
 
-		const expectedEventObject = { stopPropagation: () => {} };
+prop(
+	'disabled Selectable has tabIndex of -1',
+	arbitrarySelectableProps().map(props => ({ ...props, disabled: true })),
+	props => shallow(<Selectable {...props} />).props().tabIndex === -1
+);
 
-		const minProps = { ...getMinProps(), data, index };
-		const onSelectSpy = spy(minProps, 'onSelect');
-		const instance = shallow(<Selectable {...minProps} />).instance() as Selectable<string>;
+prop(
+	'disabled Selectable has class disabled',
+	arbitrarySelectableProps().map(props => ({ ...props, disabled: true })),
+	props => shallow(<Selectable {...props} />)
+		.getElement().props.className.includes('disabled')
+);
 
-		// tslint:disable-next-line no-string-literal
-		const onMouseSelect = (instance as any)._onMouseSelect;
-		onMouseSelect(expectedEventObject as MouseEvent<HTMLElement>);
+prop(
+	'custom className is attached',
+	fc.tuple(fc.string(10, 15), arbitrarySelectableProps()),
+	([className, props]) => shallow(<Selectable {...props} className={className} />)
+		.getElement()
+		.props.className.includes(className)
+);
 
-		onSelectSpy.restore();
-
-		const [passedEvent, passedSelectionInfo] = onSelectSpy.getCall(0).args;
-
-		assert.deepEqual(passedEvent, expectedEventObject);
-		assert.deepEqual(passedSelectionInfo, expectedSelectionInfo);
-	});
-};
-
-const propsProviders = [
-	(): TSelectableProps<any> => ({
-		selected: false,
-		data: 'hello',
-		onSelect: noop,
-		index: 0,
-		children: <h1>Hello</h1>
-	}),
-	(): TSelectableProps<any> => ({
-		selected: false,
-		data: 'hello',
-		render: 'p',
-		onSelect: noop,
-		index: 0,
-		children: <a href="https://www.haskell.org/hoogle/">haha</a>
-	}),
-	(): TSelectableProps<any> => ({
-		selected: false,
-		data: 3,
-		render: 'a',
-		onSelect: noop,
-		index: 0,
-		children: <pre>5</pre>
-	}),
-	(): TSelectableProps<any> => ({
-		selected: false,
-		data: {},
-		render: 'div',
-		onSelect: noop,
-		index: 0,
-		children: <p>Hello</p>
-	})
-];
-
-propsProviders.forEach(runTestsWithProps);
-
-for (const eventName of ['click', 'keydown']) {
-	test(`selection event does not propagate ${eventName} event`, assert => {
-		const stopPropagation = spy();
-		const [getMinProps] = propsProviders;
-		const wrapper = shallow(<Selectable {...getMinProps()}>gosho</Selectable>);
-
-		wrapper.simulate(eventName, { stopPropagation });
-		assert.true(stopPropagation.calledOnce);
-	});
-}
-
-test('clicking a disabled Selectable does not invoke props.onSelect', assert => {
-	const [getMinProps] = propsProviders;
-	const props = {
-		...getMinProps(),
-		disabled: true,
-		onSelect: spy()
-	};
-	const wrapper = shallow(<Selectable {...props}>gosho</Selectable>);
-
-	wrapper.simulate('click', { stopPropagation: () => {} });
-	assert.false(props.onSelect.called);
-});
-
-test('disabled Selectable has tabIndex of -1', assert => {
-	const [getMinProps] = propsProviders;
-	const props = {
-		...getMinProps(),
-		disabled: true
-	};
-	const wrapper = shallow(<Selectable {...props}>gosho</Selectable>);
-
-	assert.is(-1, wrapper.getElement().props.tabIndex);
-});
-
-test('disabled Selectable has class disabled', assert => {
-	const [getMinProps] = propsProviders;
-	const props = {
-		...getMinProps(),
-		disabled: true
-	};
-	const instance = shallow(<Selectable {...props}>gosho</Selectable>).instance() as Selectable<string>;
-
-	assert.true(instance._className.includes('disabled'));
-});
-
-test('custom className is attached', assert => {
-	const [getMinProps] = propsProviders;
-	const props = {
-		...getMinProps(),
-		className: 'test1'
-	};
-	const wrapper = shallow(<Selectable {...props}>gosho</Selectable>);
-
-	assert.true(wrapper.props().className.includes(props.className));
-});
-
-test('additional props pass through to rendered element', assert => {
-	const [getMinProps] = propsProviders;
-	const props = {
-		...getMinProps(),
-		title: 'testtest2',
-		['data-something']: 5
-	};
-	const wrapper = shallow(<Selectable {...props}>gosho</Selectable>);
-
-	assert.is(wrapper.props().title, props.title);
-	assert.is(wrapper.props()['data-something'], props['data-something']);
-});
+prop(
+	'additional props pass through to rendered element',
+	fc.tuple(
+		fc.constant({
+			onContextMenu: noop,
+			onSomething: noop,
+			title: 'test-test',
+			id: 'kek'
+		}),
+		arbitrarySelectableProps()
+	),
+	([otherProps, props]) => {
+		const wrapper = shallow(<Selectable {...otherProps} {...props} />);
+		const elementProps = wrapper.getElement().props;
+		return Object.entries(otherProps)
+			.every(([key, value]) => value === elementProps[key]);
+	}
+);
