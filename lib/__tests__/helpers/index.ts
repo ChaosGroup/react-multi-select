@@ -1,24 +1,18 @@
 import test from 'ava';
 import * as enzyme from 'enzyme';
+import * as fc from 'fast-check';
+
 import {
 	SelectionAction,
 	SelectionType,
-	TSelectionStrategy,
 	TSelectionContext
 } from '../../handle-selection/types';
-import * as fc from 'fast-check';
 
-const pickSelectors = (selectionContext: { [id: string]: any }) => JSON.stringify(
-	[
-		'ctrlKey',
-		'shiftKey',
-		'altKey',
-		'key',
-		'selectionType'
-	].reduce((obj: object, key: string) => ({ ...obj, [key]: selectionContext[key] }), selectionContext)
-);
-
-export const prop = <T>(description: string, arbitrary: fc.Arbitrary<T>, predicate: (input: T) => boolean) => test(
+export const prop = <T>(
+	description: string,
+	arbitrary: fc.Arbitrary<T>,
+	predicate: (input: T) => boolean
+) => test(
 	description,
 	assert => {
 		fc.assert(fc.property(arbitrary, predicate));
@@ -26,7 +20,7 @@ export const prop = <T>(description: string, arbitrary: fc.Arbitrary<T>, predica
 	}
 );
 
-export type Opts<T> = {
+export type SelectionContextArbitrary<T> = {
 	data: fc.Arbitrary<T>;
 	minE?: number;
 	maxE?: number;
@@ -43,7 +37,7 @@ export type Opts<T> = {
 
 const ALPHABET = Array.from({ length: 26 }, (_, i) => String.fromCharCode(i + 97));
 
-export const arbitrarySelectionContext = <T>(options: Opts<T>) => {
+export const arbitrarySelectionContext = <T>(options: SelectionContextArbitrary<T>) => {
 	const {
 		data,
 		minE = 1,
@@ -76,24 +70,7 @@ export const arbitrarySelectionContext = <T>(options: Opts<T>) => {
 		}));
 };
 
-export const minSelectionContext = Object.freeze({
-	selection: new Set([1, 5, 10, 42]),
-	data: 8,
-	lastAction: ('add' as SelectionAction),
-	lastActionIndex: 2,
-	currentActionIndex: 5,
-	childrenData: [1, 2, 5, 6, 10, 7, 42],
-	ctrlKey: false,
-	shiftKey: false,
-	altKey: false,
-	selectionType: ('mouse' as SelectionType)
-});
-
-export const selectionCtx = <DT>(overrides: object): TSelectionContext<DT> => {
-	return ({ ...minSelectionContext, ...overrides } as any /* GJ typescript */ as TSelectionContext<DT>);
-};
-
-export const noop = () => undefined;
+export const noop = (): void => undefined;
 
 export const json = JSON.stringify;
 
