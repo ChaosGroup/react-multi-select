@@ -3,6 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import Paragraphs from './stories/paragraphs/';
 import NestedLists from './stories/nested-lists/';
+import CustomStrategy from './stories/custom-strategies/';
 
 
 storiesOf('Examples', {})
@@ -48,4 +49,8 @@ storiesOf('Examples', {})
 			]
 		};
 		return <NestedLists data={folder} />;
+	})
+	.add('Code your own selection rules', () => {
+		const listItems = Array.from({ length: 30 }, (_, i) => i);
+		return <CustomStrategy numbers={listItems} />;
 	});
