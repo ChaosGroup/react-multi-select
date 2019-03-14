@@ -84,11 +84,10 @@ prop(
 	([props, [type, eventName]]) => {
 		const wrapper = mount(<Selectable {...props} />);
 		wrapper.simulate(eventName);
-		const [eventArg, { data, selectionType, currentActionIndex }] = props.onSelect.getCall(0).args;
+		const [eventArg, { data, selectionType }] = props.onSelect.getCall(0).args;
 		return typeof eventArg === 'object'
 			&& data === props.data
 			&& selectionType === type
-			&& currentActionIndex === props.index;
 	}
 );
 

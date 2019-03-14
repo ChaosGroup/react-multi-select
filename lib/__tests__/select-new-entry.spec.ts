@@ -31,9 +31,9 @@ prop(
 );
 
 prop(
-	'stateUpdates.lastActionIndex is selectionContext.currentActionIndex',
+	'stateUpdates.lastData is selectionContext.data',
 	arbitrarySelectionContext({ data: fc.integer() }),
-	ctx => selectNewEntry.getStateUpdates(ctx).lastActionIndex === ctx.currentActionIndex
+	ctx => selectNewEntry.getStateUpdates(ctx).lastData === ctx.data
 );
 
 prop(

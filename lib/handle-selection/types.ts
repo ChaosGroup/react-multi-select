@@ -41,18 +41,11 @@ export interface TSelectionContext<DT> {
 	/**
 	 * On which index in the children array was the last selection modification perfmormed.
 	 */
-	lastActionIndex: number;
-	/**
-	 * The current index in the children array where a selection modification should be performed.
-	 */
-	currentActionIndex: number;
-	/**
-	 * All selectable items for the current selection modification.
-	 * Provides access to their data key via children[i].props.data .
-	 */
 	childrenData: DT[];
 
 	selectionType: SelectionType;
+
+	lastData?: DT;
 
 	/**
 	 * Define the active modifiers for the selection modification.
@@ -66,7 +59,6 @@ export interface TSelectionContext<DT> {
 export interface TStateUpdate {
 	lastAction?: SelectionAction;
 	lastActionIndex?: number;
-	focusedIndex?: number;
 	[key: string]: any;
 }
 

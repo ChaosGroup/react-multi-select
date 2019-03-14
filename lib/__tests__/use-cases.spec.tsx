@@ -4,7 +4,7 @@ import * as React from 'react';
 import * as enzyme from 'enzyme';
 import { simulateFocus } from './helpers';
 
-import MultiSelect, { Selectable } from '../index';
+import MultiSelect, { Selectable } from '../';
 import { OSName } from '../constants';
 
 type Point = {
@@ -15,23 +15,26 @@ type Point = {
 
 type Tag = keyof HTMLElementTagNameMap;
 
+type Props = {
+	points: Point[];
+	renderM: Tag;
+	renderS: Tag;
+};
+
+
 class Test extends React.Component {
 	public state: {
 		selection: Set<number>;
 	};
 
-	public props: {
-		points: Point[];
-		renderM: Tag;
-		renderS: Tag;
-	};
+	public props: Props;
 
-	constructor(props) {
+	constructor(props: Props) {
 		super(props);
 		this.state = { selection: new Set };
 	}
 
-	public onSelectionChange = selection => this.setState({ selection });
+	public onSelectionChange = (selection: Set<number>) => this.setState({ selection });
 
 	public render() {
 		const { renderS, renderM } = this.props;

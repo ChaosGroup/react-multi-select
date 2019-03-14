@@ -27,8 +27,7 @@ export type SelectionContextArbitrary<T> = {
 	selection?: fc.Arbitrary<Set<T>>;
 	selectionType?: fc.Arbitrary<SelectionType>;
 	lastAction?: fc.Arbitrary<SelectionAction>;
-	lastActionIndex?: fc.Arbitrary<number>;
-	currentActionIndex?: fc.Arbitrary<number>;
+	lastData?: fc.Arbitrary<T>;
 	key?: fc.Arbitrary<string>;
 	shiftKey?: fc.Arbitrary<boolean>;
 	altKey?: fc.Arbitrary<boolean>;
@@ -45,8 +44,7 @@ export const arbitrarySelectionContext = <T>(options: SelectionContextArbitrary<
 		selection,
 		selectionType = fc.constantFrom('mouse' as SelectionType, 'keyboard' as SelectionType),
 		lastAction = fc.constantFrom('add' as SelectionAction, 'remove' as SelectionAction),
-		lastActionIndex,
-		currentActionIndex,
+		lastData,
 		shiftKey = fc.boolean(),
 		altKey = fc.boolean(),
 		ctrlKey = fc.boolean(),
@@ -59,8 +57,10 @@ export const arbitrarySelectionContext = <T>(options: SelectionContextArbitrary<
 			selection: selection || fc.constant(new Set(dataSelection)),
 			data: fc.constantFrom(...dataArray),
 			lastAction,
-			lastActionIndex: lastActionIndex || fc.integer(0, dataArray.length),
-			currentActionIndex: currentActionIndex || fc.integer(0, dataArray.length),
+			lastData: lastData || fc.oneof(
+				fc.constant(null),
+				fc.constantFrom(...dataArray)
+			),
 			childrenData: fc.constant(dataArray),
 			selectionType,
 			altKey,

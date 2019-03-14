@@ -23,11 +23,11 @@ export const getNewSelection = <DT>(selectionContext: TSelectionContext<DT>): Se
 	return newSelection;
 };
 export const getStateUpdates = <DT>(selectionContext: TSelectionContext<DT>): TStateUpdate => {
-	const { currentActionIndex, selection, data } = selectionContext;
+	const { selection, data } = selectionContext;
 
 	return {
-		lastActionIndex: currentActionIndex,
-		lastAction: selection.has(data) ? 'delete' : 'add'
+		lastAction: selection.has(data) ? 'delete' : 'add',
+		lastData: selectionContext.data
 	};
 };
 

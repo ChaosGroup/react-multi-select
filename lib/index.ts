@@ -14,9 +14,9 @@ import {
 } from './handle-selection';
 import { OSName } from './constants';
 
-export interface TMultiSelectState {
+export interface TMultiSelectState<DT> {
 	lastAction: SelectionAction;
-	lastActionIndex: number;
+	lastData?: DT;
 	[key: string]: any;
 }
 
@@ -34,7 +34,10 @@ export interface TMultiSelectProps<DT> {
 export * from './handle-selection';
 export { default as Selectable } from './Selectable';
 
-export default class MultiSelect<DT> extends React.PureComponent<TMultiSelectProps<DT>, Partial<TMultiSelectState>> {
+export default class MultiSelect<DT> extends React.PureComponent<
+	TMultiSelectProps<DT>,
+	Partial<TMultiSelectState<DT>>
+> {
 	public static defaultProps: Partial<TMultiSelectProps<any>> = {
 		children: [],
 		render: 'ul',
@@ -128,7 +131,6 @@ export default class MultiSelect<DT> extends React.PureComponent<TMultiSelectPro
 			...this.state,
 			selection: this.props.selection,
 			lastAction: this.state.lastAction,
-			lastActionIndex: this.state.lastActionIndex,
 			childrenData,
 			ctrlKey,
 			shiftKey,

@@ -65,13 +65,12 @@ prop(
 				data: fc.integer(),
 				minE: Math.max(a, b, minE + 1),
 				maxE: Math.max(a, b, minE + 1) + 100,
-				lastAction: fc.constant('add' as SelectionAction),
-				lastActionIndex: fc.constant(a),
-				currentActionIndex: fc.constant(b)
+				lastAction: fc.constant('add' as SelectionAction)
 			})),
 		ctx => {
-			const { selection, childrenData, lastActionIndex, currentActionIndex } = ctx;
-			const [start, end] = [lastActionIndex, currentActionIndex]
+			const { selection, childrenData, lastData, data } = ctx;
+			const [start, end] = [lastData, data]
+				.map(x => childrenData.indexOf(x))
 				.sort((a, b) => a - b)
 				.map(x => Math.max(0, Math.min(x, childrenData.length - 1)));
 			const expectedSelection = new Set([
@@ -89,25 +88,24 @@ prop(
 	fc.tuple(
 		fc.integer(-200, 200),
 		fc.integer(-200, 200),
-		fc.nat(150) // childrenData length
+		fc.nat(150), // childrenData length
 	)
 		.chain(([a, b, minE]) => arbitrarySelectionContext({
-				data: fc.integer(),
-				minE: Math.max(a, b, minE + 1),
-				maxE: Math.max(a, b, minE + 1) + 100,
-				lastAction: fc.constant('delete' as SelectionAction),
-				lastActionIndex: fc.constant(a),
-				currentActionIndex: fc.constant(b)
-			})),
+			data: fc.integer(),
+			minE: Math.max(a, b, minE + 1),
+			maxE: Math.max(a, b, minE + 1) + 100,
+			lastAction: fc.constant('delete' as SelectionAction),
+		})),
 	ctx => {
-		const { selection, childrenData, lastActionIndex, currentActionIndex } = ctx;
-		const [start, end] = [lastActionIndex, currentActionIndex]
+		const { selection, childrenData, lastData, data } = ctx;
+		const [start, end] = [lastData, data]
+			.map(x => childrenData.indexOf(x))
 			.sort((a, b) => a - b)
 			.map(x => Math.max(0, Math.min(x, childrenData.length - 1)));
 
 		const range = childrenData.slice(start, end + 1);
 		const expectedSelection = new Set(
-			[...selection].filter(data => !range.includes(data))
+			[...selection].filter(selectedData => !range.includes(selectedData))
 		);
 		const newSelection = repeatLastSelectionAction.getNewSelection(ctx);
 
@@ -118,14 +116,14 @@ prop(
 prop(
 	'stateUpdates.lastActionIndex is selectionContext.currentActionIndex',
 	arbitrarySelectionContext({ data: fc.integer() }),
-	ctx => repeatLastSelectionAction.getStateUpdates(ctx).lastActionIndex === ctx.currentActionIndex
+	ctx => repeatLastSelectionAction.getStateUpdates(ctx).lastData === ctx.data
 );
 
 prop(
-	'never returns an update for anything besied lastActionIndex',
+	'never returns an update for anything besides lastData',
 	arbitrarySelectionContext({ data: fc.integer() }),
 	ctx => {
 		const updates = repeatLastSelectionAction.getStateUpdates(ctx);
-		return updates.hasOwnProperty('lastActionIndex') && Object.keys(updates).length === 1;
+		return updates.hasOwnProperty('lastData') && Object.keys(updates).length === 1;
 	}
 );

@@ -65,9 +65,9 @@ prop(
 );
 
 prop(
-	'sets the lastActionIndex to the currentActionIndex from input context',
+	'sets the lastData to the current data from input context',
 	arbitrarySelectionContext({ data: fc.integer() }),
-	ctx => toggleSelectedItem.getStateUpdates(ctx).lastActionIndex === ctx.currentActionIndex
+	ctx => toggleSelectedItem.getStateUpdates(ctx).lastData === ctx.data
 );
 
 prop(

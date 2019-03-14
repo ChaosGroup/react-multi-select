@@ -11,12 +11,9 @@ export const getNewSelection = <DT>(selectionContext: TSelectionContext<DT>): Se
 };
 
 export const getStateUpdates = <DT>(selectionContext: TSelectionContext<DT>): TStateUpdate => {
-	const { currentActionIndex } = selectionContext;
-
 	return {
 		lastAction: 'add',
-		lastActionIndex: currentActionIndex,
-		focusedIndex: currentActionIndex
+		lastData: selectionContext.data
 	};
 };
 
