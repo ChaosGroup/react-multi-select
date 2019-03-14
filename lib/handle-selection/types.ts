@@ -19,7 +19,6 @@ export type SelectionAction = 'add' | 'delete';
 export interface TSelectionInfo {
 	data: any;
 	selectionType: SelectionType;
-	currentActionIndex: number;
 }
 
 export type TSelectionEvent<TElement> =

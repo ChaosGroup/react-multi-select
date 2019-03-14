@@ -51,17 +51,16 @@ prop(
 );
 
 prop(
-	'propagates index, selected and onSelect properties to child elements',
+	'propagates selected and onSelect properties to child elements',
 	arbitraryMultiSelectProps(),
 	multiSelectProps => {
 		const wrapper = mount(<MultiSelect {...multiSelectProps} />);
 		const renderedSelectables = wrapper.find(Selectable).getElements();
 
-		return renderedSelectables.every(({ props }, i) => {
+		return renderedSelectables.every(({ props }) => {
 			const correctSelected = props.selected === multiSelectProps.selection.has(props.data);
-			const hasCorrectIndex = props.index === i;
 			const hasCorrectOnSelect = typeof props.onSelect === 'function';
-			return correctSelected && hasCorrectIndex && hasCorrectOnSelect;
+			return correctSelected && hasCorrectOnSelect;
 		});
 	}
 );

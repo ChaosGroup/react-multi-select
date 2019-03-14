@@ -92,20 +92,6 @@ prop(
 );
 
 prop(
-	'onClick and onKeyDown always call event.stopPropagation',
-	arbitrarySelectableProps().chain(props => fc.tuple(
-		fc.constant(props),
-		fc.constantFrom('click', 'keydown')
-	)),
-	([props, eventName]) => {
-		const wrapper = mount(<Selectable {...props} />);
-		const event = { stopPropagation: spy() };
-		wrapper.simulate(eventName, event);
-		return event.stopPropagation.calledOnce;
-	}
-);
-
-prop(
 	'click on a disabled Selectable never invokes props.onSelect',
 	arbitrarySelectableProps().map(props => ({ ...props, disabled: true })),
 	props => {

@@ -7,7 +7,6 @@ export interface TSelectableProps<DT> {
 	data: DT;
 	className?: string;
 	onSelect?: ((event: TSelectionEvent<HTMLLIElement>, selectionInfo: TSelectionInfo) => any);
-	index?: number;
 	children: React.ReactNode;
 	ref?: (ref: React.ReactInstance) => any;
 	tabIndex?: number;
@@ -20,19 +19,12 @@ const _createOnSelect = <DT>(
 	instance: Selectable<DT>,
 	selectionType: SelectionType
 ): UserEventHandler => event => {
-	event.stopPropagation();
 	if (instance.props.disabled) {
 		return;
 	}
 
-	const { onSelect, data, index } = instance.props;
-	const selectionInfo = {
-		data,
-		selectionType,
-		currentActionIndex: index
-	};
-
-	onSelect(event, selectionInfo);
+	const { onSelect, data } = instance.props;
+	onSelect(event, { data, selectionType });
 };
 
 export default class Selectable<DT> extends React.PureComponent<TSelectableProps<DT>, Readonly<{}>> {
@@ -62,7 +54,7 @@ export default class Selectable<DT> extends React.PureComponent<TSelectableProps
 	private _onKeyboardSelect: UserEventHandler = _createOnSelect(this, 'keyboard');
 
 	public render() {
-		const { render, index, ...rest } = this.props;
+		const { render, ...rest } = this.props;
 
 		return React.createElement(render, {
 			...rest,
