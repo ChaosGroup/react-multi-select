@@ -15,7 +15,12 @@ const fuse = FuseBox.init({
 			bakeApiIntoBundle: 'es6',
 			containedAPI: true,
 			globalRequire: false,
-			uglify: true
+			uglify: {
+				compress: {
+					warnings: true,
+					drop_console: true
+				}
+			}
 		})
 	]
 });

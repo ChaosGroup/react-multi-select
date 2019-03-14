@@ -1,5 +1,4 @@
 import { OSName } from './constants';
-export const ensureRange = (min: number, value: number, max: number) => Math.max(min, Math.min(value, max));
 
 export const _getOsNameFromUserAgent = (platform: string): OSName => [
 	{ name: OSName.MAC, test: (platformString: string) => /mac/i.test(platformString) },
