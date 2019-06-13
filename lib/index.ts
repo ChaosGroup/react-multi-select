@@ -153,6 +153,8 @@ export default class MultiSelect<DT> extends React.PureComponent<
 
 	private _updateWalker = () => this._walker.currentNode = document.activeElement;
 
+	public focusData = (data: DT) => this.setState({ lastData: data });
+
 	public render() {
 		const {
 			render,
