@@ -1,6 +1,6 @@
 import './helpers/browser';
 import * as fc from 'fast-check';
-import { SelectionAction, SelectionType } from '../handle-selection/types';
+import { SelectionType } from '../handle-selection/types';
 import { arbitrarySelectionContext, prop, areSetsEqual } from './helpers';
 import * as repeatLastSelectionAction from '../handle-selection/repeat-last-action-strategy';
 
@@ -55,7 +55,7 @@ prop(
 );
 
 prop(
-	`new selection containins old data + every data from the range [start, end] when last action was 'add'`,
+	`selection has old data + every data from the range [start, end] when selectionContext.data is not selected`,
 	fc.tuple(
 		fc.integer(-200, 200),
 		fc.integer(-200, 200),
@@ -64,11 +64,11 @@ prop(
 		.chain(([a, b, minE]) => arbitrarySelectionContext({
 				data: fc.integer(),
 				minE: Math.max(a, b, minE + 1),
-				maxE: Math.max(a, b, minE + 1) + 100,
-				lastAction: fc.constant('add' as SelectionAction)
+				maxE: Math.max(a, b, minE + 1) + 100
 			})),
 		ctx => {
 			const { selection, childrenData, lastData, data } = ctx;
+			selection.delete(data);
 			const [start, end] = [lastData, data]
 				.map(x => childrenData.indexOf(x))
 				.sort((a, b) => a - b)
@@ -84,7 +84,7 @@ prop(
 );
 
 prop(
-	`returns set with old data minus every data from the range [start, end] when last action was delete`,
+	`returns set with old data minus every data from the range [start, end] when selectionContext.data is selected`,
 	fc.tuple(
 		fc.integer(-200, 200),
 		fc.integer(-200, 200),
@@ -93,11 +93,11 @@ prop(
 		.chain(([a, b, minE]) => arbitrarySelectionContext({
 			data: fc.integer(),
 			minE: Math.max(a, b, minE + 1),
-			maxE: Math.max(a, b, minE + 1) + 100,
-			lastAction: fc.constant('delete' as SelectionAction),
+			maxE: Math.max(a, b, minE + 1) + 100
 		})),
 	ctx => {
 		const { selection, childrenData, lastData, data } = ctx;
+		selection.add(data);
 		const [start, end] = [lastData, data]
 			.map(x => childrenData.indexOf(x))
 			.sort((a, b) => a - b)

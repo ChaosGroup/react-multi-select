@@ -120,9 +120,12 @@ const runTestsWithTags = (multiselectTag: Tag, selectableTag: Tag) => test(
 		wrapper.find(Selectable).at(5).simulate('click', { ctrlKey: true });
 		assert.true(selection().has(5));
 
+		// selection only 5
+		wrapper.find(Selectable).at(5).simulate('click');
+
 		// select all from 5 to 1 inclusive
 		wrapper.find(Selectable).at(1).simulate('click', { shiftKey: true });
-		[0, 1, 2, 3, 4, 5].forEach(id => assert.true(selection().has(id)));
+		[1, 2, 3, 4, 5].forEach(id => assert.true(selection().has(id)));
 		assert.false(selection().has(6));
 
 		// do some clicking

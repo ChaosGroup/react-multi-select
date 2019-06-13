@@ -10,20 +10,19 @@ export const name = STRATEGY_NAME.REPEAT_RANGE;
 export const getNewSelection = <DT>(selectionContext: TSelectionContext<DT>): Set<DT> => {
 	const {
 		selection,
-		lastAction,
 		childrenData,
 		data,
 		lastData
 	} = selectionContext;
-
-	const newSelected = new Set(selection);
 
 	const [start, end] = [lastData, data]
 		.map(childData => childrenData.indexOf(childData))
 		.sort((a, b) => a - b)
 		.map(index => Math.max(0, index));
 
-	const action = lastAction === 'delete' ?
+	const newSelected = new Set(selection);
+
+	const action = selection.has(data) ?
 		newSelected.delete.bind(newSelected) :
 		newSelected.add.bind(newSelected);
 
@@ -34,9 +33,10 @@ export const getNewSelection = <DT>(selectionContext: TSelectionContext<DT>): Se
 	return newSelected;
 };
 
-export const getStateUpdates = <DT>(selectionContext: TSelectionContext<DT>): TStateUpdate => {
-	return { lastData: selectionContext.data };
-};
+export const getStateUpdates =
+	<DT>(selectionContext: TSelectionContext<DT>): TStateUpdate => ({
+		lastData: selectionContext.data
+	});
 
 export const matches = {
 	mouse<DT>({ shiftKey }: TSelectionContext<DT>): boolean {
