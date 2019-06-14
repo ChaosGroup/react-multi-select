@@ -6,3 +6,6 @@ fuse.js
 tsconfig.test.json
 init.hooks.js
 tslint.json
+coverage/
+.nyc_output/
+.gitlab-ci.yml
