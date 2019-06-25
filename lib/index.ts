@@ -113,7 +113,7 @@ export default class MultiSelect<DT> extends React.PureComponent<
 	}
 
 	private _onSelectionChange = (event: TSelectionEvent<HTMLLIElement>, selectionInfo: TSelectionInfo): void => {
-		const { target, ctrlKey: ctrl, shiftKey, altKey, metaKey, key = '' } = event;
+		const { ctrlKey: ctrl, shiftKey, altKey, metaKey, key = '' } = event;
 		const ctrlKey = this._isMacOs ? metaKey : ctrl;
 		const childrenData = React.Children.map(
 			this.props.children,
