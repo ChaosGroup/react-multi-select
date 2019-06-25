@@ -15,16 +15,20 @@ export interface TSelectableProps<DT> {
 
 type UserEventHandler = (event: TSelectionEvent<HTMLLIElement>) => void;
 
+const FOCUS_KEYS = new Set(['Tab', 'ArrowUp', 'ArrowDown']);
+
 const _createOnSelect = <DT>(
 	instance: Selectable<DT>,
 	selectionType: SelectionType
 ): UserEventHandler => event => {
-	if (instance.props.disabled) {
-		return;
+	if (!FOCUS_KEYS.has(event.key)) {
+		event.stopPropagation();
 	}
 
-	const { onSelect, data } = instance.props;
-	onSelect(event, { data, selectionType });
+	if (!instance.props.disabled) {
+		const { onSelect, data } = instance.props;
+		onSelect(event, { data, selectionType });
+	}
 };
 
 export default class Selectable<DT> extends React.PureComponent<TSelectableProps<DT>, Readonly<{}>> {
