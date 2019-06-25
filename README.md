@@ -1,8 +1,5 @@
 # react-multi-select
 
-[![pipeline status](https://git.chaosgroup.com/neui/react-multi-select/badges/master/pipeline.svg)](https://git.chaosgroup.com/neui/react-multi-select/commits/master)
-[![coverage report](https://git.chaosgroup.com/neui/react-multi-select/badges/master/coverage.svg)](https://git.chaosgroup.com/neui/react-multi-select/commits/master)
-
 React components that provide multiple selection logic. Features mouse and keyboard selections. Can render arbitary tags as selectable items.
 
 ![quick example](./examples.gif)
