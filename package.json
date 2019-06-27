@@ -4,9 +4,8 @@
 	"description": "Multi selection component",
 	"ts:main": "./lib/index.tsx",
 	"main": "dist/es6.js",
-	"repository": "git@git.chaosgroup.com:neui/react-multi-select.git",
+	"repository": "https://github.com/ChaosGroup/react-multi-select.git",
 	"author": "Konstantin Simeonov <konstantin.simeonov@chaosgroup.com>",
-	"registry": "https://npm.chaosgroup.com",
 	"license": "MIT",
 	"scripts": {
 		"init-hooks": "ts-node init-hooks.ts",
@@ -14,7 +13,7 @@
 		"test": "tsc --p ./tsconfig.test.json && ava",
 		"test-with-coverage": "tsc --p ./tsconfig.test.json && nyc ava",
 		"lint": "tslint lib/*.ts lib/**/*.ts -p . --config tslint.json",
-		"coverage": "nyc report --reporter=html",
+		"html-coverage": "nyc report --reporter=html",
 		"clean": "rm -rf ./dump ./dist",
 		"examples": "yarn && yarn build && cd ./examples && yarn && yarn storybook"
 	},
