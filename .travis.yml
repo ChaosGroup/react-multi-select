@@ -2,4 +2,5 @@ language: node_js
 node_js:
   - "8.12.0"
 install: yarn
-script: yarn test && yarn lint
+script: yarn test:coverage && yarn lint
+after_success: yarn coverage:coveralls
