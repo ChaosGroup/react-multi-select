@@ -18,7 +18,11 @@ export default class Paragraphs extends React.Component {
 		const { selection } = this.state;
 
 		return (
-			<MultiSelect render="div" selection={selection} onSelectionChange={this.onSelectionChange}>
+			<MultiSelect
+				render="div"
+				selection={selection}
+				onSelectionChange={this.onSelectionChange}
+			>
 				{
 					this.props.texts.map(p => (
 						<Selectable render="p" key={p} data={p}>
