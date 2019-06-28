@@ -1,5 +1,7 @@
 # react-multi-select
 
+[![Build Status](https://travis-ci.org/ChaosGroup/react-multi-select.svg?branch=master)](https://travis-ci.org/ChaosGroup/react-multi-select)
+
 React components that provide multiple selection logic. Features mouse and keyboard selections. Can render arbitary tags as selectable items.
 
 ![quick example](./examples.gif)
