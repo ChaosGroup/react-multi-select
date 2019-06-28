@@ -1,6 +1,6 @@
 {
 	"name": "@chaosgroup/react-multi-select",
-	"version": "0.9.3",
+	"version": "0.9.4",
 	"description": "Multi selection component",
 	"ts:main": "./lib/index.tsx",
 	"main": "dist/es6.js",
