@@ -1,5 +1,5 @@
 {
-	"name": "react-multi-select",
+	"name": "@chaosgroup/react-multi-select",
 	"version": "0.9.3",
 	"description": "Multi selection component",
 	"ts:main": "./lib/index.tsx",
