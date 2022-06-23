@@ -30,7 +30,7 @@
 		"enzyme-adapter-react-16": "^1.14.0",
 		"fast-check": "1.10.0",
 		"fuse-box": "3.0.2",
-		"jsdom": "11.10.0",
+		"jsdom": "16.5.0",
 		"coveralls": "^3.0.2",
 		"nyc": "11.8.0",
 		"prop-types": ">= 15.6.0",
